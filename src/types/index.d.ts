@@ -7,9 +7,11 @@ export type NavItem = {
 export type SiteConfig = {
   name: string;
   description: string;
+  author: string;
   url: string;
   favicon: string;
   ogImage: string;
+  logo: string;
   links: {
     facebook: string;
     instagram: string;
