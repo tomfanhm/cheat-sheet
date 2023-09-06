@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { siteConfig } from "../config/site";
-import { MdMenu, MdClose } from "react-icons/md";
 import { Dialog } from "@headlessui/react";
 
 const navigation = [
@@ -35,7 +34,12 @@ const Header: React.FC = () => {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <MdMenu className="h-6 w-6" aria-hidden="true" />
+            <img
+              src="/svg/bars-solid.svg"
+              alt="bars-solid"
+              className="h-6 w-6"
+              aria-hidden="true"
+            />
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
@@ -73,7 +77,12 @@ const Header: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
-              <MdClose className="h-6 w-6" aria-hidden="true" />
+              <img
+                src="/svg/xmark-solid.svg"
+                alt="xmark-solid"
+                className="h-6 w-6"
+                aria-hidden="true"
+              />
             </button>
           </div>
           <div className="mt-6 flow-root">

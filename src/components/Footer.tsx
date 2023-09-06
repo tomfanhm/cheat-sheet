@@ -1,11 +1,4 @@
 import React from "react";
-import {
-  BsFacebook,
-  BsInstagram,
-  BsTwitter,
-  BsGithub,
-  BsYoutube,
-} from "react-icons/bs";
 import { siteConfig } from "../config/site";
 
 type Navigation = {
@@ -18,27 +11,35 @@ const navigation: Navigation = [
   {
     name: "Facebook",
     href: siteConfig.links.facebook,
-    icon: (props) => <BsFacebook {...props} />,
+    icon: (props) => (
+      <img src="/svg/square-facebook.svg" alt="square-facebook" {...props} />
+    ),
   },
   {
     name: "Instagram",
     href: siteConfig.links.instagram,
-    icon: (props) => <BsInstagram {...props} />,
+    icon: (props) => (
+      <img src="/svg/instagram.svg" alt="instagram" {...props} />
+    ),
   },
   {
     name: "Twitter",
     href: siteConfig.links.twitter,
-    icon: (props) => <BsTwitter {...props} />,
+    icon: (props) => (
+      <img src="/svg/x-twitter.svg" alt="x-twitter" {...props} />
+    ),
   },
   {
     name: "GitHub",
     href: siteConfig.links.github,
-    icon: (props) => <BsGithub {...props} />,
+    icon: (props) => (
+      <img src="/svg/github-alt.svg" alt="github-alt" {...props} />
+    ),
   },
   {
     name: "YouTube",
     href: siteConfig.links.youtube,
-    icon: (props) => <BsYoutube {...props} />,
+    icon: (props) => <img src="/svg/youtube.svg" alt="youtube" {...props} />,
   },
 ];
 
