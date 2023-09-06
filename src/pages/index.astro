@@ -2,11 +2,21 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero";
 import Content from "../components/Content";
+import { getCollection } from "astro:content";
 
-const sheets = await Astro.glob("../content/*.md");
+const docs = await getCollection("documentation");
+
+const data = docs.map((el) => ({
+  href: "/documentation/" + el.slug,
+  title: el.data.title,
+  description: el.data.description,
+  imageUrl: el.data.imageUrl,
+  date: el.data.date,
+  datetime: el.data.datetime,
+}));
 ---
 
 <Layout>
   <Hero />
-  <Content />
+  <Content data={data} />
 </Layout>

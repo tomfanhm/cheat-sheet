@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { siteConfig } from "../config/site";
 import { Dialog } from "@headlessui/react";
-
-const navigation = [
-  { name: "Documentation", href: "/" },
-  { name: "Showcase", href: "/" },
-  { name: "Resources", href: "/" },
-  { name: "Blog", href: "/" },
-];
+import { navigation } from "../config/navigation";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);

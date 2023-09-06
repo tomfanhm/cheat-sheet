@@ -1,0 +1,24 @@
+---
+import Showcase from "../../components/Showcase";
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const heading = "Showcase";
+const paragraph =
+  "With this curated selection, see how these resources can be applied in different coding scenarios, enhancing productivity and code quality.";
+
+const docs = await getCollection("showcase");
+
+const data = docs.map((el) => ({
+  href: el.slug,
+  title: el.data.title,
+  description: el.data.description,
+  imageUrl: el.data.imageUrl,
+  date: el.data.date,
+  datetime: el.data.datetime,
+}));
+---
+
+<Layout title={heading} description={paragraph}>
+  <Showcase heading={heading} paragraph={paragraph} data={data} />
+</Layout>
