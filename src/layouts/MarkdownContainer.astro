@@ -17,36 +17,36 @@ const { frontmatter } = Astro.props;
   </div>
 </div>
 
-<script>
-  function main() {
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
-    for (const codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.className = "relative";
-      const copyButton = document.createElement("button");
-      const code = codeBlock.querySelector("code");
-      copyButton.className =
-        "absolute top-0 right-0 m-4 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
-      copyButton.innerHTML = "Copy";
-      codeBlock.appendChild(copyButton);
-      if (codeBlock && codeBlock.parentNode) {
-        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-        wrapper.appendChild(codeBlock);
+<script is:inline>
+function main() {
+  const codeBlocks = Array.from(document.querySelectorAll("pre"));
+  for (const codeBlock of codeBlocks) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "relative";
+    const copyButton = document.createElement("button");
+    const code = codeBlock.querySelector("code");
+    copyButton.className =
+      "absolute top-0 right-0 m-2 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
+    copyButton.innerHTML = "Copy";
+    codeBlock.appendChild(copyButton);
+    if (codeBlock && codeBlock.parentNode) {
+      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
 
-        copyButton.addEventListener("click", async () => {
-          if (!code) return;
-          const text = code.innerText;
-          await navigator.clipboard.writeText(text).then(() => {
-            copyButton.innerText = "Copied";
+      copyButton.addEventListener("click", async () => {
+        if (!code) return;
+        const text = code.innerText;
+        await navigator.clipboard.writeText(text).then(() => {
+          copyButton.innerText = "Copied";
 
-            setTimeout(() => {
-              copyButton.innerText = "Copy";
-            }, 1000);
-          });
+          setTimeout(() => {
+            copyButton.innerText = "Copy";
+          }, 1000);
         });
-      }
+      });
     }
   }
+}
 
-  main();
+main();
 </script>
