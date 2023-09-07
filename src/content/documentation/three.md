@@ -5,6 +5,8 @@ description: Three.js is a powerful, lightweight, cross-browser JavaScript libra
 imageUrl: "/images/test.jpg"
 date: "Sep 7, 2023"
 datetime: "2023-09-07"
+category: Documentation
+disable: false
 ---
 
 ### Scene
@@ -30,7 +32,7 @@ const camera = new THREE.PerspectiveCamera(
 const renderer = new THREE.WebGLRenderer({
   antialias: true,
   alpha: true,
-  canvas: document.querySelector("canvas")
+  canvas: document.querySelector("canvas"),
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);

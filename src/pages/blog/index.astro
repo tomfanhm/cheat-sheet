@@ -1,5 +1,5 @@
 ---
-import Showcase from "../../components/Showcase";
+import Showcase from "../../components/Showcase.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
@@ -8,14 +8,16 @@ const paragraph = "Stay updated with the latest trends in the coding world.";
 
 const docs = await getCollection("blog");
 
-const data = docs.map((el) => ({
-  href: el.slug,
-  title: el.data.title,
-  description: el.data.description,
-  imageUrl: el.data.imageUrl,
-  date: el.data.date,
-  datetime: el.data.datetime,
-}));
+const data = docs
+  .filter((el) => !el.data.disable)
+  .map((el) => ({
+    href: el.slug,
+    title: el.data.title,
+    description: el.data.description,
+    imageUrl: el.data.imageUrl,
+    date: el.data.date,
+    datetime: el.data.datetime,
+  }));
 ---
 
 <Layout title={heading} description={paragraph}>

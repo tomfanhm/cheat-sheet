@@ -11,13 +11,12 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
-const socialUrl = Astro.url.href + siteConfig.ogImage.replace("/", "");
+const socialUrl = Astro.url.origin + siteConfig.ogImage;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <ViewTransitions />
     <!-- Global Metadata -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -37,8 +36,11 @@ const socialUrl = Astro.url.href + siteConfig.ogImage.replace("/", "");
       content={description || siteConfig.description}
     />
     <meta property="og:image" content={socialUrl} />
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <!-- Others -->
     <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
   </head>
   <body class="min-h-screen bg-background font-sans antialiased">
     <div class="flex min-h-screen flex-col">

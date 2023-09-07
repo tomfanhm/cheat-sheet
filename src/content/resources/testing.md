@@ -5,6 +5,8 @@ description: Hello, World
 imageUrl: "/images/test.jpg"
 date: "Jan 7, 2023"
 datetime: "2023-01-07"
+category: Resources
+disable: false
 ---
 
 # Hello, World

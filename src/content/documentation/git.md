@@ -5,9 +5,11 @@ description: Git is a distributed version control system. It's used for tracking
 imageUrl: "/images/test.jpg"
 date: "Sep 7, 2023"
 datetime: "2023-09-07"
+category: Documentation
+disable: false
 ---
 
-# Setup and Config
+### Setup and Config
 
 - Initialize a new Git repository
 
@@ -27,7 +29,7 @@ git config --global user.name "[name]"
 git config --global user.email "[email address]"
 ```
 
-# Staging and Committing
+### Staging and Committing
 
 - Add all new and changed files to the staging area
 
@@ -47,7 +49,7 @@ git add [file or dir name]
 git commit -m "[commit message]"
 ```
 
-# Branching and Merging
+### Branching and Merging
 
 - List all local branches
 
@@ -73,7 +75,7 @@ git branch [branch name]
 git checkout [branch name]
 ```
 
-# Working with Remotes
+### Working with Remotes
 
 - Push changes to remote repository
 
@@ -105,7 +107,7 @@ git status
 git log
 ```
 
-# Undoing Changes
+### Undoing Changes
 
 - Discard all history and changes back to the specified commit
 

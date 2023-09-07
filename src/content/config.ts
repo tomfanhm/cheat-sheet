@@ -7,6 +7,8 @@ const blogCollection = defineCollection({
     imageUrl: z.string(),
     date: z.string(),
     datetime: z.string(),
+    category: z.string(),
+    disable: z.boolean(),
   }),
 });
 const showcaseCollection = defineCollection({
@@ -16,6 +18,8 @@ const showcaseCollection = defineCollection({
     imageUrl: z.string(),
     date: z.string(),
     datetime: z.string(),
+    category: z.string(),
+    disable: z.boolean(),
   }),
 });
 const resourcesCollection = defineCollection({
@@ -25,6 +29,8 @@ const resourcesCollection = defineCollection({
     imageUrl: z.string(),
     date: z.string(),
     datetime: z.string(),
+    category: z.string(),
+    disable: z.boolean(),
   }),
 });
 const documentationCollection = defineCollection({
@@ -34,6 +40,8 @@ const documentationCollection = defineCollection({
     imageUrl: z.string(),
     date: z.string(),
     datetime: z.string(),
+    category: z.string(),
+    disable: z.boolean(),
   }),
 });
 
