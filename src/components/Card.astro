@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 
 export interface Props {
+  id: string;
   title: string;
   href: string;
   description: string;
@@ -10,7 +11,7 @@ export interface Props {
   datetime: string;
 }
 
-const { title, href, description, imageUrl, date, datetime } = Astro.props;
+const { id, title, href, description, imageUrl, date, datetime } = Astro.props;
 ---
 
 <article class="flex flex-col items-start justify-start">
@@ -22,6 +23,7 @@ const { title, href, description, imageUrl, date, datetime } = Astro.props;
       src={imageUrl}
       alt={title}
       class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+      transition:name={id}
     />
 
     <div

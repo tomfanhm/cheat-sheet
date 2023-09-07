@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 const { frontmatter } = Astro.props;
 ---
 
@@ -13,6 +14,15 @@ const { frontmatter } = Astro.props;
       {frontmatter.title}
     </h1>
     <p class="mt-6 text-xl leading-8">{frontmatter.description}</p>
+    <Image
+      width={800}
+      height={450}
+      format="webp"
+      src={frontmatter.imageUrl}
+      alt={frontmatter.title}
+      class="mt-6 aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+      transition:name={frontmatter.id}
+    />
     <article class="mt-10 prose lg:prose-xl">
       <slot />
     </article>
