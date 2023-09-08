@@ -2,9 +2,9 @@
 layout: ../../layouts/MarkdownContainer.astro
 title: Error
 description: Master different error types, exception handling mechanisms, and debugging strategies across multiple programming languages.
-imageUrl: "/images/test.jpg"
-date: "Sep 7, 2023"
-datetime: "2023-09-07"
+imageUrl: /images/test.jpg
+date: Sep 7, 2023
+datetime: 2023-09-07
 category: Documentation
 disable: false
 ---
