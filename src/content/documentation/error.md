@@ -1,5 +1,5 @@
 ---
-id: 01d77667-ab7d-4a16-9e56-e21e3771fa93
+id: d0e5fb79
 layout: ../../layouts/MarkdownContainer.astro
 title: Error
 description: Master different error types, exception handling mechanisms, and debugging strategies across multiple programming languages.

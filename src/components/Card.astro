@@ -17,18 +17,17 @@ export interface Props {
 }
 
 const { id, title, href, description, imageUrl, date, datetime } = Astro.props;
+
 ---
 
 <article class="flex flex-col items-start justify-start">
   <div class="relative w-full">
     <Image
-      width={800}
-      height={450}
-      format="webp"
+      format="avif"
       src={imageUrl}
       alt={title}
       class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
-      transition:name={id}
+      transition:name={`img-${id}`}
     />
 
     <div
