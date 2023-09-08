@@ -120,13 +120,13 @@ export async function getArticles() {
     const querySnapshot = await getDocs(q);
 
     const articles = querySnapshot.docs.map((doc) => {
-      const data = ArticleSchema.safeParse(doc.data());
-      if (data.success) {
-        return data.data;
+      const parse = ArticleSchema.safeParse(doc.data());
+      if (parse.success) {
+        return parse.data;
       }
     });
 
-    return articles.flatMap((article) => (article ? [article] : []));
+    return articles.flatMap((f) => (f ? [f] : []));
   } catch (error) {
     console.error("Error fetching articles: ", error);
   }
