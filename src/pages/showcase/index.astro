@@ -12,6 +12,7 @@ const docs = await getCollection("showcase");
 const data = docs
   .filter((el) => !el.data.disable)
   .map((el) => ({
+    id: el.data.id,
     href: el.slug,
     title: el.data.title,
     description: el.data.description,

@@ -2,6 +2,7 @@ import { defineCollection, z } from "astro:content";
 
 const blogCollection = defineCollection({
   schema: z.object({
+    id: z.string(),
     title: z.string(),
     description: z.string(),
     imageUrl: z.string(),
@@ -13,6 +14,7 @@ const blogCollection = defineCollection({
 });
 const showcaseCollection = defineCollection({
   schema: z.object({
+    id: z.string(),
     title: z.string(),
     description: z.string(),
     imageUrl: z.string(),
@@ -24,6 +26,7 @@ const showcaseCollection = defineCollection({
 });
 const resourcesCollection = defineCollection({
   schema: z.object({
+    id: z.string(),
     title: z.string(),
     description: z.string(),
     imageUrl: z.string(),
@@ -35,6 +38,7 @@ const resourcesCollection = defineCollection({
 });
 const documentationCollection = defineCollection({
   schema: z.object({
+    id: z.string(),
     title: z.string(),
     description: z.string(),
     imageUrl: z.string(),
