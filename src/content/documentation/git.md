@@ -5,7 +5,7 @@ title: Git
 description: Git is a distributed version control system. It's used for tracking changes in source code during software development, enabling multiple developers to work on the same project simultaneously without overwriting each other's work.
 imageUrl: /images/git.png
 date: Sep 7, 2023
-datetime: 2023-09-07
+datetime: "2023-09-07"
 category: Documentation
 disable: false
 ---
