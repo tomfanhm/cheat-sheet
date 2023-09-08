@@ -3,7 +3,7 @@ id: 51460ce9-8d4a-4e2b-93d5-90793dcfb5cc
 layout: ../../layouts/MarkdownContainer.astro
 title: Git
 description: Git is a distributed version control system. It's used for tracking changes in source code during software development, enabling multiple developers to work on the same project simultaneously without overwriting each other's work.
-imageUrl: /images/git.png
+imageUrl: ../../assets/git.png
 date: Sep 7, 2023
 datetime: "2023-09-07"
 category: Documentation
