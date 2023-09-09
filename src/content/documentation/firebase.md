@@ -133,3 +133,45 @@ export async function getArticles() {
   return [];
 }
 ```
+
+### Batch Write
+
+- Batch writes allow you to make multiple write operations as a single atomic unit
+
+```typescript
+const docRef = doc(firestore, collection, uid);
+const batch = writeBatch(firestore);
+batch.set(docRef, {
+  name: "Tom Fan",
+});
+bach.update(docRef, {
+  name: "Tom Fan",
+});
+await batch.commit();
+```
+
+### Transactions
+
+- Transactions are a way to read and write data within the context of a single operation
+
+```typescript
+async function incrementCounter(docId: string) {
+  try {
+    await runTransaction(firestore, async (transaction) => {
+      const counterRef = doc(firestore, "counters", docId);
+      const counterSnap = await transaction.get(counterRef);
+
+      if (!counterSnap.exists()) {
+        throw "Document does not exist!";
+      }
+
+      const newCount = counterSnap.data().count + 1;
+      transaction.update(counterRef, { count: newCount });
+    });
+
+    console.log("Transaction successfully committed!");
+  } catch (error) {
+    console.error("Transaction failed: ", error);
+  }
+}
+```
