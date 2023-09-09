@@ -2,7 +2,7 @@
 id: d218b710
 layout: ../../layouts/MarkdownContainer.astro
 title: Next.js
-description: A comprehensive guide to using Next.js effectively, featuring a collection of handy code snippets and best practices for various features.
+description: Next.js is a React framework that provides features such as SSR (Server-Side Rendering), SSG (Static Site Generation), and ISR (Incremental Static Regeneration) out of the box. These features help us to build high performance, SEO-friendly web applications. A comprehensive guide to using Next.js effectively, featuring a collection of handy code snippets and best practices for various features.
 imageUrl: ../../assets/next.png
 date: Sep 9, 2023
 datetime: "2023-09-09"
@@ -36,8 +36,6 @@ disable: false
 - Create theme-provider.tsx
 
 ```typescript
-"use client";
-
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
@@ -90,4 +88,10 @@ export const ThemeSwitcher = () => {
     </div>
   );
 };
+```
+
+### Pages Route
+
+```typescript
+
 ```
