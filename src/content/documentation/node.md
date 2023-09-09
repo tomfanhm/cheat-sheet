@@ -65,7 +65,7 @@ touch src/index.ts
 
 - Update your package.json scripts to include a script for starting the application in development mode with Nodemon
 
-```
+```json
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "npx nodemon"
