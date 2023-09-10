@@ -10,6 +10,8 @@ category: Documentation
 disable: false
 ---
 
+## App Route
+
 ### Dark Mode
 
 - Update the global.css
@@ -35,7 +37,7 @@ disable: false
 
 - Create theme-provider.tsx
 
-```typescript
+```tsx
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
@@ -48,7 +50,7 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 - Update layout.tsx
 - Wrap the application with the ThemeProvider component
 
-```typescript
+```tsx
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
@@ -74,7 +76,7 @@ export default function RootLayout({
 - Create theme-switcher.tsx
 - This component allows the user to switch between light and dark modes
 
-```typescript
+```tsx
 import { useTheme } from "next-themes";
 
 export const ThemeSwitcher = () => {
@@ -88,10 +90,4 @@ export const ThemeSwitcher = () => {
     </div>
   );
 };
-```
-
-### Pages Route
-
-```typescript
-
 ```

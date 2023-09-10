@@ -12,6 +12,8 @@ disable: false
 
 ### Get All Pokemon
 
+- To retrieve a list of all Pokemon
+
 ```typescript
 const schema = z.object({
   count: z.number(),
@@ -43,11 +45,14 @@ export async function getAllPokemon() {
 
 ### Get Pokemon Details
 
+- To retrieve details about a specific Pokemon
+
 ```typescript
 const schema = z.object({
   id: z.number(),
   name: z.string(),
   weight: z.number(),
+  // Include additional properties
 });
 
 async function getPokemonDetails(nameOrId: string | number) {
