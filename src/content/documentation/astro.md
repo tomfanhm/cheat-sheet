@@ -1,9 +1,9 @@
 ---
 id: b730026d
 layout: ../../layouts/MarkdownContainer.astro
-title: Astro
+title: Astro.js
 description: Astro.js is a modern front-end framework for building static websites and web applications. It allows you to write modular HTML, CSS, and JavaScript components and compile them into a static site.
-imageUrl: ../../assets/astro.png
+imageUrl: ../../assets/astrojs.png
 date: Sep 10, 2023
 datetime: "2023-09-10"
 category: Documentation
