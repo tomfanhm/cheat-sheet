@@ -6,5 +6,11 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://cheat-sheet-01y.pages.dev",
-  integrations: [tailwind(), react(), sitemap()],
+  integrations: [
+    tailwind(),
+    react(),
+    sitemap({
+      lastmod: new Date(),
+    }),
+  ],
 });
