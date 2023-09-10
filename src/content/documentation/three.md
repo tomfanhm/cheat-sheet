@@ -175,3 +175,39 @@ function onMouseMove(event) {
   }
 }
 ```
+
+### Instance Mesh
+
+- Creates an InstancedMesh with 125 instances arranged in a grid pattern
+
+```typescript
+const dummy = new THREE.Object3D();
+const geometry = new THREE.BoxGeometry(1, 1, 1);
+const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+const count = 125;
+const instancedMesh = new THREE.InstancedMesh(geometry, material, count);
+
+function generateNode(num: number) {
+  const temp = [];
+  const gap = 5;
+
+  for (let i = 0; i < num; i++) {
+    for (let j = 0; j < num; j++) {
+      for (let k = 0; k < num; k++) {
+        temp.push({ x: gap * i, y: gap * j, z: gap * k });
+      }
+    }
+  }
+  return temp;
+}
+
+const nodes = generateNode(5);
+
+for (let i = 0; i < nodes.length; i++) {
+  const { x, y, z } = nodes[i];
+  dummy.position.set(x, y, z);
+  dummy.updateMatrix();
+  instancedMesh.setMatrixAt(i, dummy.matrix);
+  instancedMesh.instanceMatrix.needsUpdate = true;
+}
+```
