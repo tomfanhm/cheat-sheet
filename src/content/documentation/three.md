@@ -12,11 +12,15 @@ disable: false
 
 ### Scene
 
+- The 3D scene where all the objects, lights, and cameras are added and rendered
+
 ```typescript
 const scene = new THREE.Scene();
 ```
 
 ### Camera
+
+- Defines the virtual camera used to view the scene
 
 ```typescript
 const camera = new THREE.PerspectiveCamera(
@@ -28,6 +32,9 @@ const camera = new THREE.PerspectiveCamera(
 ```
 
 ### Renderer
+
+- Provides the rendering capabilities using WebGL
+- The options { antialias: true, alpha: true } enable antialias and support for transparency
 
 ```typescript
 const renderer = new THREE.WebGLRenderer({
@@ -43,6 +50,8 @@ renderer.setPixelRatio(devicePixelRatio);
 
 ### Resize Handler
 
+- Used to handle window resizing
+
 ```typescript
 window.addEventListener("resize", onWindowResize, false);
 
@@ -55,6 +64,8 @@ function onWindowResize() {
 
 ### Animation Loop
 
+- Creates a loop that repeatedly renders the scene
+
 ```typescript
 function animate() {
   requestAnimationFrame(animate);
@@ -65,6 +76,8 @@ animate();
 
 ### Mesh
 
+- Combines the geometry and material to create a mesh object
+
 ```typescript
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
@@ -73,11 +86,15 @@ const mesh = new THREE.Mesh(geometry, material);
 
 ### GLTF Loader
 
+- Load 3D models in the glTF format
+
 ```typescript
 const loader = new THREE.GLTFLoader();
 ```
 
 ### Texture Loader
+
+- Load textures from image files
 
 ```typescript
 const textures = [
@@ -91,6 +108,9 @@ const textures = [
 ```
 
 ### ShaderMaterial
+
+- Custom shaders to be used
+- The vertexShader and fragmentShader variables define the GLSL code
 
 ```typescript
 const uniforms = {
@@ -130,6 +150,8 @@ const material = new THREE.ShaderMaterial({
 ```
 
 ### Mouse Events
+
+- Picking objects and performing intersection tests
 
 ```typescript
 const raycaster = new THREE.Raycaster();

@@ -10,8 +10,6 @@ category: Documentation
 disable: false
 ---
 
-## App Route
-
 ### Dark Mode
 
 - Update the global.css

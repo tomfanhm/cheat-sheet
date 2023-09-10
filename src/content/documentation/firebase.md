@@ -51,9 +51,13 @@ const usersCollection = collection(firestore, "users");
 - To create a new query with additional restrictions
 
 ```typescript
-import { query, where } from "firebase/firestore";
-
-const q = query(collection(firestore, "users"), where("active", "==", true));
+const q = query(
+  collection(firestore, "users"),
+  where("active", "==", true),
+  orderBy("age"),
+  startAt(18),
+  limit(100)
+);
 ```
 
 ### Fetching a Document
