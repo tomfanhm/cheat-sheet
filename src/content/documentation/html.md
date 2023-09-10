@@ -160,3 +160,19 @@ disable: false
   </footer>
 </body>
 ```
+
+### Functions
+
+- Scroll to target element
+
+```typescript
+function scrollToPage(class: string) {
+  const e = document.getElementById(class);
+
+  e.scrollIntoView({
+    block: "start",
+    behavior: "smooth",
+    inline: "start",
+  });
+}
+```

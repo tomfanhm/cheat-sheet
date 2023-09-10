@@ -31,5 +31,9 @@ interface Props
 const { variant, size, class: className, ...props } = Astro.props;
 ---
 
-<button class={twMerge(buttonVariants({ variant, size }), className)} {...props}
-></button>
+<button
+  class={twMerge(buttonVariants({ variant, size }), className)}
+  {...props}
+>
+  <slot />
+</button>

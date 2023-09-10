@@ -1,0 +1,115 @@
+---
+
+---
+
+<!-- Canvas Container -->
+<div
+  class="canvas-container relative w-full aspect-[4/3] bg-black rounded-2xl overflow-hidden"
+>
+  <canvas></canvas>
+</div>
+
+<script>
+  import * as THREE from "three";
+  function main() {
+    // Basic
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, -10, 10);
+    camera.position.z = 1;
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      canvas: document.querySelector("canvas"),
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(devicePixelRatio);
+    // Main
+    const [ryoiki, yuji] = ["/images/ryoiki.jpeg", "/images/yuji.jpeg"].map(
+      (url) => new THREE.TextureLoader().load(url)
+    );
+
+    const imageAspect = 841 / 467;
+
+    const geometry = new THREE.PlaneGeometry(1, 1);
+    // GLSL
+    const vertexShader = `
+        varying vec2 vUv;
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        uniform float time;
+
+        void main() {
+            vUv = uv;
+            vNormal = normal;
+            vPosition = position;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
+        }
+    `;
+    const fragmentShader = `
+        varying vec2 vUv;
+        varying vec3 vNormal;
+        varying vec3 vPosition;
+        uniform float time;
+        uniform vec2 scale;
+        uniform sampler2D texture1;
+        uniform sampler2D texture2;
+        
+        void main() {
+            float progress = abs(sin(time * 0.5));
+            vec2 UV = vUv;
+            UV = (UV - 0.5) / scale + 0.5;
+            float x = progress;
+            x = smoothstep(0.0, 1.0, (x * 2.0 + UV.x - 1.0));
+            vec2 a = (UV - 0.5) * (1.0 - x) + 0.5;
+            vec2 b = (UV - 0.5) * x + 0.5;
+            vec4 textureA = texture2D(texture1, a);
+            vec4 textureB = texture2D(texture2, b);
+            vec4 finalColor = mix(textureA, textureB, x);
+            gl_FragColor = finalColor;
+        }
+    `;
+
+    const uniforms = {
+      time: { value: 1.0 },
+      factor: { value: 5.0 },
+      resolutionX: { value: window.innerWidth },
+      resolutionY: { value: window.innerHeight },
+      scale: { value: new THREE.Vector2(1, 1) },
+      texture1: { value: ryoiki },
+      texture2: { value: yuji },
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms: uniforms,
+      side: THREE.DoubleSide,
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+    });
+    const plane = new THREE.Mesh(geometry, material);
+    plane.position.set(0, 0, 0);
+
+    scene.add(plane);
+    // Run Animation
+    const clock = new THREE.Clock();
+    function animate() {
+      requestAnimationFrame(animate);
+      const delta = clock.getDelta();
+      uniforms.time.value += delta;
+      renderer.render(scene, camera);
+    }
+    animate();
+    // Events
+    window.addEventListener("resize", onWindowResize, false);
+
+    function onWindowResize() {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      const viewportAspect = window.innerWidth / window.innerHeight;
+      if (imageAspect > viewportAspect) {
+        material.uniforms.scale.value.set(imageAspect / viewportAspect, 1);
+      } else {
+        material.uniforms.scale.value.set(1, viewportAspect / imageAspect);
+      }
+    }
+  }
+  main();
+</script>
