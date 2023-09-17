@@ -1,40 +1,6 @@
----
-
----
-
-<!-- Canvas Container -->
-<div
-  class="canvas-container relative w-full aspect-[4/3] bg-black rounded-2xl overflow-hidden p-0"
->
-  <canvas></canvas>
-</div>
-
-<script is:inline>
 import * as THREE from "three";
-function main() {
-  // Basic
-  const scene = new THREE.Scene();
 
-  const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, -10, 10);
-  camera.position.z = 1;
-
-  const renderer = new THREE.WebGLRenderer({
-    antialias: true,
-    alpha: true,
-    canvas: document.querySelector("canvas"),
-  });
-  renderer.setPixelRatio(devicePixelRatio);
-
-  // Main
-  const [ryoiki, yuji] = ["/images/ryoiki.jpeg", "/images/yuji.jpeg"].map(
-    (url) => new THREE.TextureLoader().load(url)
-  );
-  // Resource size
-  const imageAspect = 841 / 467;
-
-  const geometry = new THREE.PlaneGeometry(1, 1);
-  // GLSL
-  const vertexShader = `
+const vertexShader = `
         varying vec2 vUv;
         varying vec3 vNormal;
         varying vec3 vPosition;
@@ -47,7 +13,7 @@ function main() {
             gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
         }
     `;
-  const fragmentShader = `
+const fragmentShader = `
         varying vec2 vUv;
         varying vec3 vNormal;
         varying vec3 vPosition;
@@ -70,6 +36,33 @@ function main() {
             gl_FragColor = finalColor;
         }
     `;
+
+function main() {
+  // Basic
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.OrthographicCamera(-0.5, 0.5, 0.5, -0.5, -10, 10);
+  camera.position.z = 1;
+
+  const canvas = document.querySelector("canvas");
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    canvas: canvas,
+  });
+  renderer.setPixelRatio(devicePixelRatio);
+
+  // Main
+  const [ryoiki, yuji] = ["/images/ryoiki.jpeg", "/images/yuji.jpeg"].map(
+    (url) => new THREE.TextureLoader().load(url)
+  );
+  // Resource size
+  const imageAspect = 841 / 467;
+
+  const geometry = new THREE.PlaneGeometry(1, 1);
+  // GLSL
 
   const uniforms = {
     time: { value: 0.0 },
@@ -127,4 +120,3 @@ function main() {
 }
 
 main();
-</script>
