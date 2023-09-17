@@ -7,7 +7,6 @@ export const siteConfig: SiteConfig = {
   url: "https://cheat-sheet-01y.pages.dev/",
   author: "Tom Fan",
   ogImage: "/images/opengraph-image.png",
-  favicon: "/images/favicon.ico",
   logo: "/images/logo.png",
   links: {
     facebook: "https://facebook.com/",

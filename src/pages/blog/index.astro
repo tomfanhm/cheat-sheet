@@ -2,26 +2,14 @@
 import Showcase from "../../components/Showcase.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { parse } from "../../utils/utils";
 
 const heading = "Blog";
 const paragraph = "Stay updated with the latest trends in the coding world.";
 
 const docs = await getCollection("blog");
 
-const data = docs
-  .filter((el) => !el.data.disable)
-  .sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
-  )
-  .map((el) => ({
-    id: el.data.id,
-    href: el.slug,
-    title: el.data.title,
-    description: el.data.description,
-    imageUrl: el.data.imageUrl,
-    date: el.data.date,
-    datetime: el.data.datetime,
-  }));
+const data = parse(docs, "/blog/");
 ---
 
 <Layout title={heading} description={paragraph}>

@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero";
 import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
+import { parse } from "../utils/utils";
 
 const heading = "From the Cheat Sheet";
 const paragraph =
@@ -10,20 +11,7 @@ const paragraph =
 
 const docs = await getCollection("documentation");
 
-const data = docs
-  .filter((el) => !el.data.disable)
-  .sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
-  )
-  .map((el) => ({
-    id: el.data.id,
-    href: "/documentation/" + el.slug,
-    title: el.data.title,
-    description: el.data.description,
-    imageUrl: el.data.imageUrl,
-    date: el.data.date,
-    datetime: el.data.datetime,
-  }));
+const data = parse(docs, "/documentation/");
 ---
 
 <Layout>

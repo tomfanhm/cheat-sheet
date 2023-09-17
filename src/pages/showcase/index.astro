@@ -2,6 +2,7 @@
 import Showcase from "../../components/Showcase.astro";
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
+import { parse } from "../../utils/utils";
 
 const heading = "Showcase";
 const paragraph =
@@ -9,20 +10,7 @@ const paragraph =
 
 const docs = await getCollection("showcase");
 
-const data = docs
-  .filter((el) => !el.data.disable)
-  .sort(
-    (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
-  )
-  .map((el) => ({
-    id: el.data.id,
-    href: el.slug,
-    title: el.data.title,
-    description: el.data.description,
-    imageUrl: el.data.imageUrl,
-    date: el.data.date,
-    datetime: el.data.datetime,
-  }));
+const data = parse(docs, "/showcase/");
 ---
 
 <Layout title={heading} description={paragraph}>

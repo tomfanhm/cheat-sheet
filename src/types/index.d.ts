@@ -9,7 +9,6 @@ export type SiteConfig = {
   description: string;
   author: string;
   url: string;
-  favicon: string;
   ogImage: string;
   logo: string;
   links: {

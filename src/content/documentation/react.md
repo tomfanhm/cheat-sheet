@@ -2,10 +2,154 @@
 id: e2272306
 layout: ../../layouts/MarkdownContainer.astro
 title: React
-description: some description
+description: This React Cheat Sheet is a comprehensive and concise reference guide for developers at all skill levels. It covers essential React topics with complete code examples, prioritizing clarity and readability. Each topic is explained using TypeScript for added type safety.
 imageUrl: ../../assets/react.png
 date: Sep 10, 2023
 datetime: "2023-09-10"
 category: Documentation
-disable: true
+disable: false
 ---
+
+### Functional Components
+
+- A functional component in React is a JavaScript/ Typescript function that returns JSX/ TSX.
+
+```tsx
+interface Props {
+  name: string;
+}
+
+const Greeting: React.FC<Props> = ({ name }) => {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+    </div>
+  );
+};
+```
+
+- To use the functional component, you can import it into another component and pass props as necessary
+
+```tsx
+function App() {
+  return (
+    <div>
+      <Greeting name="John" />
+    </div>
+  );
+}
+```
+
+### Handling Events
+
+- Event handlers are functions that get executed when a specific event occurs, such as a click or input change
+
+```jsx
+const Counter: React.FC = () => {
+  const [count, setCount] = useState < number > 0;
+
+  const handleIncrement = () => {
+    setCount((prev) => prev + 1);
+  };
+
+  const handleDecrement = () => {
+    setCount((prev) => prev - 1);
+  };
+
+  return (
+    <div>
+      <h2>Counter</h2>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+    </div>
+  );
+};
+```
+
+- For events like form submissions, you can prevent the default behavior using `event.preventDefault()`
+
+```tsx
+const FormExample: React.FC = () => {
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Handle form submission logic here
+  };
+
+  return (
+    <div>
+      <h2>Form Example</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+```
+
+### Custom Hook
+
+- Creating a custom hook for fetching data with loading and error states is a common pattern in React
+
+```tsx
+const usePokemon = () => {
+  const [data, setData] = useState<PokemonSchema>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const pokemonData = await getAllPokemon();
+        setData(pokemonData);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, loading, error };
+};
+
+export default usePokemon;
+```
+
+- To use this custom hook in React components to fetch and handle data
+
+```tsx
+function PokemonList() {
+  const { data, loading, error } = usePokemon();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return (
+    <div>
+      <h2>Pokemon List</h2>
+      {data && (
+        <ul>
+          {data.results.map((pokemon) => (
+            <li key={pokemon.url}>{pokemon.name}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+```
