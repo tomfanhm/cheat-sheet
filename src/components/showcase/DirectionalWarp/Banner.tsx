@@ -84,8 +84,9 @@ const Banner: React.FC = () => {
   const ref =
     useRef<THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>>(null);
 
-  useFrame(({ clock }) => {
+  useFrame(() => {
     if (ref && ref.current) {
+      const clock = new THREE.Clock();
       const dt = clock.getDelta();
       ref.current.material.uniforms.uTime.value += dt;
     }
