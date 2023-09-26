@@ -2,7 +2,7 @@
 id: cf494023
 layout: ../../layouts/MarkdownContainer.astro
 title: PHP
-description: It includes sections on creating headers, footers, and navigation menus in PHP, crafting login forms, and connecting to a MySQL database. The sheet also covers error handling using try-catch blocks, sending emails using PHP's mail function, and handling file uploads.
+description: PHP is a popular server-side scripting language, primarily used for web development. It's open-source, easy to learn with a flexible structure, and supports many databases, making it a preferred choice for powering dynamic websites and applications.
 imageUrl: ../../assets/php.png
 date: Sep 20, 2023
 datetime: "2023-09-20"

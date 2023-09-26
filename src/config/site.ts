@@ -9,10 +9,10 @@ export const siteConfig: SiteConfig = {
   ogImage: "/images/opengraph-image.png",
   logo: "/images/logo.png",
   links: {
-    facebook: "https://facebook.com/",
-    instagram: "https://www.instagram.com/",
-    twitter: "https://twitter.com/HoManFan1",
+    facebook: "https://www.facebook.com/profile.php?id=61551635771872",
+    instagram: "https://www.instagram.com/tomfancode/",
+    twitter: "https://twitter.com/",
     github: "https://github.com/TomFanHM/cheat-sheet",
-    youtube: "https://www.youtube.com/",
+    youtube: "https://www.youtube.com/@tomfancode",
   },
 };
