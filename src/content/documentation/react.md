@@ -12,7 +12,7 @@ disable: false
 
 ### Functional Components
 
-- A functional component in React is a JavaScript/ Typescript function that returns JSX/ TSX.
+- A functional component in React is a JavaScript/ Typescript function that returns JSX/ TSX
 
 ```tsx
 interface Props {
@@ -152,4 +152,64 @@ function PokemonList() {
     </div>
   );
 }
+```
+
+### Image
+
+- Displays a skeleton while loading, and a fallback image in case of an error
+
+```tsx
+import React, { useState, useEffect } from "react";
+
+const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
+  const [imageSrc, setImageSrc] = useState(src);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  useEffect(() => {
+    let img = new Image();
+    img.src = src;
+    img.onload = () => {
+      setImageSrc(src);
+      setIsLoading(false);
+    };
+    img.onerror = () => {
+      setIsError(true);
+    };
+    return () => {
+      img.onload = null;
+      img.onerror = null;
+    };
+  }, [src]);
+
+  if (isLoading) {
+    return (
+      <div className="animate-pulse bg-gray-500 h-20 w-full">
+        {/* This div acts as a skeleton screen */}
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <img
+        src={fallbackImage}
+        alt={alt}
+        className="w-full h-full object-cover"
+        {...rest}
+      />
+    );
+  }
+
+  return (
+    <img
+      src={imageSrc}
+      alt={alt}
+      className="w-full h-full object-cover"
+      {...rest}
+    />
+  );
+};
+
+export default ImageComponent;
 ```

@@ -72,7 +72,7 @@ void main() {
 }
 ```
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Three.js Template" src="https://codepen.io/TomFanHM/embed/WNLKwWX?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Three.js Template" src="https://codepen.io/TomFanHM/embed/preview/WNLKwWX?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/TomFanHM/pen/WNLKwWX">
   Three.js Template</a> by Tom Fan (<a href="https://codepen.io/TomFanHM">@TomFanHM</a>)
   on <a href="https://codepen.io">CodePen</a>.
@@ -96,7 +96,7 @@ void main() {
 
 - Array and textureless GLSL 2D simplex noise function
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Simplex 2D" src="https://codepen.io/TomFanHM/embed/rNorLWg?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Simplex 2D" src="https://codepen.io/TomFanHM/embed/preview/rNorLWg?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/TomFanHM/pen/rNorLWg">
   Simplex 2D</a> by Tom Fan (<a href="https://codepen.io/TomFanHM">@TomFanHM</a>)
   on <a href="https://codepen.io">CodePen</a>.
@@ -180,7 +180,7 @@ float snoise(vec2 v)
 
 - Array and textureless GLSL 2D/3D/4D simplex noise functions
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Simplex 3D" src="https://codepen.io/TomFanHM/embed/GRPBqmE?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Simplex 3D" src="https://codepen.io/TomFanHM/embed/preview/GRPBqmE?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/TomFanHM/pen/GRPBqmE">
   Simplex 3D</a> by Tom Fan (<a href="https://codepen.io/TomFanHM">@TomFanHM</a>)
   on <a href="https://codepen.io">CodePen</a>.
@@ -296,7 +296,7 @@ float snoise(vec3 v)
 - FBM is used to create noise with a more natural look and feel compared to standard noise
 - This is achieved by layering or "stacking" multiple layers of noise on top of each other, each with a different frequency and amplitude
 
-<iframe height="500" style="width: 100%;" scrolling="no" title="Fractional Brownian Motion" src="https://codepen.io/TomFanHM/embed/LYMBZrR?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Fractional Brownian Motion" src="https://codepen.io/TomFanHM/embed/preview/LYMBZrR?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/TomFanHM/pen/LYMBZrR">
   Fractional Brownian Motion</a> by Tom Fan (<a href="https://codepen.io/TomFanHM">@TomFanHM</a>)
   on <a href="https://codepen.io">CodePen</a>.
