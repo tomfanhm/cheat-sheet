@@ -296,7 +296,7 @@ float snoise(vec3 v)
 - FBM is used to create noise with a more natural look and feel compared to standard noise
 - This is achieved by layering or "stacking" multiple layers of noise on top of each other, each with a different frequency and amplitude
 
-<iframe height="300" style="width: 100%;" scrolling="no" title="Fractional Brownian Motion" src="https://codepen.io/TomFanHM/embed/LYMBZrR?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+<iframe height="500" style="width: 100%;" scrolling="no" title="Fractional Brownian Motion" src="https://codepen.io/TomFanHM/embed/LYMBZrR?default-tab=result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href="https://codepen.io/TomFanHM/pen/LYMBZrR">
   Fractional Brownian Motion</a> by Tom Fan (<a href="https://codepen.io/TomFanHM">@TomFanHM</a>)
   on <a href="https://codepen.io">CodePen</a>.
@@ -304,41 +304,41 @@ float snoise(vec3 v)
 
 ```glsl
 float fbm(float x) {
-float v = 0.0;
-float a = 0.5;
-float shift = float(100);
-for (int i = 0; i < NUM*OCTAVES; ++i) {
-v += a * noise(x);
-x = x \_ 2.0 + shift;
-a \*= 0.5;
-}
-return v;
+  float v = 0.0;
+  float a = 0.5;
+  float shift = float(100);
+  for (int i = 0; i < NUM*OCTAVES; ++i) {
+  v += a * noise(x);
+  x = x \_ 2.0 + shift;
+  a \*= 0.5;
+  }
+  return v;
 }
 
 float fbm(vec2 x) {
-float v = 0.0;
-float a = 0.5;
-vec2 shift = vec2(100);
-// Rotate to reduce axial bias
-mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
-for (int i = 0; i < NUM*OCTAVES; ++i) {
-v += a * noise(x);
-x = rot _ x _ 2.0 + shift;
-a \_= 0.5;
-}
-return v;
+  float v = 0.0;
+  float a = 0.5;
+  vec2 shift = vec2(100);
+  // Rotate to reduce axial bias
+  mat2 rot = mat2(cos(0.5), sin(0.5), -sin(0.5), cos(0.50));
+  for (int i = 0; i < NUM*OCTAVES; ++i) {
+  v += a * noise(x);
+  x = rot _ x _ 2.0 + shift;
+  a \_= 0.5;
+  }
+  return v;
 }
 
 float fbm(vec3 x) {
-float v = 0.0;
-float a = 0.5;
-vec3 shift = vec3(100);
-for (int i = 0; i < NUM*OCTAVES; ++i) {
-v += a * noise(x);
-x = x \_ 2.0 + shift;
-a \*= 0.5;
-}
-return v;
+  float v = 0.0;
+  float a = 0.5;
+  vec3 shift = vec3(100);
+  for (int i = 0; i < NUM*OCTAVES; ++i) {
+  v += a * noise(x);
+  x = x \_ 2.0 + shift;
+  a \*= 0.5;
+  }
+  return v;
 }
 
 ```
