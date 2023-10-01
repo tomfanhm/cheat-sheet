@@ -1,67 +1,44 @@
-import { shaderMaterial, useTexture } from "@react-three/drei";
-import { extend, useFrame, useThree } from "@react-three/fiber";
+import { useTexture } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import React, { useRef } from "react";
 import * as THREE from "three";
 
 const vertexShader = `
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vPosition;
-    uniform float uTime;
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  uniform float uTime;
 
-    void main() {
-        vUv = uv;
-        vNormal = normal;
-        vPosition = position;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
-    }
+  void main() {
+    vUv = uv;
+    vNormal = normal;
+    vPosition = position;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
+  }
 `;
 const fragmentShader = `
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vPosition;
-    uniform float uTime;
-    uniform vec2 uScale;
-    uniform sampler2D uTexture1;
-    uniform sampler2D uTexture2;
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vPosition;
+  uniform float uTime;
+  uniform vec2 uScale;
+  uniform sampler2D uTexture1;
+  uniform sampler2D uTexture2;
         
-    void main() {
-        float progress = abs(sin(uTime * 0.5));
-        vec2 UV = vUv;
-        UV = (UV - 0.5) / uScale + 0.5;
-        float p = progress;
-        p = smoothstep(0.0, 1.0, (p * 2.0 + UV.x - 1.0));
-        vec2 a = (UV - 0.5) * (1.0 - p) + 0.5;
-        vec2 b = (UV - 0.5) * p + 0.5;
-        vec4 textureA = texture2D(uTexture1, a);
-        vec4 textureB = texture2D(uTexture2, b);
-        vec4 finalColor = mix(textureA, textureB, p);
-        gl_FragColor = finalColor;
-    }
-`;
-
-const DirectionalWarpShader = shaderMaterial(
-  { uTime: null, uTexture1: null, uTexture2: null, uScale: null },
-  vertexShader,
-  fragmentShader
-);
-
-type DirectionalWarpShader = {
-  uTime: number;
-  uTexture1: THREE.Texture | null;
-  uTexture2: THREE.Texture | null;
-  uScale: THREE.Vector2;
-} & JSX.IntrinsicElements["shaderMaterial"];
-
-extend({ DirectionalWarpShader });
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      directionalWarpShader: DirectionalWarpShader;
-    }
+  void main() {
+    float progress = abs(sin(uTime * 0.5));
+    vec2 UV = vUv;
+    UV = (UV - 0.5) / uScale + 0.5;
+    float p = progress;
+    p = smoothstep(0.0, 1.0, (p * 2.0 + UV.x - 1.0));
+    vec2 a = (UV - 0.5) * (1.0 - p) + 0.5;
+    vec2 b = (UV - 0.5) * p + 0.5;
+    vec4 textureA = texture2D(uTexture1, a);
+    vec4 textureB = texture2D(uTexture2, b);
+    vec4 finalColor = mix(textureA, textureB, p);
+    gl_FragColor = finalColor;
   }
-}
+`;
 
 function getScale(width: number, height: number): THREE.Vector2 {
   const imageAspect = 841 / 467;
@@ -84,24 +61,31 @@ const Banner: React.FC = () => {
   const ref =
     useRef<THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>>(null);
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (ref && ref.current) {
-      const clock = new THREE.Clock();
-      const dt = clock.getDelta();
-      ref.current.material.uniforms.uTime.value += dt;
+      ref.current.material.uniforms.uTime.value += delta;
     }
   });
 
   return (
-    <mesh position={[0, 0, 0]} ref={ref}>
+    <mesh
+      position={[0, 0, 0]}
+      ref={ref}
+      material={
+        new THREE.ShaderMaterial({
+          uniforms: {
+            uTime: { value: 0.0 },
+            uScale: { value: getScale(width, height) },
+            uTexture1: { value: ryoiki },
+            uTexture2: { value: yuji },
+          },
+          vertexShader: vertexShader,
+          fragmentShader: fragmentShader,
+          side: THREE.DoubleSide,
+        })
+      }
+    >
       <planeGeometry args={[1, 1]} />
-      <directionalWarpShader
-        uScale={getScale(width, height)}
-        uTime={0.0}
-        uTexture1={ryoiki}
-        uTexture2={yuji}
-        side={THREE.DoubleSide}
-      />
     </mesh>
   );
 };
