@@ -12,7 +12,6 @@ const DirectionalWarp: React.FC = () => {
           alpha: true,
           antialias: true,
         }}
-        resize={{ scroll: false }}
       >
         <Banner />
         <OrthographicCamera
@@ -26,6 +25,7 @@ const DirectionalWarp: React.FC = () => {
           near={-10}
           far={10}
           position={[0, 0, 1]}
+          manual
         />
       </Canvas>
     </div>
