@@ -18,6 +18,9 @@ disable: false
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
+#include <cmath>
+#include <fstream>
 ```
 
 ### Standard Input/Output
@@ -128,30 +131,46 @@ int value = *ptr;
 
 ### Classes and Objects
 
-- Class definition:
+- Class is a blueprint for creating objects
 
 ```cpp
 class MyClass {
-public:
-    // Member variables
+public: // Access specifier
+    // Member variables (properties)
     int myVar;
 
-    // Member function
-    void myFunction() {
-        // Code here
+    // Default constructor
+    MyClass() {
+        myVar = 0;
+    }
+
+    // Parameterized constructor
+    MyClass(int val) {
+        myVar = val;
+    }
+
+    // Member functions (methods)
+    void setMyVar(int val) {
+        myVar = val;
+    }
+
+    int getMyVar() {
+        return myVar;
     }
 };
+
 ```
 
 - Creating an object
 
 ```cpp
-MyClass obj;
+MyClass obj1; // Using default constructor, myVar will be 0
+MyClass obj2(10); // Using parameterized constructor, myVar will be 10
 ```
 
 - Accessing class members
 
 ```cpp
-obj.myVar = 42;
-obj.myFunction();
+obj1.setMyVar(42); // Sets obj1's myVar to 42
+int x = obj2.getMyVar(); // Gets the value of obj2's myVar
 ```

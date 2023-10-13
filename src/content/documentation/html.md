@@ -12,7 +12,7 @@ disable: false
 
 ### Meta Tags
 
-- Commonly used for SEO
+- Meta tags provide metadata about your webpage that helps search engines understand your content better
 
 ```html
 <meta charset="UTF-8" />
@@ -39,57 +39,64 @@ disable: false
 
 ### Text Formatting
 
-- <b>Bold text</b>
+- HTML tags for formatting text
 
 ```html
 <b>Bold text</b>
-```
-
-- <i>Italicized text</i>
-
-```html
 <i>Italicized text</i>
-```
-
-- <u>Underlined text</u>
-
-```html
 <u>Underlined text</u>
-```
-
-- <strong>Strong emphasis</strong>
-
-```html
 <strong>Strong emphasis</strong>
-```
-
-- <em>Emphasized text</em>
-
-```html
 <em>Emphasized text</em>
-```
-
-- <s>Strikethrough text</s>
-
-```html
 <s>Strikethrough text</s>
-```
-
-- <sub>Subscript text</sub>
-
-```html
 <sub>Subscript text</sub>
+<sup>Superscript text</sup>
 ```
 
-- <sup>Superscript text</sup>
+### Lists
+
+- Unordered, Ordered and Description Lists
 
 ```html
-<sup>Superscript text</sup>
+<ul>
+  <li>Unordered list item</li>
+  <li>Another unordered list item</li>
+</ul>
+
+<ol>
+  <li>Ordered list item</li>
+  <li>Another ordered list item</li>
+</ol>
+
+<dl>
+  <dt>Description Term</dt>
+  <dd>Description for the term</dd>
+</dl>
+```
+
+### Tables
+
+- HTML tables for displaying tabular data
+
+```html
+<table>
+  <tr>
+    <th>Header 1</th>
+    <th>Header 2</th>
+  </tr>
+  <tr>
+    <td>Row 1 Data 1</td>
+    <td>Row 1 Data 2</td>
+  </tr>
+  <tr>
+    <td>Row 2 Data 1</td>
+    <td>Row 2 Data 2</td>
+  </tr>
+</table>
 ```
 
 ### Picture
 
-- Used for responsive image loading
+- The Picture element for responsive image loading
 
 ```html
 <picture>
@@ -101,7 +108,7 @@ disable: false
 
 ### Form
 
-- Format structure
+- Form elements for user inputs
 
 ```html
 <form>
@@ -120,7 +127,7 @@ disable: false
 
 ### Semantic Elements
 
-- These tags provide information about the type of content they contain, improving accessibility and SEO
+- HTML5 semantic elements that provide meaning to the structure of web content
 
 ```html
 <body>
@@ -174,5 +181,25 @@ function scrollToPage(class: string) {
     behavior: "smooth",
     inline: "start",
   });
+}
+```
+
+- Change element content
+
+```javascript
+function changeContent(id, content) {
+  const element = document.getElementById(id);
+  element.innerHTML = content;
+}
+```
+
+- Add element
+
+```javascript
+function addElement(tag, content, parentId) {
+  const newElement = document.createElement(tag);
+  newElement.innerHTML = content;
+  const parent = document.getElementById(parentId);
+  parent.appendChild(newElement);
 }
 ```
