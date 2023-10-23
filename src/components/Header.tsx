@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { siteConfig } from "../config/site";
 import { Dialog } from "@headlessui/react";
 import { navigation } from "../config/navigation";
+import Search from "./Search";
+import SearchPanel from "./SearchPanel";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <nav
@@ -46,6 +49,10 @@ const Header: React.FC = () => {
               {item.name}
             </a>
           ))}
+          <Search
+            className="-my-1 ml-auto flex h-8 w-8 items-center justify-center rounded-lg lg:ml-8"
+            setSearchOpen={setSearchOpen}
+          />
         </div>
       </nav>
       <Dialog
@@ -91,11 +98,19 @@ const Header: React.FC = () => {
                     {item.name}
                   </a>
                 ))}
+                <span className="-mx-3 block rounded-lg text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">
+                  <Search
+                    className="flex items-center justify-start rounded-lg px-3 py-3 w-full"
+                    setSearchOpen={setSearchOpen}
+                  />
+                </span>
               </div>
             </div>
           </div>
         </Dialog.Panel>
       </Dialog>
+      {/* Search */}
+      <SearchPanel searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
     </header>
   );
 };

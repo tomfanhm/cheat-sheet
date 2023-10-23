@@ -65,8 +65,16 @@ Networking involves a variety of commands to configure and troubleshoot network 
 
 ### Routers vs Switches
 
-Routers and switches are both essential networking devices, but they serve different purposes in a network.
+#### Switches
 
-- **Switches**: A network switch primarily works in the Data Link layer of the OSI model (Layer 2). It connects devices on a local area network (LAN), like computers and printers, and allows them to communicate with each other efficiently. Switches create a network of devices where each device has a direct, high-speed connection to the network. They operate using MAC addresses to forward data to the appropriate destination within the LAN.
+- Operate at the Data Link layer of the OSI model (Layer 2).
+- Connect devices on a local area network (LAN), such as computers and printers.
+- Use MAC addresses to forward data to the correct destination within the LAN.
+- Allow for direct, high-speed connections between network devices.
 
-- **Routers**: A router works at a higher level, in the Network layer of the OSI model (Layer 3). Its main job is to connect multiple networks together and route network traffic between them. This includes connecting a home or business network to the internet. Routers use IP addresses to determine the best path for forwarding the packets, and they also provide additional features like DHCP serving, NAT, static routing, and network firewall protection.
+#### Routers
+
+- Operate at the Network layer of the OSI model (Layer 3).
+- Connect multiple networks together, including connecting a home or business network to the internet.
+- Use IP addresses to determine the best path for forwarding packets.
+- Provide additional features like DHCP serving, NAT, static routing, and network firewall protection.
