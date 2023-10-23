@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { siteConfig } from "../config/site";
 import { Dialog } from "@headlessui/react";
 import { navigation } from "../config/navigation";
 import Search from "./Search";
-import SearchPanel from "./SearchPanel";
+const SearchPanel = React.lazy(() => import("./SearchPanel"));
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -110,7 +110,9 @@ const Header: React.FC = () => {
         </Dialog.Panel>
       </Dialog>
       {/* Search */}
-      <SearchPanel searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+      <Suspense fallback={null}>
+        <SearchPanel searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+      </Suspense>
     </header>
   );
 };
