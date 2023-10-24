@@ -85,7 +85,7 @@ Networking involves a variety of commands to configure and troubleshoot network 
 
 - **Layer 5: Session Layer**
 
-  - Supervises communication session, including opening and closing
+  - Supervises communication sessions, including opening and closing
   - Synchronizes data transfer with checkpoints
 
 - **Layer 4: Transport Layer**
@@ -96,13 +96,13 @@ Networking involves a variety of commands to configure and troubleshoot network 
 
 - **Layer 3: Network Layer**
 
-  - Responsible for packet creation, transport, and assembly
-  - Manages data routing
+  - Responsible for packet creation and routing
+  - Manages logical addressing
   - Protocols include IP, ICMP, IGMP, IPsec suite
 
 - **Layer 2: Data Link Layer**
 
-  - Manages frame creation and sending frames between networks
+  - Manages frame creation and local delivery of frames
   - Handles flow control and error control in intra-network communication
 
 - **Layer 1: Physical Layer**
@@ -236,7 +236,7 @@ In a client-server architecture, the system is divided into two components: the 
 
 In this model, a computer can be a client when it requests data from a server, but it can also be a server when it's providing data to other devices. However, if the server fails, services become unavailable to the clients due to the centralized nature of a client-server architecture.
 
-## URL Structure
+### URL Structure
 
 A URL (Uniform Resource Locator) is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it.
 
