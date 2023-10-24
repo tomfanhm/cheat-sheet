@@ -411,3 +411,28 @@ DNS (Domain Name System) records are a vital part of the internet's infrastructu
 4. **MX Record (Mail Exchange Record):** Points a domain name to an email server and is used to route emails to the correct mail servers for that domain.
 
    Syntax: `type=MX; value=name of mail server associated with name`
+
+### Difference between Client-Server and Peer-to-Peer Network
+
+The Client-Server and Peer-to-Peer models represent two different ways of managing and structuring network connections. Below is a comparison of the two:
+
+|                           | Client-Server Network                                                             | Peer-to-Peer Network                                                                    |
+| ------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| **Structure**             | Clients and servers are differentiated. Specific servers and clients are present. | Clients and servers are not differentiated. Each node acts as both a client and server. |
+| **Focus**                 | Focuses on information sharing.                                                   | Focuses on connectivity.                                                                |
+| **Data Storage**          | Uses a centralized server to store data.                                          | Each peer has its own data.                                                             |
+| **Service Response**      | Servers respond to service requests made by clients.                              | Each node can both request and respond to services.                                     |
+| **Cost**                  | Generally more costly due to the need for powerful servers and maintenance.       | Generally less costly as each node contributes to the network's resources.              |
+| **Stability**             | More stable. Centralized structure allows for better control and management.      | Can be less stable as number of peers increase due to lack of centralized control.      |
+| **Suitability**           | Used for both small and large networks.                                           | Generally suited for small networks with fewer than 10 computers.                       |
+| **Download Time Formula** | Dc-s = max{NF/us, F/dmin}                                                         | DP2P = max{F/us, F/dmin, NF/(us + Σui)}                                                 |
+
+Where:
+
+- Dc-s is the download time in a client-server network
+- DP2P is the download time in a peer-to-peer network
+- F is the size of the file
+- us is the upload speed of the server
+- dmin is the minimum download speed among all peers
+- Σui is the sum of the upload speeds of all 'i' peers
+- N is the number of peers
