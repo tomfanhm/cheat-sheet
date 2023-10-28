@@ -6,7 +6,7 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://cheat-sheet-01y.pages.dev",
+  site: "https://cheatsheet.tfix.io",
   integrations: [
     mdx(),
     tailwind(),
