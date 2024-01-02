@@ -79,3 +79,111 @@ touch src/index.ts
 ```
 npm run start:dev
 ```
+
+### Creating a Simple HTTP Server
+
+- Add Express.js as a dependency
+
+```
+npm install express
+
+```
+
+- Create an Express application in src/index.ts
+
+```typescript
+import express from "express";
+
+const app = express();
+const PORT = 3000;
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+```
+
+### Environment Variables
+
+- Create a .env file in the root directory and add variables
+
+```
+MONGODB_URI=your-mongodb-uri
+
+```
+
+- Load environment variables
+
+```typescript
+import dotenv from "dotenv";
+dotenv.config();
+```
+
+### Database Integration
+
+- Connect to the database
+
+```typescript
+import mongoose from "mongoose";
+
+const MONGODB_URI = "your-mongodb-uri";
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Could not connect to MongoDB", err));
+```
+
+- Define a Mongoose model
+
+```typescript
+import mongoose from "mongoose";
+
+const itemSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: String,
+  price: Number,
+});
+
+const Item = mongoose.model("Item", itemSchema);
+
+export default Item;
+```
+
+- CRUD Operations
+
+```typescript
+import Item from "./models/itemModel";
+
+// Create
+router.post("/items", async (req, res) => {
+  const newItem = new Item(req.body);
+  await newItem.save();
+  res.status(201).send(newItem);
+});
+
+// Read
+router.get("/items", async (req, res) => {
+  const items = await Item.find();
+  res.send(items);
+});
+
+// Update
+router.put("/items/:id", async (req, res) => {
+  const item = await Item.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  if (!item) return res.status(404).send("Item not found");
+  res.send(item);
+});
+
+// Delete
+router.delete("/items/:id", async (req, res) => {
+  const item = await Item.findByIdAndRemove(req.params.id);
+  if (!item) return res.status(404).send("Item not found");
+  res.send(item);
+});
+```
