@@ -31,9 +31,9 @@ const NextAndPrevious: React.FC<NextAndPreviousProps> = ({
               d="M3 0L0 3L3 6"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
           </svg>
           {previous.title}
@@ -53,9 +53,9 @@ const NextAndPrevious: React.FC<NextAndPreviousProps> = ({
               d="M0 0L3 3L0 6"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             ></path>
           </svg>
         </a>

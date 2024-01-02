@@ -10,12 +10,7 @@ export function parse<
       id: string;
       title: string;
       description: string;
-      imageUrl: {
-        src: string;
-        width: number;
-        height: number;
-        format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg";
-      };
+      imageUrl: ImageMetadata;
       date: string;
       datetime: string;
       disable: boolean;
@@ -59,7 +54,7 @@ export async function getPosts(q: string) {
     const result = fuse.search(q);
     return result.map((item) => item.item);
   } catch (error) {
-    console.log("Error", error);
+    console.log("🚀 ~ file: utils.ts ~ getPosts ~ error:", error);
   }
   return [];
 }

@@ -8,12 +8,7 @@ export interface Props {
     title: string;
     href: string;
     description: string;
-    imageUrl: {
-      src: string;
-      width: number;
-      height: number;
-      format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg";
-    };
+    imageUrl: ImageMetadata;
     date: string;
     datetime: string;
   }[];
