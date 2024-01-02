@@ -162,12 +162,7 @@ export const collections = {
 import { Image } from "astro:assets";
 
 export interface Props {
-  imageUrl: {
-    src: string;
-    width: number;
-    height: number;
-    format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg";
-  };
+  imageUrl: ImageMetadata
 }
 
 const { imageUrl } = Astro.props;

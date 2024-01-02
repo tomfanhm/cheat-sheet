@@ -138,6 +138,23 @@ export async function getArticles() {
 }
 ```
 
+### Create a Document with a Custom ID
+
+- You can specify your own ID when creating a document
+
+```typescript
+async function createDocument<T>(customId: string, data: T) {
+  const docRef = doc(firestore, "collectionName", customId);
+
+  try {
+    await setDoc(docRef, data);
+    console.log("Document created with custom ID:", customId);
+  } catch (error) {
+    console.error("Error creating document:", error);
+  }
+}
+```
+
 ### Batch Write
 
 - Batch writes allow you to make multiple write operations as a single atomic unit
@@ -178,4 +195,102 @@ async function incrementCounter(docId: string) {
     console.error("Transaction failed: ", error);
   }
 }
+```
+
+### Firestore Real-Time Data Listening
+
+- Listen to a Document
+- Get real-time updates when a document changes
+
+```typescript
+import { doc, onSnapshot } from "firebase/firestore";
+
+const docRef = doc(firestore, "collection", "docId");
+const unsubscribe = onSnapshot(docRef, (doc) => {
+  if (doc.exists()) {
+    console.log("Current data: ", doc.data());
+  } else {
+    console.log("Document does not exist");
+  }
+});
+// Call unsubscribe() to stop listening
+```
+
+- Listen to a Collection
+- Receive updates when any document in a collection changes
+
+```typescript
+import { collection, onSnapshot } from "firebase/firestore";
+
+const collRef = collection(firestore, "collection");
+const unsubscribe = onSnapshot(collRef, (snapshot) => {
+  snapshot.docChanges().forEach((change) => {
+    if (change.type === "added") {
+      console.log("New doc: ", change.doc.data());
+    }
+    if (change.type === "modified") {
+      console.log("Modified doc: ", change.doc.data());
+    }
+    if (change.type === "removed") {
+      console.log("Removed doc: ", change.doc.data());
+    }
+  });
+});
+// Call unsubscribe() to stop listening
+```
+
+### Firebase Rules
+
+- Public Access
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
+
+```
+
+- Authenticated Access
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+```
+
+- User-Specific Data
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+
+```
+
+- Role-Based Access
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read: if true;
+      allow write: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
+
 ```
