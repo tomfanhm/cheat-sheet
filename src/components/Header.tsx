@@ -1,8 +1,9 @@
-import React, { useState, Suspense } from "react";
-import { siteConfig } from "../config/site";
 import { Dialog } from "@headlessui/react";
+import React, { Suspense, useState } from "react";
 import { navigation } from "../config/navigation";
+import { siteConfig } from "../config/site";
 import Search from "./Search";
+
 const SearchPanel = React.lazy(() => import("./SearchPanel"));
 
 const Header: React.FC = () => {
@@ -98,9 +99,9 @@ const Header: React.FC = () => {
                     {item.name}
                   </a>
                 ))}
-                <span className="-mx-3 block rounded-lg text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 cursor-pointer">
+                <span className="-mx-3 block cursor-pointer rounded-lg text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                   <Search
-                    className="flex items-center justify-start rounded-lg px-3 py-3 w-full"
+                    className="flex w-full items-center justify-start rounded-lg px-3 py-3"
                     setSearchOpen={setSearchOpen}
                   />
                 </span>
@@ -110,7 +111,7 @@ const Header: React.FC = () => {
         </Dialog.Panel>
       </Dialog>
       {/* Search */}
-      <Suspense fallback={null}>
+      <Suspense fallback={<></>}>
         <SearchPanel searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
       </Suspense>
     </header>

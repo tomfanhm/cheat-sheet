@@ -17,7 +17,7 @@ const NextAndPrevious: React.FC<NextAndPreviousProps> = ({
   if (!next && !previous) return <></>;
 
   return (
-    <div className="mb-10 text-slate-700 font-semibold flex items-center">
+    <div className="mb-10 flex items-center font-semibold text-slate-700">
       {previous && (
         <a
           className="group flex items-center hover:text-slate-900 dark:hover:text-white"
@@ -25,7 +25,7 @@ const NextAndPrevious: React.FC<NextAndPreviousProps> = ({
         >
           <svg
             viewBox="0 0 3 6"
-            className="mr-3 w-auto h-1.5 text-slate-400 overflow-visible group-hover:text-slate-600 dark:group-hover:text-slate-300"
+            className="mr-3 h-1.5 w-auto overflow-visible text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300"
           >
             <path
               d="M3 0L0 3L3 6"
@@ -47,7 +47,7 @@ const NextAndPrevious: React.FC<NextAndPreviousProps> = ({
           {next.title}
           <svg
             viewBox="0 0 3 6"
-            className="ml-3 w-auto h-1.5 text-slate-400 overflow-visible group-hover:text-slate-600 dark:group-hover:text-slate-300"
+            className="ml-3 h-1.5 w-auto overflow-visible text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300"
           >
             <path
               d="M0 0L3 3L0 6"

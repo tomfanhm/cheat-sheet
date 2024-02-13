@@ -119,6 +119,7 @@ MONGODB_URI=your-mongodb-uri
 
 ```typescript
 import dotenv from "dotenv";
+
 dotenv.config();
 ```
 

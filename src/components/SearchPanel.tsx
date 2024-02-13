@@ -38,11 +38,11 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
       className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24"
     >
       <div
-        className="fixed inset-0 bg-slate-900/25 backdrop-blur transition-opacity opacity-100"
+        className="fixed inset-0 bg-slate-900/25 opacity-100 backdrop-blur transition-opacity"
         aria-hidden="true"
         onClick={() => setSearchOpen(false)}
       />
-      <Dialog.Panel className="relative w-full max-w-lg transform px-4 transition-all opacity-100 scale-100">
+      <Dialog.Panel className="relative w-full max-w-lg scale-100 transform px-4 opacity-100 transition-all">
         <div className="overflow-hidden rounded-lg bg-white shadow-md">
           <div className="relative">
             <input
@@ -58,7 +58,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
             {isPending ? (
               <svg
                 aria-hidden="true"
-                className="pointer-events-none absolute right-4 top-4 h-6 w-6 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+                className="pointer-events-none absolute right-4 top-4 h-6 w-6 animate-spin fill-gray-600 text-gray-200 dark:fill-gray-300 dark:text-gray-600"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,8 +86,8 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
               <ul className="max-h-[18.375rem] divide-y divide-slate-200 overflow-y-auto rounded-b-lg border-t border-slate-200 text-sm leading-6">
                 {searchResult.map((post, i) => (
                   <a href={post.href} key={i}>
-                    <li className="flex items-center justify-between p-4 bg-slate-50">
-                      <span className="whitespace-nowrap overflow-hidden text-overflow-ellipsis max-w-xs block font-semibold text-sky-600">
+                    <li className="flex items-center justify-between bg-slate-50 p-4">
+                      <span className="text-overflow-ellipsis block max-w-xs overflow-hidden whitespace-nowrap font-semibold text-sky-600">
                         {post.title}
                       </span>
                       <span className="ml-4 text-right text-xs text-slate-600">

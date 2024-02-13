@@ -15,9 +15,9 @@ disable: false
 - You can get your Firebase configuration object from the Firebase console
 
 ```typescript
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getApp, getApps, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
@@ -56,7 +56,7 @@ const q = query(
   where("active", "==", true),
   orderBy("age"),
   startAt(18),
-  limit(100)
+  limit(100),
 );
 ```
 
@@ -117,7 +117,7 @@ export async function getArticles() {
   const q = query(
     articlesCollection,
     orderBy("publishedAt", "desc"),
-    limit(10)
+    limit(10),
   );
 
   try {

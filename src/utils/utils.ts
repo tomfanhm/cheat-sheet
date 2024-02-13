@@ -1,4 +1,4 @@
-import { getCollection } from "astro:content";
+/* import { getCollection } from "astro:content"; */
 import Fuse from "fuse.js";
 
 export function parse<
@@ -15,15 +15,15 @@ export function parse<
       datetime: string;
       disable: boolean;
     };
-  }
+  },
 >(arr: T[], prefix: string) {
   return arr
     .filter((el) => !el.data.disable)
     .sort(
       (a, b) =>
-        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+        new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf(),
     )
-    .map((el, i) => ({
+    .map((el) => ({
       id: el.data.id,
       collection: el.collection,
       href: prefix + el.slug,
@@ -37,8 +37,9 @@ export function parse<
 }
 
 export async function getPosts(q: string) {
-  try {
-    /* Get all posts */
+  return []
+  /* try {
+
     const collections = await Promise.all([
       getCollection("blog").then((el) => parse(el, "/blog/")),
       getCollection("documentation").then((el) => parse(el, "/documentation/")),
@@ -46,7 +47,7 @@ export async function getPosts(q: string) {
       getCollection("showcase").then((el) => parse(el, "/showcase/")),
     ]);
     const allPosts = collections.flat();
-    /* Use Fuse */
+
     const fuse = new Fuse(allPosts, {
       includeScore: false,
       keys: ["title", "description", "body"],
@@ -56,5 +57,5 @@ export async function getPosts(q: string) {
   } catch (error) {
     console.log("🚀 ~ file: utils.ts ~ getPosts ~ error:", error);
   }
-  return [];
+  return []; */
 }

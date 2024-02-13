@@ -90,7 +90,7 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <ViewTransitions />
   </head>
-  <body class="min-h-screen bg-background font-sans antialiased">
+  <body class="bg-background min-h-screen font-sans antialiased">
     <main>
       <slot />
     </main>
@@ -122,10 +122,11 @@ import Layout from "../layouts/Layout.astro";
 
 ```astro
 ---
-import InteractiveButton from '../components/InteractiveButton.tsx';
-import InteractiveCounter from '../components/InteractiveCounter.tsx';
-import InteractiveModal from "../components/InteractiveModal.tsx"
+import InteractiveButton from "../components/InteractiveButton.tsx";
+import InteractiveCounter from "../components/InteractiveCounter.tsx";
+import InteractiveModal from "../components/InteractiveModal.tsx";
 ---
+
 <InteractiveButton client:load />
 <InteractiveButton client:visible />
 <InteractiveButton client:only="react" />
@@ -162,11 +163,12 @@ export const collections = {
 import { Image } from "astro:assets";
 
 export interface Props {
-  imageUrl: ImageMetadata
+  imageUrl: ImageMetadata;
 }
 
 const { imageUrl } = Astro.props;
 ---
+
 <Image
   format="avif"
   src={imageUrl}
@@ -183,43 +185,43 @@ const { imageUrl } = Astro.props;
 ---
 // MarkdownLayout.astro
 ---
-<article class="mt-10 prose lg:prose-xl">
+
+<article class="prose mt-10 lg:prose-xl">
   <slot />
 </article>
 
 <script is:inline>
-function main() {
-  const codeBlocks = Array.from(document.querySelectorAll("pre"));
-  for (const codeBlock of codeBlocks) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "relative";
-    const copyButton = document.createElement("button");
-    copyButton.className =
-      "absolute top-0 right-0 m-2 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
-    copyButton.innerHTML = "Copy";
+  function main() {
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "relative";
+      const copyButton = document.createElement("button");
+      copyButton.className =
+        "absolute top-0 right-0 m-2 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
+      copyButton.innerHTML = "Copy";
 
-    const code = codeBlock.querySelector("code");
+      const code = codeBlock.querySelector("code");
 
-    if (code && codeBlock && codeBlock.parentNode) {
-      codeBlock.appendChild(copyButton);
-      codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-      wrapper.appendChild(codeBlock);
+      if (code && codeBlock && codeBlock.parentNode) {
+        codeBlock.appendChild(copyButton);
+        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
+        wrapper.appendChild(codeBlock);
 
-      copyButton.addEventListener("click", async () => {
-        const text = code.innerText;
-        await navigator.clipboard.writeText(text).then(() => {
-          copyButton.innerText = "Copied";
+        copyButton.addEventListener("click", async () => {
+          const text = code.innerText;
+          await navigator.clipboard.writeText(text).then(() => {
+            copyButton.innerText = "Copied";
 
-          setTimeout(() => {
-            copyButton.innerText = "Copy";
-          }, 1000);
+            setTimeout(() => {
+              copyButton.innerText = "Copy";
+            }, 1000);
+          });
         });
-      });
+      }
     }
   }
-}
 
-main();
+  main();
 </script>
-
 ```

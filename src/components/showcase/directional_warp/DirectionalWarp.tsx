@@ -1,12 +1,12 @@
+import { OrthographicCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { useRef } from "react";
 import Banner from "./Banner";
-import { OrthographicCamera } from "@react-three/drei";
 
 const DirectionalWarp: React.FC = () => {
   const cam = useRef(null);
   return (
-    <div className="canvas-container relative w-full aspect-[4/3] bg-black rounded-2xl overflow-hidden p-0">
+    <div className="canvas-container relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-black p-0">
       <Canvas
         gl={{
           alpha: true,

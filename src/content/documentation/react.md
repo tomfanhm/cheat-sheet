@@ -159,7 +159,7 @@ function PokemonList() {
 - Displays a skeleton while loading, and a fallback image in case of an error
 
 ```tsx
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
   const [imageSrc, setImageSrc] = useState(src);
@@ -184,7 +184,7 @@ const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
 
   if (isLoading) {
     return (
-      <div className="animate-pulse bg-gray-500 h-20 w-full">
+      <div className="h-20 w-full animate-pulse bg-gray-500">
         {/* This div acts as a skeleton screen */}
       </div>
     );
@@ -195,7 +195,7 @@ const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
       <img
         src={fallbackImage}
         alt={alt}
-        className="w-full h-full object-cover"
+        className="h-full w-full object-cover"
         {...rest}
       />
     );
@@ -205,7 +205,7 @@ const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
     <img
       src={imageSrc}
       alt={alt}
-      className="w-full h-full object-cover"
+      className="h-full w-full object-cover"
       {...rest}
     />
   );

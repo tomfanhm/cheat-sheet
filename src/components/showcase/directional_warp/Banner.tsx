@@ -61,7 +61,7 @@ const Banner: React.FC = () => {
   const ref =
     useRef<THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial>>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (ref && ref.current) {
       ref.current.material.uniforms.uTime.value += delta;
     }

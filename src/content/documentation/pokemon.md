@@ -30,7 +30,7 @@ const schema = z.object({
 export async function getAllPokemon() {
   try {
     const res = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
+      "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0",
     );
     if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const result = await res.json();

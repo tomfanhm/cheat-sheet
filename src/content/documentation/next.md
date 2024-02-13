@@ -36,9 +36,9 @@ disable: false
 - Create theme-provider.tsx
 
 ```tsx
-import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
+import * as React from "react";
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
@@ -49,8 +49,9 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 - Wrap the application with the ThemeProvider component
 
 ```tsx
-import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Inter } from "next/font/google";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -118,7 +119,7 @@ const config: Config = {
 - A Next.js function that you can export from a page to fetch data at build time and pre-render the page with the fetched data
 
 ```tsx
-import type { InferGetStaticPropsType, GetStaticProps } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 
 type Repo = {
   name: string;

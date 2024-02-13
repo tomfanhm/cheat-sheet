@@ -27,7 +27,7 @@ const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
   0.1,
-  1000
+  1000,
 );
 ```
 
@@ -103,7 +103,7 @@ const textures = [
 ].map((url) =>
   new THREE.TextureLoader().load(url, (texture) => {
     // Onload callback, do something
-  })
+  }),
 );
 ```
 
@@ -161,7 +161,7 @@ window.addEventListener("mousemove", onMouseMove, false);
 function onMouseMove(event) {
   const mouse = new THREE.Vector2(
     (event.clientX / window.innerWidth) * 2 - 1,
-    -(event.clientY / window.innerHeight) * 2 + 1
+    -(event.clientY / window.innerHeight) * 2 + 1,
   );
 
   raycaster.setFromCamera(mouse, camera);

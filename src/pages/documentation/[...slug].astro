@@ -1,8 +1,7 @@
 ---
-import type { Code } from "astro:components";
-import Layout from "../../layouts/Layout.astro";
-import { type CollectionEntry, getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
+import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   const docs = await getCollection("documentation");
