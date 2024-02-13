@@ -1,4 +1,4 @@
-/* import { getCollection } from "astro:content"; */
+import { getCollection } from "astro:content";
 import Fuse from "fuse.js";
 
 export function parse<
@@ -37,9 +37,7 @@ export function parse<
 }
 
 export async function getPosts(q: string) {
-  return []
-  /* try {
-
+  try {
     const collections = await Promise.all([
       getCollection("blog").then((el) => parse(el, "/blog/")),
       getCollection("documentation").then((el) => parse(el, "/documentation/")),
@@ -57,5 +55,5 @@ export async function getPosts(q: string) {
   } catch (error) {
     console.log("🚀 ~ file: utils.ts ~ getPosts ~ error:", error);
   }
-  return []; */
+  return [];
 }

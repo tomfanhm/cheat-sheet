@@ -111,7 +111,7 @@ const Header: React.FC = () => {
         </Dialog.Panel>
       </Dialog>
       {/* Search */}
-      <Suspense fallback={<></>}>
+      <Suspense fallback={null}>
         <SearchPanel searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
       </Suspense>
     </header>
