@@ -15,28 +15,26 @@ disable: false
 - A functional component in React is a JavaScript/ Typescript function that returns JSX/ TSX
 
 ```tsx
-interface Props {
+type GreetingProps = {
   name: string;
-}
-
-const Greeting: React.FC<Props> = ({ name }) => {
-  return (
-    <div>
-      <h1>Hello, {name}!</h1>
-    </div>
-  );
 };
+
+const Greeting: React.FC<GreetingProps> = ({ name }) => (
+  <div>
+    <h1>Hello, {name}!</h1>
+  </div>
+);
+
+export default Greeting;
 ```
 
 - To use the functional component, you can import it into another component and pass props as necessary
 
 ```tsx
+import Greeting from "./Greeting";
+
 function App() {
-  return (
-    <div>
-      <Greeting name="John" />
-    </div>
-  );
+  return <Greeting name="Jane" />;
 }
 ```
 
@@ -44,9 +42,9 @@ function App() {
 
 - Event handlers are functions that get executed when a specific event occurs, such as a click or input change
 
-```jsx
+```tsx
 const Counter: React.FC = () => {
-  const [count, setCount] = useState < number > 0;
+  const [count, setCount] = useState<number>(0);
 
   const handleIncrement = () => {
     setCount((prev) => prev + 1);
@@ -212,4 +210,140 @@ const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
 };
 
 export default ImageComponent;
+```
+
+### Context API
+
+- Manage global state in a type-safe manner
+
+```tsx
+import React, { createContext, useContext, useState } from "react";
+
+type ThemeContextType = {
+  theme: string;
+  toggleTheme: () => void;
+};
+
+const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [theme, setTheme] = useState("light");
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
+};
+```
+
+### useReducer
+
+- Particularly useful for complex state logic that involves multiple sub-values
+
+```tsx
+import { useReducer } from "react";
+
+type CartItem = {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+};
+
+type CartState = {
+  cartItems: CartItem[];
+  totalAmount: number;
+};
+
+type CartAction =
+  | { type: "ADD_ITEM"; payload: CartItem }
+  | { type: "REMOVE_ITEM"; payload: { id: string } }
+  | { type: "CLEAR_CART" };
+
+const cartReducer = (state: CartState, action: CartAction): CartState => {
+  switch (action.type) {
+    case "ADD_ITEM": {
+      const updatedCartItems = state.cartItems.concat(action.payload);
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+        totalAmount:
+          state.totalAmount + action.payload.price * action.payload.quantity,
+      };
+    }
+    case "REMOVE_ITEM": {
+      const updatedCartItems = state.cartItems.filter(
+        (item) => item.id !== action.payload.id,
+      );
+      const removedItem = state.cartItems.find(
+        (item) => item.id === action.payload.id,
+      );
+      const updatedTotalAmount = removedItem
+        ? state.totalAmount - removedItem.price * removedItem.quantity
+        : state.totalAmount;
+      return {
+        ...state,
+        cartItems: updatedCartItems,
+        totalAmount: updatedTotalAmount,
+      };
+    }
+    case "CLEAR_CART":
+      return {
+        cartItems: [],
+        totalAmount: 0,
+      };
+    default:
+      return state;
+  }
+};
+
+const ShoppingCart: React.FC = () => {
+  const [cartState, dispatch] = useReducer(cartReducer, {
+    cartItems: [],
+    totalAmount: 0,
+  });
+
+  const addItemToCart = (item: CartItem) => {
+    dispatch({ type: "ADD_ITEM", payload: item });
+  };
+
+  const removeItemFromCart = (id: string) => {
+    dispatch({ type: "REMOVE_ITEM", payload: { id } });
+  };
+
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
+
+  return (
+    <div>
+      <h2>Shopping Cart</h2>
+      {cartState.cartItems.map((item) => (
+        <div key={item.id}>
+          <span>
+            {item.title} - {item.quantity} x ${item.price}
+          </span>
+          <button onClick={() => removeItemFromCart(item.id)}>Remove</button>
+        </div>
+      ))}
+      <div>Total Amount: ${cartState.totalAmount.toFixed(2)}</div>
+      <button onClick={clearCart}>Clear Cart</button>
+    </div>
+  );
+};
 ```

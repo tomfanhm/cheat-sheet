@@ -64,17 +64,36 @@ disable: false
 
 ```php
 <?php
-$servername = "localhost";
+$server_name = "localhost";
 $username = "username";
 $password = "password";
-$dbname = "myDB";
+$db_name = "myDB";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($server_name, $username, $password, $db_name);
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 ?>
+```
+
+- PDO
+
+```php
+<?php
+$server_name = "localhost";
+$username = "username";
+$password = "password";
+$db_name = "myDB";
+try {
+  $conn = new PDO("mysql:host=$server_name;db_name=$db_name", $username, $password);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully";
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+}
+?>
+
 ```
 
 ### Error Handling
@@ -84,7 +103,9 @@ if ($conn->connect_error) {
 ```php
 <?php
 try {
-  // code that may throw an exception
+  // Code that may throw an error
+} catch (Error $e) {
+  echo 'An error occurred: ',  $e->getMessage(), "\n";
 } catch (Exception $e) {
   echo 'Caught exception: ',  $e->getMessage(), "\n";
 }
@@ -128,4 +149,153 @@ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
   echo "Sorry, there was an error uploading your file.";
 }
 ?>
+```
+
+### Advanced Database Operations
+
+- Encapsulate common database operations
+
+```php
+<?php
+
+namespace Phppot;
+
+class DataSource
+{
+    const HOST = 'localhost';
+    const USERNAME = 'root';
+    const PASSWORD = '';
+    const DATABASE_NAME = 'speed';
+
+    private $connection;
+
+    function __construct()
+    {
+        $this->connection = $this->get_connection();
+    }
+
+    public function get_connection()
+    {
+        $connection = new \mysqli(self::HOST, self::USERNAME, self::PASSWORD, self::DATABASE_NAME);
+
+        if ($connection->connect_error) {
+            throw new \Exception('Connect Error (' . $connection->connect_errno . ') ' . $connection->connect_error);
+        }
+
+        $connection->set_charset("utf8");
+        return $connection;
+    }
+
+    public function select(string $query, string $param_type = "", array $param_array = array())
+    {
+        $stmt = $this->connection->prepare($query);
+        if (!empty($param_type) && !empty($param_array)) {
+            $this->bind_query_params($stmt, $param_type, $param_array);
+        }
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $result_set[] = $row;
+            }
+        }
+        if (!empty($result_set)) {
+            return $result_set;
+        }
+    }
+
+    public function insert(string $query, string $param_type, array $param_array)
+    {
+        $stmt = $this->connection->prepare($query);
+        $this->bind_query_params($stmt, $param_type, $param_array);
+        $stmt->execute();
+        $insert_id = $stmt->insert_id;
+        return $insert_id;
+    }
+
+    public function execute(string $query, string $param_type = "", array $param_array = array())
+    {
+        $stmt = $this->connection->prepare($query);
+        if (!empty($param_type) && !empty($param_array)) {
+            $this->bind_query_params($stmt, $param_type, $param_array);
+        }
+        $stmt->execute();
+    }
+
+    public function bind_query_params(\mysqli_stmt $stmt, string $param_type, array $param_array = array())
+    {
+        $param_value_reference[] = &$param_type;
+        for ($i = 0; $i < count($param_array); $i++) {
+            $param_value_reference[] = &$param_array[$i];
+        }
+        call_user_func_array(array($stmt, 'bind_param'), $param_value_reference);
+    }
+
+    public function get_record_count(string $query, string $param_type = "", array $param_array = array()): int
+    {
+        $stmt = $this->connection->prepare($query);
+        if (!empty($param_type) && !empty($param_array)) {
+            $this->bind_query_params($stmt, $param_type, $param_array);
+        }
+        $stmt->execute();
+        $stmt->store_result();
+        $record_count = $stmt->num_rows;
+        return $record_count;
+    }
+}
+
+```
+
+- Including the DataSource Class
+
+```php
+require_once 'Path/To/Phppot/DataSource.php';
+
+use Phppot\DataSource;
+```
+
+- Inserting a New Record
+
+- **`'s'`** - String
+- **`'i'`** - Integer
+- **`'d'`** - Double
+- **`'b'`** - Blob
+
+```php
+$ds = new DataSource();
+
+$query = "INSERT INTO users (username, email) VALUES (?, ?)";
+$paramType = "ss"; // 's' denotes a string type parameter
+$paramArray = array($username, $email);
+$insertId = $ds->insert($query, $paramType, $paramArray);
+
+echo "The new record has been added with ID: " . $insertId;
+```
+
+- Selecting Records from a Database
+
+```php
+$ds = new DataSource();
+
+$query = "SELECT * FROM users WHERE active = ?";
+$paramType = "i"; // 'i' denotes an integer type parameter
+$paramArray = array(1);
+$users = $ds->select($query, $paramType, $paramArray);
+
+foreach ($users as $user) {
+    echo "Username: " . $user['username'] . ", Email: " . $user['email'] . "<br/>";
+}
+```
+
+- Counting the Number of Records
+
+```php
+$ds = new DataSource();
+
+$query = "SELECT * FROM users WHERE active = ?";
+$paramType = "i";
+$paramArray = array(1);
+$userCount = $ds->get_record_count($query, $paramType, $paramArray);
+
+echo "Number of active users: " . $userCount;
 ```

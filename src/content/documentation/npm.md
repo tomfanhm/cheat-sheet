@@ -24,7 +24,13 @@ npm install
 npm install <package-name>
 ```
 
-- Install a package globally.
+- Install a specific version of a package
+
+```bash
+npm install <package-name>@<version>
+```
+
+- Install a package globally
 
 ```bash
 npm install <package-name> --global
@@ -40,6 +46,20 @@ npm install --save <package-name>
 
 ```bash
 npm install --save-dev <package-name>
+```
+
+### Handling Global Packages
+
+- List globally installed packages
+
+```bash
+npm list -g --depth=0
+```
+
+- Find the location of globally installed packages
+
+```bash
+npm root -g
 ```
 
 ### Dependency Management
@@ -132,4 +152,18 @@ npm ls
 
 ```bash
 npm help
+```
+
+### Reinstall
+
+- Remove node modules
+
+```bash
+rm -rf node_modules
+```
+
+- Install
+
+```bash
+npm i
 ```
