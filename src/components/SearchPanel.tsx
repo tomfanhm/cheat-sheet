@@ -1,6 +1,5 @@
 import { Dialog } from "@headlessui/react";
 import React, { Fragment, useState, useTransition } from "react";
-import { getPosts } from "../utils/utils";
 
 interface Post {
   href: string;
@@ -24,6 +23,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
 
   const handleSearch = async (value: string) => {
     setSearchValue(value);
+    const { getPosts } = await import("../utils/utils");
     const result = await getPosts(value);
     startTransition(() => {
       setSearchResult(result);
