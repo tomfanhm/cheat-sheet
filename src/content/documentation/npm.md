@@ -10,6 +10,27 @@ category: Documentation
 disable: false
 ---
 
+### Installing npm
+
+To use npm, you need Node.js installed on your computer. Why? Because npm comes bundled with Node.js.
+
+- To check if it's installed, open your command line or terminal and type
+
+```bash
+node -v
+npm -v
+```
+
+### Semantic Versioning
+
+This is semantic versioning, and it's important for managing package updates without breaking your project. Here's a quick breakdown:
+
+- **Major version** (1.x.x): Introduces breaking changes.
+- **Minor version** (x.1.x): Adds functionality in a backwards-compatible manner.
+- **Patch version** (x.x.1): Fixes bugs without adding new features.
+
+The `^` symbol allows minor and patch updates. Using `~` would only allow patch updates.
+
 ### Package Management
 
 - Install packages defined in the `package.json` file
@@ -21,31 +42,37 @@ npm install
 - Install a package locally
 
 ```bash
-npm install <package-name>
+npm install <package_name>
 ```
 
 - Install a specific version of a package
 
 ```bash
-npm install <package-name>@<version>
+npm install <package_name>@<version>
 ```
 
 - Install a package globally
 
 ```bash
-npm install <package-name> --global
+npm install <package_name> --global
 ```
 
 - Install and save a package as a dependency
 
 ```bash
-npm install --save <package-name>
+npm install --save <package_name>
 ```
 
 - Install and save a package as a development dependency
 
 ```bash
-npm install --save-dev <package-name>
+npm install --save-dev <package_name>
+```
+
+- Updating Packages
+
+```bash
+npm update <package_name>
 ```
 
 ### Handling Global Packages
@@ -79,7 +106,7 @@ npm outdated
 - Uninstall a package
 
 ```bash
-npm uninstall <package-name>
+npm uninstall <package_name>
 ```
 
 - Remove packages not listed in the `package.json` file
@@ -105,7 +132,7 @@ npm test
 - Run a custom script defined in `package.json`
 
 ```bash
-npm run <script-name>
+npm run <script_name>
 ```
 
 ### Publishing
@@ -139,7 +166,7 @@ npm search <keyword>
 - Get detailed information about a package
 
 ```bash
-npm info <package-name>
+npm info <package_name>
 ```
 
 - List installed packages

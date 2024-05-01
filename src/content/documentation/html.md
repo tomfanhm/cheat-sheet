@@ -167,39 +167,3 @@ disable: false
   </footer>
 </body>
 ```
-
-### Functions
-
-- Scroll to target element
-
-```typescript
-function scrollToPage(class: string) {
-  const e = document.getElementById(class);
-
-  e.scrollIntoView({
-    block: "start",
-    behavior: "smooth",
-    inline: "start",
-  });
-}
-```
-
-- Change element content
-
-```javascript
-function changeContent(id, content) {
-  const element = document.getElementById(id);
-  element.innerHTML = content;
-}
-```
-
-- Add element
-
-```javascript
-function addElement(tag, content, parentId) {
-  const newElement = document.createElement(tag);
-  newElement.innerHTML = content;
-  const parent = document.getElementById(parentId);
-  parent.appendChild(newElement);
-}
-```
