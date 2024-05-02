@@ -869,3 +869,50 @@ END;
 ```plsql
 DROP PROCEDURE calculate_bonus;
 ```
+
+## Function
+
+A function in PL/SQL is a type of subprogram that returns a single value.
+
+```plsql
+CREATE OR REPLACE FUNCTION function_name (
+   parameters
+) RETURN return_type IS
+-- variable declarations
+BEGIN
+-- function body
+   RETURN value;
+END function_name;
+
+CREATE OR REPLACE FUNCTION calculate_annual_salary(
+    p_monthly_salary IN NUMBER
+) RETURN NUMBER IS
+    v_annual_salary NUMBER;
+BEGIN
+    v_annual_salary := p_monthly_salary * 12;
+    RETURN v_annual_salary;
+END calculate_annual_salary;
+```
+
+### Executing Functions
+
+- Functions can be executed within PL/SQL blocks, or called from SQL statements.
+
+```plsql
+DECLARE
+    v_monthly_salary NUMBER := 5000;
+    v_annual_salary  NUMBER;
+BEGIN
+    v_annual_salary := calculate_annual_salary(v_monthly_salary);
+    dbms_output.put_line('Annual Salary: '
+                         || v_annual_salary);
+END;
+```
+
+### Removing Functions
+
+- To remove a function from the database, use the DROP FUNCTION command.
+
+```plsql
+DROP FUNCTION calculate_annual_salary;
+```
