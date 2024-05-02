@@ -412,7 +412,7 @@ WHERE
 
 - Anonymous PL/SQL blocks are the basic building units in PL/SQL that do not require a name and execute immediately.
 
-```sql
+```plsql
 DECLARE
  -- Optional: Declarations of variables, constants, and data types
     variable_name DATATYPE [:= INITIAL_VALUE];
@@ -432,7 +432,7 @@ END;
 
 - A RECORD is a composite data type that groups together multiple fields, potentially of different data types, into a single variable. It's similar to a row in a table or a structure in other programming languages.
 
-```sql
+```plsql
 DECLARE
     TYPE employee_record IS RECORD (
         emp_id NUMBER,
@@ -455,7 +455,7 @@ END;
 
 - In PL/SQL, a TABLE (often referred to as an associative array, index-by table, or array) is a set of key-value pairs. It is useful for temporarily storing data and processing it in bulk.
 
-```sql
+```plsql
 DECLARE
     TYPE num_table IS
         TABLE OF NUMBER INDEX BY BINARY_INTEGER;
@@ -473,7 +473,7 @@ END;
 
 - A VARRAY (Variable-size array) is used to store an ordered set of elements, all of the same type. Unlike tables, VARRAYs have a fixed size and are dense, meaning each element has a value or is NULL.
 
-```sql
+```plsql
 DECLARE
     TYPE name_array IS
         VARRAY(5) OF VARCHAR2(100);
@@ -490,7 +490,7 @@ END;
 
 - The %TYPE attribute is used to declare a variable of the same data type as that of a database column or another variable.
 
-```sql
+```plsql
 DECLARE
     emp_id   employees.employee_id%type; -- Assume employee_id is a NUMBER
     emp_name employees.first_name%type;
@@ -512,7 +512,7 @@ END;
 
 - The %ROWTYPE attribute is used to declare a record variable that represents an entire row of a table or a view.
 
-```sql
+```plsql
 DECLARE
     emp_record employees%rowtype; -- Represents a row in the 'employees' table
 BEGIN
@@ -533,7 +533,7 @@ END;
 
 - Assignment statements are used to assign values to variables in PL/SQL.
 
-```sql
+```plsql
 DECLARE
     x NUMBER;
 BEGIN
@@ -545,7 +545,7 @@ END;
 
 - PL/SQL provides several functions for manipulating character strings.
 
-```sql
+```plsql
 DECLARE
     str VARCHAR2(100) := 'Hello World';
 BEGIN
@@ -562,7 +562,7 @@ END;
 
 - To execute SQL queries within PL/SQL and store the results in PL/SQL variables.
 
-```sql
+```plsql
 DECLARE
     emp_salary NUMBER;
 BEGIN
@@ -586,7 +586,7 @@ END;
 
 - Conditional control in PL/SQL allows executing different code blocks based on conditions.
 
-```sql
+```plsql
 DECLARE
     x NUMBER := 10;
 BEGIN
@@ -604,7 +604,7 @@ END;
 
 - Basic LOOP.
 
-```sql
+```plsql
 LOOP
     -- Statements
     EXIT; -- Condition to exit the loop
@@ -613,7 +613,7 @@ END LOOP;
 
 - WHILE LOOP.
 
-```sql
+```plsql
 WHILE condition LOOP
     -- Statements
 END LOOP;
@@ -621,7 +621,7 @@ END LOOP;
 
 - FOR LOOP.
 
-```sql
+```plsql
 FOR i IN 1..10 LOOP
     -- Statements
 END LOOP;
@@ -629,8 +629,243 @@ END LOOP;
 
 - CURSOR FOR LOOP.
 
-```sql
+```plsql
 FOR rec IN (SELECT * FROM employees) LOOP
     DBMS_OUTPUT.PUT_LINE(rec.emp_name);
 END LOOP;
+```
+
+### Explicit Cursors in PL/SQL
+
+Explicit cursors are named cursors that are declared and controlled programmatically to fetch each row and process it individually.
+
+1. Declaration of Explicit Cursors.
+2. Opening a Cursor.
+3. Fetching Data from a Cursor
+4. Closing a Cursor
+
+```plsql
+DECLARE
+ -- Declare the cursor with a SELECT statement to retrieve employee data
+    CURSOR emp_cursor IS
+    SELECT
+        employee_id,
+        first_name,
+        last_name,
+        salary
+    FROM
+        employees;
+ -- Variables to hold data fetched from the cursor
+    v_emp_id                employees.employee_id%type;
+    v_first_name            employees.first_name%type;
+    v_last_name             employees.last_name%type;
+    v_salary                employees.salary%type;
+ -- Additional variable to define high salary threshold
+    v_high_salary_threshold NUMBER := 10000;
+BEGIN
+ -- Open the cursor
+    OPEN emp_cursor;
+ -- Fetch each row into the variables
+    LOOP
+        FETCH emp_cursor INTO v_emp_id, v_first_name, v_last_name, v_salary;
+ -- Exit the loop if no more rows to fetch
+        EXIT WHEN emp_cursor%notfound;
+ -- Display the employee data
+        IF v_salary > v_high_salary_threshold THEN
+            dbms_output.put_line('High earner: '
+                                 || v_first_name
+                                 || ' '
+                                 || v_last_name
+                                 || ' ('
+                                 || v_emp_id
+                                 || ') - $'
+                                 || v_salary);
+        ELSE
+            dbms_output.put_line('Employee: '
+                                 || v_first_name
+                                 || ' '
+                                 || v_last_name
+                                 || ' ('
+                                 || v_emp_id
+                                 || ') - $'
+                                 || v_salary);
+        END IF;
+    END LOOP;
+ -- Close the cursor
+    CLOSE emp_cursor;
+EXCEPTION
+    WHEN OTHERS THEN
+ -- Error handling: close cursor if open and re-raise the error
+        IF emp_cursor%isopen THEN
+            CLOSE emp_cursor;
+        END IF;
+
+        raise;
+END;
+```
+
+### Handling Exceptions
+
+Exceptions are handled inside the EXCEPTION block of a PL/SQL block, which comes after the executable commands and before the END; statement.
+
+- Predefined exceptions are automatically provided by Oracle and handle common Oracle errors.
+
+1. NO_DATA_FOUND: Raised when a SELECT INTO statement returns no rows.
+2. TOO_MANY_ROWS: Raised when a SELECT INTO statement returns more than one row.
+3. VALUE_ERROR: Raised when an operation, conversion, or assignment results in a data type mismatch.
+
+```plsql
+BEGIN
+    SELECT
+        employee_id INTO v_emp_id
+    FROM
+        employees
+    WHERE
+        employee_name = 'John Doe';
+EXCEPTION
+    WHEN no_data_found THEN
+        dbms_output.put_line('No employee found with the name John Doe.');
+    WHEN too_many_rows THEN
+        dbms_output.put_line('More than one employee found with the name John Doe.');
+END;
+```
+
+- Non-predefined exceptions cover errors not predefined by Oracle.
+
+```plsql
+DECLARE
+    v_invalid_number EXCEPTION;
+    PRAGMA EXCEPTION_INIT(V_INVALID_NUMBER, -1722); -- Oracle error code for invalid number conversion
+BEGIN
+ -- Some operation that might cause an invalid number error
+    DECLARE V_NUMBER NUMBER := TO_NUMBER('ABC'); -- This will fail
+EXCEPTION
+    WHEN V_INVALID_NUMBER THEN
+        DBMS_OUTPUT.PUT_LINE('Conversion error occurred: '
+                             || SQLERRM);
+END;
+```
+
+- User-defined exceptions are explicitly defined by the programmer and can be raised using the RAISE statement within a PL/SQL block.
+
+```plsql
+DECLARE
+    e_custom_exception exception;
+BEGIN
+ -- A conditional check that leads to an error
+    IF 1 = 1 THEN -- Simplified condition for illustration
+        RAISE e_custom_exception;
+    END IF;
+EXCEPTION
+    WHEN e_custom_exception THEN
+        dbms_output.put_line('A custom error has occurred.');
+END;
+/
+```
+
+## Procedure
+
+A procedure in PL/SQL is a subprogram that performs a specific action. It can take parameters, perform operations, and optionally return values via OUT or IN OUT parameters.
+
+```plsql
+CREATE OR REPLACE PROCEDURE PROCEDURE_NAME (
+    PARAMETERS
+) AS
+BEGIN
+ -- procedure body
+END PROCEDURE_NAME;
+/
+```
+
+### IN Parameters
+
+- IN parameters are used to pass values to a procedure. They are read-only within the procedure, meaning you cannot modify their values.
+
+```plsql
+CREATE OR REPLACE PROCEDURE print_employee_info (
+    p_employee_id IN employees.employee_id%type
+) AS
+    v_name employees.name%type;
+BEGIN
+    SELECT
+        name INTO v_name
+    FROM
+        employees
+    WHERE
+        employee_id = p_employee_id;
+    dbms_output.put_line('Employee Name: '
+                         || v_name);
+END;
+/
+```
+
+### OUT Parameters
+
+- OUT parameters are used to return values from a procedure to the calling environment. They are write-only within the procedure, meaning you cannot read their initial values (unless they are explicitly assigned a value before being used).
+
+```plsql
+CREATE OR REPLACE PROCEDURE get_employee_name (
+    p_employee_id IN employees.employee_id%type,
+    p_name OUT employees.name%type
+) AS
+BEGIN
+    SELECT
+        name INTO p_name
+    FROM
+        employees
+    WHERE
+        employee_id = p_employee_id;
+END;
+/
+```
+
+### IN OUT Parameters
+
+- IN OUT parameters can both receive values from the calling environment and send values back. They are both readable and writable within the procedure.
+
+```plsql
+CREATE OR REPLACE PROCEDURE update_salary (
+    p_employee_id IN employees.employee_id%type,
+    p_salary IN OUT employees.salary%type
+) AS
+BEGIN
+    UPDATE employees
+    SET
+        salary = p_salary
+    WHERE
+        employee_id = p_employee_id;
+    SELECT
+        salary INTO p_salary
+    FROM
+        employees
+    WHERE
+        employee_id = p_employee_id; -- Get updated salary
+END;
+/
+```
+
+### Methods for Passing Parameters
+
+- Position: Values are associated with formal parameters in the order they are defined.
+- Name: Values are associated with formal parameters by explicitly stating the parameter name. This is useful for clarity and when skipping optional parameters.
+
+```plsql
+BEGIN
+ -- Passing by position
+    update_salary(101, 50000);
+ -- Passing by name
+    update_salary(
+        p_employee_id => 101,
+        p_salary => 50000
+    );
+END;
+/
+```
+
+### Removing Procedures
+
+- To remove a procedure from the database, use the DROP PROCEDURE statement.
+
+```plsql
+DROP PROCEDURE calculate_bonus;
 ```
