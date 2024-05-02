@@ -14,7 +14,7 @@ disable: false
 
 ### SELECT
 
-- Specifies columns to be retrieved
+- Specifies columns to be retrieved.
 
 ```sql
 SELECT
@@ -27,7 +27,7 @@ FROM
 
 ### FROM
 
-- Specifies the table from which the data will be retrieved
+- Specifies the table from which the data will be retrieved.
 
 ```sql
 SELECT
@@ -38,7 +38,7 @@ FROM
 
 ### WHERE
 
-- Filters records that fulfill a specified condition
+- Filters records that fulfill a specified condition.
 
 ```sql
 SELECT
@@ -82,7 +82,7 @@ HAVING
 
 ### ORDER BY
 
-- Sorts the results returned by the query in ascending or descending order
+- Sorts the results returned by the query in ascending or descending order.
 
 ```sql
 SELECT
@@ -96,7 +96,7 @@ ORDER BY
 
 ### LIKE
 
-- Used to search for a specified pattern in a column
+- Used to search for a specified pattern in a column.
 
 ```sql
 SELECT
@@ -109,7 +109,7 @@ WHERE
 
 ### BETWEEN
 
-- Selects values within a given inclusive range
+- Selects values within a given inclusive range.
 
 ```sql
 SELECT
@@ -122,7 +122,7 @@ WHERE
 
 ### Join
 
-- Combines rows from two or more tables based on a related column
+- Combines rows from two or more tables based on a related column.
 
 ```sql
 SELECT
@@ -136,7 +136,7 @@ FROM
 
 ### Aggregate Functions
 
-- Performs a calculation on a set of values and returns a single value
+- Performs a calculation on a set of values and returns a single value.
 
 ```sql
 SELECT
@@ -151,7 +151,7 @@ FROM
 
 ### Self-Join
 
-- Joining a table to itself
+- Joining a table to itself.
 
 ```sql
 SELECT
@@ -184,7 +184,7 @@ WHERE
 
 ### Multiple-Row Sub-queries
 
-- Returns zero or more rows
+- Returns zero or more rows.
 
 ```sql
 SELECT
@@ -268,7 +268,7 @@ WHERE
 
 ### EXISTS
 
-- Tests for the existence of rows in a sub-query
+- Tests for the existence of rows in a sub-query.
 
 ```sql
 SELECT
@@ -290,7 +290,7 @@ WHERE
 
 ### Create an Index
 
-- Improves the speed of data retrieval operations on a database table
+- Improves the speed of data retrieval operations on a database table.
 
 ```sql
 CREATE INDEX idx_column_name ON table_name (column_name);
@@ -304,31 +304,31 @@ DROP INDEX idx_column_name;
 
 ### Constraints
 
-- NOT NULL, Ensures that a column cannot store NULL values
+- NOT NULL, Ensures that a column cannot store NULL values.
 
 ```sql
 column_name datatype NOT NULL;
 ```
 
-- UNIQUE, Ensures all values in a column are different
+- UNIQUE, Ensures all values in a column are different.
 
 ```sql
 column_name datatype UNIQUE;
 ```
 
-- PRIMARY KEY, Uniquely identifies each row in a table
+- PRIMARY KEY, Uniquely identifies each row in a table.
 
 ```sql
 column_name datatype PRIMARY KEY;
 ```
 
-- FOREIGN KEY, Ensures a key correctly references a key in another table
+- FOREIGN KEY, Ensures a key correctly references a key in another table.
 
 ```sql
 FOREIGN KEY (column_name) REFERENCES other_table_name (column_name_in_other_table);
 ```
 
-- CHECK, Ensures the values in a column satisfy a specific condition
+- CHECK, Ensures the values in a column satisfy a specific condition.
 
 ```sql
 column_name datatype CHECK (condition);
@@ -336,7 +336,7 @@ column_name datatype CHECK (condition);
 
 ### Column Constraint vs. Table Constraint
 
-- Column Constraint Level, Applied directly beside the column definition
+- Column Constraint Level, Applied directly beside the column definition.
 
 ```sql
 CREATE TABLE table_name (
@@ -358,13 +358,13 @@ CREATE TABLE table_name (
 
 ### Adding and Dropping Constraints
 
-- Adding a Constraint
+- Adding a Constraint.
 
 ```sql
 ALTER TABLE table_name ADD CONSTRAINT constraint_name UNIQUE (column_name);
 ```
 
-- Dropping a Constraint
+- Dropping a Constraint.
 
 ```sql
 ALTER TABLE table_name DROP CONSTRAINT constraint_name;
@@ -372,7 +372,7 @@ ALTER TABLE table_name DROP CONSTRAINT constraint_name;
 
 ### The INSERT Statement
 
-- Inserts new data into a table
+- Inserts new data into a table.
 
 ```sql
 INSERT INTO table_name (
@@ -404,4 +404,233 @@ WHERE
 DELETE FROM table_name
 WHERE
     condition;
+```
+
+## PL/SQL
+
+### Block Structure for Anonymous PL/SQL Blocks
+
+- Anonymous PL/SQL blocks are the basic building units in PL/SQL that do not require a name and execute immediately.
+
+```sql
+DECLARE
+ -- Optional: Declarations of variables, constants, and data types
+    variable_name DATATYPE [:= INITIAL_VALUE];
+BEGIN
+ -- Required: Code to execute
+ -- SQL statements, control structures, and PL/SQL procedures
+    NULL; -- Example statement (does nothing)
+EXCEPTION
+ -- Optional: Exception handling part
+    WHEN EXCEPTION_NAME THEN
+ -- Code to handle exceptions
+        NULL; -- Example statement
+END;
+```
+
+### Composite Variables
+
+- A RECORD is a composite data type that groups together multiple fields, potentially of different data types, into a single variable. It's similar to a row in a table or a structure in other programming languages.
+
+```sql
+DECLARE
+    TYPE employee_record IS RECORD (
+        emp_id NUMBER,
+        emp_name VARCHAR2(100),
+        emp_salary NUMBER
+    );
+    emp_info employee_record;
+BEGIN
+    emp_info.emp_id := 101;
+    emp_info.emp_name := 'John Doe';
+    emp_info.emp_salary := 60000;
+    dbms_output.put_line('ID: '
+                         || emp_info.emp_id);
+    dbms_output.put_line('Name: '
+                         || emp_info.emp_name);
+    dbms_output.put_line('Salary: '
+                         || emp_info.emp_salary);
+END;
+```
+
+- In PL/SQL, a TABLE (often referred to as an associative array, index-by table, or array) is a set of key-value pairs. It is useful for temporarily storing data and processing it in bulk.
+
+```sql
+DECLARE
+    TYPE num_table IS
+        TABLE OF NUMBER INDEX BY BINARY_INTEGER;
+    my_table num_table;
+BEGIN
+    my_table(1) := 100;
+    my_table(2) := 200;
+ -- Access elements
+    dbms_output.put_line('First element: '
+                         || my_table(1));
+    dbms_output.put_line('Second element: '
+                         || my_table(2));
+END;
+```
+
+- A VARRAY (Variable-size array) is used to store an ordered set of elements, all of the same type. Unlike tables, VARRAYs have a fixed size and are dense, meaning each element has a value or is NULL.
+
+```sql
+DECLARE
+    TYPE name_array IS
+        VARRAY(5) OF VARCHAR2(100);
+    names name_array;
+BEGIN
+    names := name_array('Alice', 'Bob', 'Charlie', 'David', 'Eve');
+ -- Access the first name
+    dbms_output.put_line('First name: '
+                         || names(1));
+END;
+```
+
+### Reference Variables
+
+- The %TYPE attribute is used to declare a variable of the same data type as that of a database column or another variable.
+
+```sql
+DECLARE
+    emp_id   employees.employee_id%type; -- Assume employee_id is a NUMBER
+    emp_name employees.first_name%type;
+BEGIN
+    SELECT
+        employee_id,
+        first_name INTO emp_id,
+        emp_name
+    FROM
+        employees
+    WHERE
+        employee_id = 101;
+    dbms_output.put_line('Employee ID: '
+                         || emp_id);
+    dbms_output.put_line('Employee Name: '
+                         || emp_name);
+END;
+```
+
+- The %ROWTYPE attribute is used to declare a record variable that represents an entire row of a table or a view.
+
+```sql
+DECLARE
+    emp_record employees%rowtype; -- Represents a row in the 'employees' table
+BEGIN
+    SELECT
+        * INTO emp_record
+    FROM
+        employees
+    WHERE
+        employee_id = 101;
+    dbms_output.put_line('Employee: '
+                         || emp_record.first_name
+                         || ' '
+                         || emp_record.last_name);
+END;
+```
+
+### Assignment Statements
+
+- Assignment statements are used to assign values to variables in PL/SQL.
+
+```sql
+DECLARE
+    x NUMBER;
+BEGIN
+    x := 10; -- Assigning value to variable x
+END;
+```
+
+### Manipulating Character Strings
+
+- PL/SQL provides several functions for manipulating character strings.
+
+```sql
+DECLARE
+    str VARCHAR2(100) := 'Hello World';
+BEGIN
+    dbms_output.put_line(lower(str)); -- Outputs: hello world
+    dbms_output.put_line(upper(str)); -- Outputs: HELLO WORLD
+    dbms_output.put_line(substr(str, 1, 5)); -- Outputs: Hello
+    dbms_output.put_line(instr(str, 'W')); -- Outputs: 7
+    dbms_output.put_line(length(str)); -- Outputs: 11
+    dbms_output.put_line(replace(str, 'World', 'PL/SQL')); -- Outputs: Hello PL/SQL
+END;
+```
+
+### SELECT Statements in PL/SQL
+
+- To execute SQL queries within PL/SQL and store the results in PL/SQL variables.
+
+```sql
+DECLARE
+    emp_salary NUMBER;
+BEGIN
+    SELECT
+        salary INTO emp_salary
+    FROM
+        employees
+    WHERE
+        employee_id = 101;
+    dbms_output.put_line('Salary: '
+                         || emp_salary);
+EXCEPTION
+    WHEN no_data_found THEN
+        dbms_output.put_line('No employee found.');
+    WHEN too_many_rows THEN
+        dbms_output.put_line('More than one employee returned.');
+END;
+```
+
+### IF/ELSIF/ELSE
+
+- Conditional control in PL/SQL allows executing different code blocks based on conditions.
+
+```sql
+DECLARE
+    x NUMBER := 10;
+BEGIN
+    IF x = 10 THEN
+        dbms_output.put_line('x is 10');
+    ELSIF x = 20 THEN
+        dbms_output.put_line('x is 20');
+    ELSE
+        dbms_output.put_line('x is neither 10 nor 20');
+    END IF;
+END;
+```
+
+### Loop Structures
+
+- Basic LOOP.
+
+```sql
+LOOP
+    -- Statements
+    EXIT; -- Condition to exit the loop
+END LOOP;
+```
+
+- WHILE LOOP.
+
+```sql
+WHILE condition LOOP
+    -- Statements
+END LOOP;
+```
+
+- FOR LOOP.
+
+```sql
+FOR i IN 1..10 LOOP
+    -- Statements
+END LOOP;
+```
+
+- CURSOR FOR LOOP.
+
+```sql
+FOR rec IN (SELECT * FROM employees) LOOP
+    DBMS_OUTPUT.PUT_LINE(rec.emp_name);
+END LOOP;
 ```
