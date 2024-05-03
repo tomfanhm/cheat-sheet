@@ -1034,3 +1034,76 @@ END;
 ```plsql
 DROP TRIGGER trigger_name;
 ```
+
+## Object-Oriented Features
+
+Oracle SQL supports object-oriented features that allow users to define their types and include methods that operate on the data.
+
+### The Structure of an Object Type
+
+- An object type can include attributes and methods.
+
+```plsql
+CREATE OR REPLACE TYPE type_name AS
+    OBJECT (
+        attribute1 datatype,
+        attribute2 datatype,
+        MEMBER FUNCTION function_name RETURN datatype,
+        MEMBER PROCEDURE procedure_name
+    );
+```
+
+### Subclass, Superclass, and Inheritance
+
+- Oracle SQL allows object types to inherit from other object types, forming a hierarchy of types.
+- A subtype inherits from a supertype. All attributes and methods of the supertype are included in the subtype.
+
+```plsql
+CREATE OR REPLACE TYPE subtype_name UNDER supertype_name (
+ -- Additional attributes or methods
+);
+```
+
+### Overriding
+
+- Overriding involves redefining a method from the supertype in a subtype.
+
+```plsql
+CREATE OR REPLACE TYPE SUBTYPE_NAME UNDER SUPERTYPE_NAME (
+    OVERRIDING MEMBER FUNCTION FUNCTION_NAME RETURN DATATYPE IS BEGIN
+ -- New implementation
+    RETURN RESULT;
+    END FUNCTION_NAME;
+);
+```
+
+### Overloading
+
+- Overloading allows multiple methods in the same object type to share the same name but have different parameter lists.
+- Use the same function or procedure name with different parameters within the same object type.
+
+### Instantiating an Object
+
+- You can create an instance of an object type by calling its constructor method, which is automatically defined with the same name as the object type.
+
+```plsql
+DECLARE
+    object_variable type_name;
+BEGIN
+    object_variable := type_name(attribute1, attribute2);
+END;
+```
+
+### Calling Methods
+
+- After an object has been instantiated, its methods can be invoked using the dot notation.
+
+```plsql
+DECLARE
+    result          datatype;
+    object_variable type_name;
+BEGIN
+    object_variable := type_name(attribute1, attribute2);
+    result := object_variable.method_name(parameters);
+END;
+```
