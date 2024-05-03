@@ -760,7 +760,6 @@ EXCEPTION
     WHEN e_custom_exception THEN
         dbms_output.put_line('A custom error has occurred.');
 END;
-/
 ```
 
 ## Procedure
@@ -774,7 +773,6 @@ CREATE OR REPLACE PROCEDURE PROCEDURE_NAME (
 BEGIN
  -- procedure body
 END PROCEDURE_NAME;
-/
 ```
 
 ### IN Parameters
@@ -796,7 +794,6 @@ BEGIN
     dbms_output.put_line('Employee Name: '
                          || v_name);
 END;
-/
 ```
 
 ### OUT Parameters
@@ -815,8 +812,7 @@ BEGIN
         employees
     WHERE
         employee_id = p_employee_id;
-END;
-/
+END get_employee_name;
 ```
 
 ### IN OUT Parameters
@@ -840,8 +836,7 @@ BEGIN
         employees
     WHERE
         employee_id = p_employee_id; -- Get updated salary
-END;
-/
+END update_salary;
 ```
 
 ### Methods for Passing Parameters
@@ -859,7 +854,6 @@ BEGIN
         p_salary => 50000
     );
 END;
-/
 ```
 
 ### Removing Procedures
@@ -915,4 +909,68 @@ END;
 
 ```plsql
 DROP FUNCTION calculate_annual_salary;
+```
+
+## Packages
+
+Packages in Oracle SQL allow you to group together related procedures, functions, variables, and other package elements, facilitating organized and reusable code. Packages consist of two parts: the specification and the body.
+
+### Creating the Package Specification
+
+- The package specification acts as the interface to the package. It defines what is visible to the application.
+
+```plsql
+CREATE OR REPLACE PACKAGE package_name IS
+ -- Function/Procedure signatures
+    FUNCTION function_name(
+        parameters
+    ) return return_type;
+
+    PROCEDURE procedure_name(
+        parameters
+    );
+END package_name;
+```
+
+### Creating the Package Body
+
+- The package body provides implementations for the SQL functions and procedures declared in the specification.
+
+```plsql
+CREATE OR REPLACE PACKAGE BODY PACKAGE_NAME IS
+
+    FUNCTION FUNCTION_NAME(
+        PARAMETERS
+    ) RETURN RETURN_TYPE IS
+    BEGIN
+ -- Implementation code
+        RETURN RESULT;
+    END FUNCTION_NAME;
+
+    PROCEDURE PROCEDURE_NAME(
+        PARAMETERS
+    ) IS
+    BEGIN
+ -- Implementation code
+    END PROCEDURE_NAME;
+END PACKAGE_NAME;
+```
+
+### Invoking Package Constructs
+
+- Once defined, you can invoke the procedures and functions in the package.
+
+```plsql
+BEGIN
+    package_name.procedure_name(arguments);
+    variable := package_name.function_name(arguments);
+END;
+```
+
+### Removing Packages
+
+- To remove a package, use the DROP statement.
+
+```plsql
+DROP PACKAGE package_name;
 ```
