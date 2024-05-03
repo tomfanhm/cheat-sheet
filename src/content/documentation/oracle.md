@@ -974,3 +974,63 @@ END;
 ```plsql
 DROP PACKAGE package_name;
 ```
+
+## Triggers
+
+Triggers are procedures that are automatically executed in response to certain events on a particular table or view in a database.
+
+```plsql
+CREATE OR REPLACE TRIGGER TRIGGER_NAME BEFORE
+    INSERT ON TABLE_NAME FOR EACH STATEMENT
+BEGIN
+ -- Trigger logic
+END;
+```
+
+### Creating DML Statement Triggers
+
+- Statement triggers execute once for each transaction. They do not depend on the number of rows being inserted, updated, or deleted.
+
+```plsql
+CREATE OR REPLACE TRIGGER TRIGGER_NAME BEFORE
+    INSERT ON TABLE_NAME FOR EACH STATEMENT
+BEGIN
+ -- Trigger logic
+END;
+```
+
+### Creating a DML Row Trigger
+
+- Row triggers execute once for each row that is inserted, updated, or deleted.
+
+```plsql
+CREATE OR REPLACE TRIGGER TRIGGER_NAME AFTER
+    UPDATE ON TABLE_NAME FOR EACH ROW
+BEGIN
+    IF :NEW.COLUMN_NAME <> :OLD.COLUMN_NAME THEN
+ -- Trigger logic
+    END IF;
+END;
+```
+
+### Using Conditional Predicates
+
+- Oracle provides predicates like INSERTING, UPDATING, and DELETING to specify the trigger action based on the type of DML operation.
+
+```plsql
+CREATE OR REPLACE TRIGGER TRIGGER_NAME BEFORE
+    UPDATE ON TABLE_NAME FOR EACH ROW WHEN (NEW.COLUMN_NAME IS NOT NULL)
+BEGIN
+    IF UPDATING THEN
+ -- Logic specific to update operation
+    END IF;
+END;
+```
+
+### DROP TRIGGER
+
+- To remove a trigger, use the DROP TRIGGER statement.
+
+```plsql
+DROP TRIGGER trigger_name;
+```
