@@ -1,6 +1,7 @@
 ---
 import Giscus from "@giscus/react";
 import { Image } from "astro:assets";
+import NextAndPrevious from "../components/NextAndPrevious";
 
 export interface Props {
   category: string;
@@ -40,6 +41,10 @@ const categoryId = import.meta.env.CATEGORY_ID;
             transition:name={`img-${id}`}
           />
           <slot />
+          <NextAndPrevious
+            next={undefined}
+            previous={undefined}
+          />
           <div class="mt-18 md:mt-24">
             <Giscus
               id={id}
@@ -116,30 +121,34 @@ const categoryId = import.meta.env.CATEGORY_ID;
       });
     }
   }
+
   function highlightOnScroll() {
     const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
     window.addEventListener("scroll", () => {
-      let found = false;
+      const h = window.innerHeight;
+      // Set the current section to the first heading
+      let current = headings[0].id;
+      let memo = headings[0].getBoundingClientRect().top - h;
+      // Highlight the current heading in the list
       headings.forEach((heading) => {
-        const elementPosition = heading.getBoundingClientRect().top;
-        if (
-          elementPosition < window.innerHeight &&
-          elementPosition >= 0 &&
-          !found
-        ) {
-          document.querySelectorAll("#list li").forEach((li) => {
-            const link = li.querySelector("a");
-            if (link) {
-              if (link.getAttribute("href") === `#${heading.id}`) {
-                link.classList.add("text-indigo-600");
-                link.classList.remove("text-gray-700", "hover:text-gray-900");
-              } else {
-                link.classList.add("text-gray-700", "hover:text-gray-900");
-                link.classList.remove("text-indigo-600");
-              }
-            }
-          });
-          found = true; // Stop highlighting once the first visible heading is found
+        // The value of the top property of the bounding rectangle of the heading
+        // is a negative number if the heading is above the viewport
+        const elementTop = heading.getBoundingClientRect().top;
+        const y = elementTop - h;
+        if (y < 0 && y > memo) {
+          memo = y;
+          current = heading.id;
+        }
+      });
+
+      const links = document.querySelectorAll("#list li a");
+      links.forEach((link) => {
+        if (link.getAttribute("href") === `#${current}`) {
+          link.classList.add("text-indigo-600");
+          link.classList.remove("text-gray-700", "hover:text-gray-900");
+        } else {
+          link.classList.add("text-gray-700", "hover:text-gray-900");
+          link.classList.remove("text-indigo-600");
         }
       });
     });

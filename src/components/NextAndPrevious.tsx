@@ -14,7 +14,7 @@ const NextAndPrevious: React.FC<NextAndPreviousProps> = ({
   next,
   previous,
 }) => {
-  if (!next && !previous) return <></>;
+  if (!next && !previous) return null;
 
   return (
     <div className="mb-10 flex items-center font-semibold text-slate-700">

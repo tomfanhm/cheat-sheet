@@ -165,7 +165,7 @@ const batch = writeBatch(firestore);
 batch.set(docRef, {
   name: "Tom Fan",
 });
-bach.update(docRef, {
+batch.update(docRef, {
   name: "Tom Fan",
 });
 await batch.commit();
