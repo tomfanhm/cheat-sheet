@@ -1,10 +1,24 @@
-import type { SiteConfig } from "../types";
+type SiteConfig = {
+  name: string;
+  description: string;
+  author: string;
+  url: string;
+  ogImage: string;
+  logo: string;
+  links: {
+    facebook: string;
+    instagram: string;
+    twitter: string;
+    github: string;
+    youtube: string;
+  };
+};
 
 export const siteConfig: SiteConfig = {
   name: "Cheat Sheet TFIX",
   description:
     "From HTML to CSS, JavaScript, and beyond, our resources simplify frontend coding, making it easier for both beginners and experts. Dive in to learn, reinforce your knowledge, and stay up-to-date with the latest in web development.",
-  url: "https://cheatsheet.tfix.io/",
+  url: "https://cheatsheet.tfix.io",
   author: "Tom Fan",
   ogImage: "/images/opengraph-image.png",
   logo: "/images/logo.png",

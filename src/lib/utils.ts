@@ -1,5 +1,11 @@
 import { getCollection } from "astro:content";
+import { clsx, type ClassValue } from "clsx";
 import Fuse from "fuse.js";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export function parse<
   T extends {

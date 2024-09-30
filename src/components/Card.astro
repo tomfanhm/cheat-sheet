@@ -14,37 +14,34 @@ export interface Props {
 const { id, title, href, description, imageUrl, date, datetime } = Astro.props;
 ---
 
-<article class="flex flex-col items-start justify-start">
+<article class="flex flex-col items-start justify-start bg-background">
   <div class="relative w-full">
     <Image
       format="avif"
       src={imageUrl}
       alt={title}
-      class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+      class="aspect-[16/9] w-full rounded-2xl bg-muted object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
       transition:name={`img-${id}`}
     />
-
-    <div
-      class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
-    >
+    <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-ring/10">
     </div>
   </div>
   <div class="max-w-xl">
     <div class="mt-8 flex items-center gap-x-4 text-xs">
-      <time datetime={datetime} class="text-gray-500">
+      <time datetime={datetime} class="text-foreground/70">
         {date}
       </time>
     </div>
     <div class="group relative">
       <h3
-        class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
+        class="mt-3 text-lg font-semibold leading-6 text-foreground group-hover:text-foreground/70"
       >
         <a href={href}>
           <span class="absolute inset-0"></span>
           {title}
         </a>
       </h3>
-      <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+      <p class="mt-5 line-clamp-3 text-sm leading-6 text-foreground/70">
         {description}
       </p>
     </div>

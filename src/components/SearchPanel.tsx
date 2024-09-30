@@ -23,7 +23,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
 
   const handleSearch = async (value: string) => {
     setSearchValue(value);
-    const { getPosts } = await import("../utils/utils");
+    const { getPosts } = await import("../lib/utils");
     const result = await getPosts(value);
     startTransition(() => {
       setSearchResult(result);
@@ -43,10 +43,10 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
         onClick={() => setSearchOpen(false)}
       />
       <Dialog.Panel className="relative w-full max-w-lg scale-100 transform px-4 opacity-100 transition-all">
-        <div className="overflow-hidden rounded-lg bg-white shadow-md">
+        <div className="overflow-hidden rounded-lg border border-border bg-background shadow-md">
           <div className="relative">
             <input
-              className="block w-full appearance-none bg-transparent py-4 pl-4 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6"
+              className="block w-full appearance-none bg-transparent py-4 pl-4 pr-12 text-base text-foreground placeholder:text-muted-foreground focus:outline-none sm:text-sm sm:leading-6"
               placeholder="Find anything..."
               aria-label="Search components"
               role="combobox"
@@ -58,7 +58,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
             {isPending ? (
               <svg
                 aria-hidden="true"
-                className="pointer-events-none absolute right-4 top-4 h-6 w-6 animate-spin fill-gray-600 text-gray-200 dark:fill-gray-300 dark:text-gray-600"
+                className="pointer-events-none absolute right-4 top-4 h-6 w-6 animate-spin fill-current"
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +74,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
               </svg>
             ) : (
               <svg
-                className="pointer-events-none absolute right-4 top-4 h-6 w-6 fill-slate-400"
+                className="pointer-events-none absolute right-4 top-4 h-6 w-6 fill-current"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path d="M20.47 21.53a.75.75 0 1 0 1.06-1.06l-1.06 1.06Zm-9.97-4.28a6.75 6.75 0 0 1-6.75-6.75h-1.5a8.25 8.25 0 0 0 8.25 8.25v-1.5ZM3.75 10.5a6.75 6.75 0 0 1 6.75-6.75v-1.5a8.25 8.25 0 0 0-8.25 8.25h1.5Zm6.75-6.75a6.75 6.75 0 0 1 6.75 6.75h1.5a8.25 8.25 0 0 0-8.25-8.25v1.5Zm11.03 16.72-5.196-5.197-1.061 1.06 5.197 5.197 1.06-1.06Zm-4.28-9.97c0 1.864-.755 3.55-1.977 4.773l1.06 1.06A8.226 8.226 0 0 0 18.75 10.5h-1.5Zm-1.977 4.773A6.727 6.727 0 0 1 10.5 17.25v1.5a8.226 8.226 0 0 0 5.834-2.416l-1.061-1.061Z"></path>
@@ -83,14 +83,14 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
           </div>
           {searchResult.length > 0 && (
             <Fragment>
-              <ul className="max-h-[18.375rem] divide-y divide-slate-200 overflow-y-auto rounded-b-lg border-t border-slate-200 text-sm leading-6">
+              <ul className="max-h-[18.375rem] divide-y divide-border overflow-y-auto rounded-b-lg border-t border-border text-sm leading-6">
                 {searchResult.map((post, i) => (
                   <a href={post.href} key={i}>
-                    <li className="flex items-center justify-between bg-slate-50 p-4">
-                      <span className="text-overflow-ellipsis block max-w-xs overflow-hidden whitespace-nowrap font-semibold text-sky-600">
+                    <li className="flex items-center justify-between bg-accent p-4">
+                      <span className="text-overflow-ellipsis block max-w-xs overflow-hidden whitespace-nowrap font-semibold text-primary">
                         {post.title}
                       </span>
-                      <span className="ml-4 text-right text-xs text-slate-600">
+                      <span className="ml-4 text-right text-xs text-accent-foreground/70">
                         {post.collection}
                       </span>
                     </li>

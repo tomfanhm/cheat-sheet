@@ -2,35 +2,34 @@
 
 ---
 
-<article class="prose mt-10 lg:prose-xl">
+<article class="prose mt-10 dark:prose-invert lg:prose-xl">
   <slot />
 </article>
 
 <script is:inline>
   function main() {
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
-    for (const codeBlock of codeBlocks) {
+    const pres = Array.from(document.querySelectorAll("pre"));
+    for (const pre of pres) {
       const wrapper = document.createElement("div");
       wrapper.className = "relative";
-      const copyButton = document.createElement("button");
-      copyButton.className =
-        "absolute top-0 right-0 m-2 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
-      copyButton.innerHTML = "Copy";
+      const button = document.createElement("button");
+      button.className =
+        "absolute top-0 right-0 m-2 inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 px-3 text-xs";
+      button.innerHTML = "Copy";
+      const code = pre.querySelector("code");
 
-      const code = codeBlock.querySelector("code");
+      if (code && pre && pre.parentNode) {
+        pre.appendChild(button);
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
 
-      if (code && codeBlock && codeBlock.parentNode) {
-        codeBlock.appendChild(copyButton);
-        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-        wrapper.appendChild(codeBlock);
-
-        copyButton.addEventListener("click", async () => {
+        button.addEventListener("click", async () => {
           const text = code.innerText;
           await navigator.clipboard.writeText(text).then(() => {
-            copyButton.innerText = "Copied";
+            button.innerText = "Copied";
 
             setTimeout(() => {
-              copyButton.innerText = "Copy";
+              button.innerText = "Copy";
             }, 1000);
           });
         });

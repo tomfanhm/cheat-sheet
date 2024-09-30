@@ -90,7 +90,7 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <ViewTransitions />
   </head>
-  <body class="bg-background min-h-screen font-sans antialiased">
+  <body class="min-h-screen bg-background font-sans antialiased">
     <main>
       <slot />
     </main>
