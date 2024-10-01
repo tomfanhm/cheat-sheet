@@ -26,6 +26,8 @@ disable: false
 | `mat2`    | 2x2 floating point matrix         | `mat2 myMat2 = mat2(vec2(1, 2), vec2(3, 4));`                      |
 | `mat3`    | 3x3 floating point matrix         | `mat3 myMat3 = mat3(vec3(1, 2, 3), vec3(4, 5, 6), vec3(7, 8, 9));` |
 
+---
+
 ### Vertex Shader
 
 - It processes each vertex of the 3D model and calculates their final positions on the screen
@@ -44,6 +46,8 @@ void main() {
 }
 ```
 
+---
+
 ### Fragment Shader
 
 - It takes the processed vertices from the vertex shader and interpolates the color for each pixel inside the triangle they form
@@ -57,6 +61,8 @@ void main() {
     gl_FragColor = vec4(vPosition, 1.0);
 }
 ```
+
+---
 
 ### Uniform Textures
 
@@ -78,6 +84,8 @@ void main() {
   on <a href="https://codepen.io">CodePen</a>.
 </iframe>
 
+---
+
 ### Uniform Cubemap Textures
 
 - The `samplerCube` type is used for cubemap textures, which are textures that contain image data representing scenes in every direction (like the inside of a cube)
@@ -91,6 +99,8 @@ void main() {
     gl_FragColor = texColor;
 }
 ```
+
+---
 
 ### Simplex 2D
 
@@ -175,6 +185,8 @@ float snoise(vec2 v)
 }
 
 ```
+
+---
 
 ### Simplex 3D
 
@@ -290,6 +302,8 @@ float snoise(vec3 v)
                                 dot(p2,x2), dot(p3,x3) ) );
   }
 ```
+
+---
 
 ### Fractional Brownian Motion
 
