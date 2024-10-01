@@ -12,8 +12,6 @@ disable: false
 
 ### Installing npm
 
-To use npm, you need Node.js installed on your computer. Why? Because npm comes bundled with Node.js.
-
 - To check if it's installed, open your command line or terminal and type
 
 ```bash
@@ -21,15 +19,19 @@ node -v
 npm -v
 ```
 
+---
+
 ### Semantic Versioning
 
-This is semantic versioning, and it's important for managing package updates without breaking your project. Here's a quick breakdown:
+- This is semantic versioning, and it's important for managing package updates without breaking your project. Here's a quick breakdown:
 
-- **Major version** (1.x.x): Introduces breaking changes.
-- **Minor version** (x.1.x): Adds functionality in a backwards-compatible manner.
-- **Patch version** (x.x.1): Fixes bugs without adding new features.
+  - **Major version** (1.x.x): Introduces breaking changes.
+  - **Minor version** (x.1.x): Adds functionality in a backwards-compatible manner.
+  - **Patch version** (x.x.1): Fixes bugs without adding new features.
 
-The `^` symbol allows minor and patch updates. Using `~` would only allow patch updates.
+- The `^` symbol allows minor and patch updates. Using `~` would only allow patch updates.
+
+---
 
 ### Package Management
 
@@ -75,6 +77,8 @@ npm install --save-dev <package_name>
 npm update <package_name>
 ```
 
+---
+
 ### Handling Global Packages
 
 - List globally installed packages
@@ -88,6 +92,8 @@ npm list -g --depth=0
 ```bash
 npm root -g
 ```
+
+---
 
 ### Dependency Management
 
@@ -115,6 +121,8 @@ npm uninstall <package_name>
 npm prune
 ```
 
+---
+
 ### Scripts
 
 - Run the `start` script defined in `package.json`
@@ -135,6 +143,8 @@ npm test
 npm run <script_name>
 ```
 
+---
+
 ### Publishing
 
 - Initialize a new `package.json` file
@@ -154,6 +164,8 @@ npm publish
 ```bash
 npm version <version>
 ```
+
+---
 
 ### Miscellaneous
 
@@ -181,6 +193,8 @@ npm ls
 npm help
 ```
 
+---
+
 ### Reinstall
 
 - Remove node modules
@@ -189,8 +203,52 @@ npm help
 rm -rf node_modules
 ```
 
-- Install
+- Reinstall
 
 ```bash
 npm i
+```
+
+---
+
+### Useful npm run setting
+
+- Here are some common and useful npm run scripts you can define in your `package.json` file
+
+#### Prettier
+
+- `npm run prettier:check`: Checks if files are formatted
+- `npm run prettier:write`: Formats the code in the entire project
+
+```json
+"scripts": {
+  "prettier:check": "prettier --check .",
+  "prettier:write": "prettier --write ."
+}
+```
+
+#### Jest
+
+- `npm run test`: Runs all the tests
+- `npm run test:watch`: Watches for changes and reruns the tests
+- `npm run test:coverage`: Runs tests and generates a code coverage report
+
+```json
+"scripts": {
+  "test": "jest",
+  "test:watch": "jest --watch",
+  "test:coverage": "jest --coverage"
+}
+```
+
+#### ESLint
+
+- `npm run lint`: Lints all files in your project.
+- `npm run lint:fix`: Automatically fixes fixable linting errors.
+
+```json
+"scripts": {
+  "lint": "eslint .",
+  "lint:fix": "eslint . --fix"
+}
 ```
