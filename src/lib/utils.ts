@@ -23,7 +23,7 @@ export function parse<
     };
   },
 >(arr: T[], prefix: string) {
-  return arr
+  const temp = arr
     .filter((el) => !el.data.disable)
     .sort(
       (a, b) =>
@@ -31,6 +31,7 @@ export function parse<
     )
     .map((el) => ({
       id: el.data.id,
+      slug: el.slug,
       collection: el.collection,
       href: prefix + el.slug,
       title: el.data.title,
@@ -40,6 +41,23 @@ export function parse<
       date: el.data.date,
       datetime: el.data.datetime,
     }));
+  return temp.map((el, i) => ({
+    ...el,
+    previous:
+      i > 0
+        ? {
+            title: temp[i - 1].title,
+            href: temp[i - 1].href,
+          }
+        : null,
+    next:
+      i < temp.length - 1
+        ? {
+            title: temp[i + 1].title,
+            href: temp[i + 1].href,
+          }
+        : null,
+  }));
 }
 
 export async function getPosts(q: string) {

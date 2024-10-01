@@ -1,0 +1,135 @@
+body {
+  color: #000000;
+}
+
+.nav ul {
+  list-style: none;
+}
+.nav li {
+  display: inline-block;
+}
+
+.button {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.button-secondary,
+.button-primary {
+  padding: 1rem 1.5rem;
+}
+
+.button-primary {
+  background-color: #000000;
+}
+
+.button-secondary {
+  background-color: #ffffff;
+}
+
+.operator {
+  padding-top: 2rem;
+  padding-bottom: 0rem;
+  padding-left: 2rem;
+  padding-right: 0.5rem;
+}
+
+.lighten-color {
+  background-color: #8bc4ea;
+}
+
+.darken-color {
+  background-color: #196090;
+}
+
+.saturate-color {
+  background-color: #1c9df3;
+}
+
+.desaturate-color {
+  background-color: #4c93c3;
+}
+
+.adjust-hue-color {
+  background-color: #cb34db;
+}
+
+.grayscale-color {
+  background-color: #888888;
+}
+
+.complement-color {
+  background-color: #db7734;
+}
+
+.invert-color {
+  background-color: #cb6724;
+}
+
+.mix-color {
+  background-color: #8e728c;
+}
+
+.percentage-value {
+  width: 50%;
+}
+
+.round-value {
+  width: 5px;
+}
+
+.ceil-value {
+  width: 5px;
+}
+
+.floor-value {
+  width: 4px;
+}
+
+.abs-value {
+  width: 10px;
+}
+
+.min-value {
+  width: 5px;
+}
+
+.max-value {
+  width: 20px;
+}
+
+.random-value {
+  width: 50;
+}
+
+.quote-string {
+  content: "Hello";
+}
+
+.unquote-string {
+  content: Hello;
+}
+
+.str-length-string {
+  content: 11;
+}
+
+.str-insert-string {
+  content: "Hello World";
+}
+
+.str-index-string {
+  content: 7;
+}
+
+.str-slice-string {
+  content: "Hello";
+}
+
+.upper-case-string {
+  content: "HELLO";
+}
+
+.lower-case-string {
+  content: "hello";
+} /*# sourceMappingURL=style.css.map */

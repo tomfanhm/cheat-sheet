@@ -5,37 +5,3 @@
 <article class="prose mt-10 dark:prose-invert lg:prose-xl">
   <slot />
 </article>
-
-<script is:inline>
-  function main() {
-    const pres = Array.from(document.querySelectorAll("pre"));
-    for (const pre of pres) {
-      const wrapper = document.createElement("div");
-      wrapper.className = "relative";
-      const button = document.createElement("button");
-      button.className =
-        "absolute top-0 right-0 m-2 inline-flex items-center justify-center whitespace-nowrap rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 px-3 text-xs";
-      button.innerHTML = "Copy";
-      const code = pre.querySelector("code");
-
-      if (code && pre && pre.parentNode) {
-        pre.appendChild(button);
-        pre.parentNode.insertBefore(wrapper, pre);
-        wrapper.appendChild(pre);
-
-        button.addEventListener("click", async () => {
-          const text = code.innerText;
-          await navigator.clipboard.writeText(text).then(() => {
-            button.innerText = "Copied";
-
-            setTimeout(() => {
-              button.innerText = "Copy";
-            }, 1000);
-          });
-        });
-      }
-    }
-  }
-
-  main();
-</script>

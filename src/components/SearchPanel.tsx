@@ -1,5 +1,5 @@
-import { Dialog } from "@headlessui/react";
 import React, { Fragment, useState, useTransition } from "react";
+import { Dialog, DialogContent } from "./ui/dialog";
 
 interface Post {
   href: string;
@@ -31,18 +31,8 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
   };
 
   return (
-    <Dialog
-      open={searchOpen}
-      onClose={() => setSearchOpen(false)}
-      as="div"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24"
-    >
-      <div
-        className="fixed inset-0 bg-slate-900/25 opacity-100 backdrop-blur transition-opacity"
-        aria-hidden="true"
-        onClick={() => setSearchOpen(false)}
-      />
-      <Dialog.Panel className="relative w-full max-w-lg scale-100 transform px-4 opacity-100 transition-all">
+    <Dialog open={searchOpen} onOpenChange={(el) => setSearchOpen(el)}>
+      <DialogContent className="max-w-lg border-0 bg-transparent px-4 py-0">
         <div className="overflow-hidden rounded-lg border border-border bg-background shadow-md">
           <div className="relative">
             <input
@@ -100,7 +90,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
             </Fragment>
           )}
         </div>
-      </Dialog.Panel>
+      </DialogContent>
     </Dialog>
   );
 };

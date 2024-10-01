@@ -75,6 +75,7 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
       <Footer />
     </div>
     <script is:inline>
+      //
       const setTheme = () => {
         const getThemePreference = () => {
           if (
@@ -101,8 +102,94 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
           });
         }
       };
-      setTheme();
-      document.addEventListener("astro:after-swap", setTheme);
+      //
+      const setCopyButton = () => {
+        const pres = Array.from(document.querySelectorAll("pre"));
+        for (const pre of pres) {
+          const wrapper = document.createElement("div");
+          wrapper.className = "relative";
+          const button = document.createElement("button");
+          button.className =
+            "absolute top-0 right-0 m-2 inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs";
+          button.innerHTML = "Copy";
+          const code = pre.querySelector("code");
+
+          if (code && pre && pre.parentNode) {
+            pre.appendChild(button);
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+
+            button.addEventListener("click", async () => {
+              const text = code.innerText;
+              try {
+                await navigator.clipboard.writeText(text);
+                button.innerText = "Copied";
+                setTimeout(() => {
+                  button.innerText = "Copy";
+                }, 1000);
+              } catch (err) {
+                console.error("Failed to copy text: ", err);
+              }
+            });
+          }
+        }
+      };
+      //
+      const setArticleFeatures = () => {
+        //
+        const addMargin = (tagName) => {
+          const marginMap = {
+            H3: "ml-2",
+            H4: "ml-4",
+            H5: "ml-6",
+            H6: "ml-8",
+          };
+
+          if (
+            tagName === "H3" ||
+            tagName === "H4" ||
+            tagName === "H5" ||
+            tagName === "H6"
+          )
+            return marginMap[tagName];
+          return "";
+        };
+        //
+        const article = document.querySelector("article");
+        if (!article) return;
+        const headings = article.querySelectorAll("h2, h3, h4, h5, h6");
+        const list = document.getElementById("article-list");
+        if (list) {
+          headings.forEach((heading) => {
+            if (heading.textContent) {
+              const id = heading.textContent.toLowerCase().replace(/\W/g, "-");
+              heading.id = id;
+              const li = document.createElement("li");
+              li.setAttribute("class", addMargin(heading.tagName));
+              const link = document.createElement("a");
+              link.setAttribute("href", `#${id}`);
+              link.setAttribute(
+                "class",
+                "flex items-center gap-x-2 text-muted-foreground hover:text-foreground",
+              );
+              link.textContent = heading.textContent;
+              li.appendChild(link);
+              list.appendChild(li);
+            }
+          });
+        }
+        //
+      };
+      //
+      const initialize = () => {
+        setCopyButton();
+        setTheme();
+        setArticleFeatures();
+      };
+      //
+      window.addEventListener("DOMContentLoaded", initialize);
+      //
+      document.addEventListener("astro:after-swap", initialize);
     </script>
   </body>
 </html>

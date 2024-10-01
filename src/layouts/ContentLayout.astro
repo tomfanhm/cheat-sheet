@@ -1,4 +1,11 @@
 ---
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import Giscus from "@giscus/react";
 import { Image } from "astro:assets";
 
@@ -8,9 +15,13 @@ export interface Props {
   description: string;
   id: string;
   imageUrl: ImageMetadata;
+  previous: { title: string; href: string } | null;
+  next: { title: string; href: string } | null;
 }
 
-const { category, title, description, id, imageUrl } = Astro.props;
+const { category, title, description, id, imageUrl, previous, next } =
+  Astro.props;
+const showPagination = previous || next;
 
 const repo = import.meta.env.REPO;
 const repoId = import.meta.env.REPO_ID;
@@ -44,6 +55,26 @@ const categoryId = import.meta.env.CATEGORY_ID;
             transition:name={`img-${id}`}
           />
           <slot />
+          {
+            showPagination && (
+              <div class="mt-10">
+                <Pagination>
+                  <PaginationContent className="flex-1">
+                    {previous && (
+                      <PaginationItem>
+                        <PaginationPrevious href={previous.href} />
+                      </PaginationItem>
+                    )}
+                    {next && (
+                      <PaginationItem className="ml-auto">
+                        <PaginationNext href={next.href} />
+                      </PaginationItem>
+                    )}
+                  </PaginationContent>
+                </Pagination>
+              </div>
+            )
+          }
           <div class="mt-18 md:mt-24">
             <Giscus
               id={id}
@@ -56,7 +87,7 @@ const categoryId = import.meta.env.CATEGORY_ID;
               reactionsEnabled="1"
               emitMetadata="0"
               inputPosition="top"
-              theme="cobalt"
+              theme="preferred_color_scheme"
               lang="en"
               loading="lazy"
               client:only="react"
@@ -64,7 +95,6 @@ const categoryId = import.meta.env.CATEGORY_ID;
           </div>
         </div>
       </div>
-
       <!-- Aside -->
       <aside
         class="sticky top-0 hidden h-dvh w-60 shrink-0 overflow-y-auto lg:block"
@@ -72,90 +102,8 @@ const categoryId = import.meta.env.CATEGORY_ID;
         <p class="py-4 text-sm font-bold uppercase tracking-wide">
           On This Page
         </p>
-        <ul class="space-y-2.5 py-2 text-sm leading-6" id="list"></ul>
+        <ul class="space-y-2.5 py-2 text-sm leading-6" id="article-list"></ul>
       </aside>
     </div>
   </div>
 </div>
-
-<script is:inline>
-  function addMargin(tagName) {
-    const marginMap = {
-      H3: "ml-2",
-      H4: "ml-4",
-      H5: "ml-6",
-      H6: "ml-8",
-    };
-
-    if (
-      tagName === "H3" ||
-      tagName === "H4" ||
-      tagName === "H5" ||
-      tagName === "H6"
-    )
-      return marginMap[tagName];
-    return "";
-  }
-
-  function addAnchor() {
-    const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-    const list = document.getElementById("list");
-    if (list) {
-      headings.forEach((heading) => {
-        if (heading.textContent) {
-          const id = heading.textContent.toLowerCase().replace(/\W/g, "-");
-          heading.id = id;
-          const li = document.createElement("li");
-          li.setAttribute("class", addMargin(heading.tagName));
-          const link = document.createElement("a");
-          link.setAttribute("href", `#${id}`);
-          link.setAttribute(
-            "class",
-            "flex items-center gap-x-2 text-muted-foreground hover:text-foreground",
-          );
-          link.textContent = heading.textContent;
-          li.appendChild(link);
-          list.appendChild(li);
-        }
-      });
-    }
-  }
-
-  function highlightOnScroll() {
-    const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
-    window.addEventListener("scroll", () => {
-      const h = window.innerHeight;
-      // Set the current section to the first heading
-      let current = headings[0].id;
-      let memo = headings[0].getBoundingClientRect().top - h;
-      // Highlight the current heading in the list
-      headings.forEach((heading) => {
-        // The value of the top property of the bounding rectangle of the heading
-        // is a negative number if the heading is above the viewport
-        const elementTop = heading.getBoundingClientRect().top;
-        const y = elementTop - h;
-        if (y < 0 && y > memo) {
-          memo = y;
-          current = heading.id;
-        }
-      });
-
-      const links = document.querySelectorAll("#list li a");
-      links.forEach((link) => {
-        if (link.getAttribute("href") === `#${current}`) {
-          link.classList.add("text-primary");
-          link.classList.remove(
-            "text-muted-foreground",
-            "hover:text-foreground",
-          );
-        } else {
-          link.classList.add("text-muted-foreground", "hover:text-foreground");
-          link.classList.remove("text-primary");
-        }
-      });
-    });
-  }
-
-  addAnchor();
-  highlightOnScroll();
-</script>
