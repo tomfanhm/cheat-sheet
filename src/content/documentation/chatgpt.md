@@ -24,6 +24,8 @@ disable: false
 5. Assume the role of a virtual cicerone for the planning of an expedition to Japan.
 ```
 
+---
+
 ### Task Description
 
 - Precisely elucidate the task, delineating the model's responsibilities
@@ -35,6 +37,8 @@ disable: false
 4. Succinctly recapitulate the pivotal occurrences precipitating World War I and its repercussions.
 5. Elucidate the tenets of supply and demand in the realm of economics.
 ```
+
+---
 
 ### Request for Specifics
 
@@ -48,6 +52,8 @@ disable: false
 5. When delineating the concept of supply and demand, encompass both elastic and inelastic demand.
 ```
 
+---
+
 ### Ask Direct Questions
 
 - If relevant, pose inquiries in a direct and concise manner
@@ -59,6 +65,8 @@ disable: false
 4. What are the advantages and drawbacks inherent to sources of renewable energy?
 5. How does the legal system in the United States contrast with the parliamentary system in the United Kingdom?
 ```
+
+---
 
 ### Specify the Format
 
@@ -72,6 +80,8 @@ disable: false
 5. Structure your response as a bulleted inventory, accentuating the pivotal attributes of the iPhone 13.
 ```
 
+---
+
 ### Set Expectations
 
 - Convey any preferences concerning tone or style
@@ -83,6 +93,8 @@ disable: false
 4. Do not hesitate to infuse humor and creativity into the brief narrative you are composing.
 5. When discussing the state of technology in your reply, concentrate on contemporary advancements and trends.
 ```
+
+---
 
 ### End Product
 
