@@ -227,6 +227,8 @@ npm i
 }
 ```
 
+---
+
 #### Jest
 
 - `npm run test`: Runs all the tests
@@ -240,6 +242,8 @@ npm i
   "test:coverage": "jest --coverage"
 }
 ```
+
+---
 
 #### ESLint
 

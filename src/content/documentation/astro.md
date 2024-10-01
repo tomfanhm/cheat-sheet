@@ -10,61 +10,6 @@ category: Documentation
 disable: false
 ---
 
-### File Structure
-
-- `src/*` - This is where your source code lives
-- `public/*` - Any files here will be served as-is to the root URL of your site
-- `src/assets/*` - Any static files that you want to reference in your HTML/JS
-- `src/components/*` - This is where your shared components (React, Vue, Svelte, etc.) live
-- `src/config/*` - This is where you can keep configuration files
-- `src/content/*` - This is where you can keep your content files like markdown for blogs
-- `src/layouts/*` - This is where your layout components live
-- `src/pages/*` - Any `.astro` file in this directory will be built as a page
-- `src/styles/*` - This is where you can keep your style files
-- `src/utils/*` - This is where you can keep your utility files
-- `astro.config.mjs` - Configure Astro
-- `package.json` - Lists package dependencies and contains other metadata
-- `tailwind.config.cjs` - Configuration file for Tailwind CSS
-- `tsconfig.json` - Configuration file for TypeScript
-
-```
-.
-└── my-app/
-    ├── public/
-    │   ├── images/
-    │   │   ├── opengraph-image.png
-    │   │   └── favicon.ico
-    │   └── robots.txt
-    ├── src/
-    │   ├── assets/
-    │   │   └── pokemon.png
-    │   ├── conpoments/
-    │   │   ├── Button.astro
-    │   │   └── Header.tsx
-    │   ├── config/
-    │   │   └── config.ts
-    │   ├── content/
-    │   │   ├── blog/
-    │   │   │   └── post1.md
-    │   │   └── config.ts
-    │   ├── layouts/
-    │   │   └── layout.astro
-    │   ├── pages/
-    │   │   ├── blog/
-    │   │   │   ├── index.astro
-    │   │   │   └── [...slug].astro
-    │   │   ├── 404.astro
-    │   │   └── index.astro
-    │   ├── styles/
-    │   │   └── global.css
-    │   └── utils/
-    │       └── utils.ts
-    ├── astro.config.mjs
-    ├── package.json
-    ├── tailwind.config.cjs
-    └── tsconfig.json
-```
-
 ### Astro Layouts
 
 - Layout.astro, Layouts in Astro are just regular `.astro` components that can be reused across different pages
@@ -98,6 +43,8 @@ const { title, description } = Astro.props;
 </html>
 ```
 
+---
+
 ### Astro Pages
 
 - Astro pages are .astro files located in the src/pages/ directory
@@ -112,6 +59,8 @@ import Layout from "../layouts/Layout.astro";
   <h1>Hello, world!</h1>
 </Layout>
 ```
+
+---
 
 ### Hydrating Interactive Components
 
@@ -131,6 +80,8 @@ import InteractiveModal from "../components/InteractiveModal.tsx";
 <InteractiveButton client:visible />
 <InteractiveButton client:only="react" />
 ```
+
+---
 
 ### Optimized Images
 
@@ -177,128 +128,72 @@ const { imageUrl } = Astro.props;
 />
 ```
 
+---
+
 ### Markdown Code Block
 
 - Creates a "Copy" button for each code block in the Markdown content
 
-```astro
----
-// MarkdownLayout.astro
----
+```javascript
+const setCopyButton = () => {
+  const pres = Array.from(document.querySelectorAll("pre"));
+  for (const pre of pres) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "relative";
+    const button = document.createElement("button");
+    button.className =
+      "absolute top-0 right-0 m-2 inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs";
+    button.innerHTML = "Copy";
+    const code = pre.querySelector("code");
 
-<article class="prose mt-10 lg:prose-xl">
-  <slot />
-</article>
+    if (code && pre && pre.parentNode) {
+      pre.appendChild(button);
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
 
-<script is:inline>
-  function main() {
-    const codeBlocks = Array.from(document.querySelectorAll("pre"));
-    for (const codeBlock of codeBlocks) {
-      const wrapper = document.createElement("div");
-      wrapper.className = "relative";
-      const copyButton = document.createElement("button");
-      copyButton.className =
-        "absolute top-0 right-0 m-2 rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
-      copyButton.innerHTML = "Copy";
-
-      const code = codeBlock.querySelector("code");
-
-      if (code && codeBlock && codeBlock.parentNode) {
-        codeBlock.appendChild(copyButton);
-        codeBlock.parentNode.insertBefore(wrapper, codeBlock);
-        wrapper.appendChild(codeBlock);
-
-        copyButton.addEventListener("click", async () => {
-          const text = code.innerText;
-          await navigator.clipboard.writeText(text).then(() => {
-            copyButton.innerText = "Copied";
-
-            setTimeout(() => {
-              copyButton.innerText = "Copy";
-            }, 1000);
-          });
-        });
-      }
+      button.addEventListener("click", async () => {
+        const text = code.innerText;
+        try {
+          await navigator.clipboard.writeText(text);
+          button.innerText = "Copied";
+          setTimeout(() => {
+            button.innerText = "Copy";
+          }, 1000);
+        } catch (err) {
+          console.error("Failed to copy text: ", err);
+        }
+      });
     }
   }
-
-  main();
-</script>
+};
 ```
 
 ### Theme
 
-- Toggle **data-theme** Attribute
+- Toggle dark theme
 
-```tsx
-import React, { useEffect, useState } from "react";
-import { siteConfig } from "../config/site";
+```javascript
+const setTheme = () => {
+  const getThemePreference = () => {
+    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
+      return localStorage.getItem("theme");
+    }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  };
+  const isDark = getThemePreference() === "dark";
+  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
 
-const Header: React.FC = () => {
-  const [theme, setTheme] = useState<"night" | "fantasy">("night");
-
-  useEffect(() => {
-    const getDefaultTheme = (): "night" | "fantasy" => {
-      const storedTheme = localStorage?.getItem("theme");
-      if (!storedTheme) return "night";
-      if (storedTheme === "night" || storedTheme == "fantasy") {
-        return storedTheme;
-      } else {
-        return "night";
-      }
-    };
-    const defaultTheme = getDefaultTheme();
-    setTheme(defaultTheme);
-    document.documentElement.setAttribute("data-theme", defaultTheme);
-  }, []);
-
-  function handleTheme(theme: "night" | "fantasy") {
-    setTheme(theme);
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+  if (typeof localStorage !== "undefined") {
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
   }
-  return (
-    <nav className="navbar">
-      <div className="navbar-start">
-        <a className="btn btn-ghost text-xl normal-case" href="/">
-          <span className="sr-only">{siteConfig.name}</span>
-          <img className="h-8 w-auto" src={siteConfig.logo} alt="Logo" />
-        </a>
-      </div>
-      <div className="navbar-end">
-        <div className={theme === "night" ? "hidden" : ""}>
-          <button
-            className="btn btn-circle btn-ghost"
-            aria-label="hidden"
-            onClick={() => handleTheme("night")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="h-5 w-5 fill-current"
-            >
-              <path d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"></path>
-            </svg>
-          </button>
-        </div>
-        <div className={theme === "night" ? "" : "hidden"}>
-          <button
-            className="btn btn-circle btn-ghost"
-            aria-label="hidden"
-            onClick={() => handleTheme("fantasy")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 384 512"
-              className="h-5 w-5 fill-current"
-            >
-              <path d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </nav>
-  );
 };
-export default Header;
 ```

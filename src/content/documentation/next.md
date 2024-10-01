@@ -33,6 +33,8 @@ disable: false
 }
 ```
 
+---
+
 - Create theme-provider.tsx
 
 ```tsx
@@ -44,6 +46,8 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
 ```
+
+---
 
 - Update layout.tsx
 - Wrap the application with the ThemeProvider component
@@ -72,6 +76,8 @@ export default function RootLayout({
 }
 ```
 
+---
+
 - Create theme-switcher.tsx
 - This component allows the user to switch between light and dark modes
 
@@ -89,6 +95,8 @@ export const ThemeSwitcher = () => {
   );
 };
 ```
+
+---
 
 - Update tailwind.config.ts
 
@@ -113,6 +121,8 @@ const config: Config = {
   plugins: [],
 };
 ```
+
+---
 
 ### getStaticProps
 
@@ -146,6 +156,8 @@ export default function Page({
 }
 ```
 
+---
+
 ### getStaticPaths
 
 - A Next.js function that you can export from a page with dynamic routes
@@ -170,6 +182,8 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 ```
+
+---
 
 ### getServerSideProps
 

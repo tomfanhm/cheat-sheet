@@ -43,6 +43,8 @@ export async function getAllPokemon() {
 }
 ```
 
+---
+
 ### Get Pokemon Details
 
 - To retrieve details about a specific Pokemon

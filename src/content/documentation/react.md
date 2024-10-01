@@ -28,6 +28,8 @@ const Greeting: React.FC<GreetingProps> = ({ name }) => (
 export default Greeting;
 ```
 
+---
+
 - To use the functional component, you can import it into another component and pass props as necessary
 
 ```tsx
@@ -37,6 +39,8 @@ function App() {
   return <Greeting name="Jane" />;
 }
 ```
+
+---
 
 ### Handling Events
 
@@ -65,6 +69,8 @@ const Counter: React.FC = () => {
 };
 ```
 
+---
+
 - For events like form submissions, you can prevent the default behavior using `event.preventDefault()`
 
 ```tsx
@@ -91,6 +97,8 @@ const FormExample: React.FC = () => {
   );
 };
 ```
+
+---
 
 ### Custom Hook
 
@@ -123,6 +131,8 @@ const usePokemon = () => {
 export default usePokemon;
 ```
 
+---
+
 - To use this custom hook in React components to fetch and handle data
 
 ```tsx
@@ -151,6 +161,8 @@ function PokemonList() {
   );
 }
 ```
+
+---
 
 ### Image
 
@@ -212,6 +224,8 @@ const ImageComponent = ({ src, alt, fallbackImage, ...rest }) => {
 export default ImageComponent;
 ```
 
+---
+
 ### Context API
 
 - Manage global state in a type-safe manner
@@ -250,6 +264,8 @@ export const useTheme = () => {
   return context;
 };
 ```
+
+---
 
 ### useReducer
 

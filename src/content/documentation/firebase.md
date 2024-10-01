@@ -36,6 +36,8 @@ const auth = getAuth(app);
 const storage = getStorage(app);
 ```
 
+---
+
 ### Getting a Collection
 
 - To get a reference to a Firestore collection
@@ -45,6 +47,8 @@ import { collection } from "firebase/firestore";
 
 const usersCollection = collection(firestore, "users");
 ```
+
+---
 
 ### Creating a Query
 
@@ -59,6 +63,8 @@ const q = query(
   limit(100),
 );
 ```
+
+---
 
 ### Fetching a Document
 
@@ -79,6 +85,8 @@ async function getDocument(collection: string, uid: string) {
 }
 ```
 
+---
+
 ### Uploading an Image
 
 - To upload an image to Firebase Storage and get its download URL
@@ -98,6 +106,8 @@ async function uploadImage(path: string, file: File): Promise<string> {
   return null;
 }
 ```
+
+---
 
 ### Fetching and Validating Data from Firestore
 
@@ -138,6 +148,8 @@ export async function getArticles() {
 }
 ```
 
+---
+
 ### Create a Document with a Custom ID
 
 - You can specify your own ID when creating a document
@@ -155,6 +167,8 @@ async function createDocument<T>(customId: string, data: T) {
 }
 ```
 
+---
+
 ### Batch Write
 
 - Batch writes allow you to make multiple write operations as a single atomic unit
@@ -170,6 +184,8 @@ batch.update(docRef, {
 });
 await batch.commit();
 ```
+
+---
 
 ### Transactions
 
@@ -197,6 +213,8 @@ async function incrementCounter(docId: string) {
 }
 ```
 
+---
+
 ### Firestore Real-Time Data Listening
 
 - Listen to a Document
@@ -215,6 +233,8 @@ const unsubscribe = onSnapshot(docRef, (doc) => {
 });
 // Call unsubscribe() to stop listening
 ```
+
+---
 
 - Listen to a Collection
 - Receive updates when any document in a collection changes
@@ -239,6 +259,8 @@ const unsubscribe = onSnapshot(collRef, (snapshot) => {
 // Call unsubscribe() to stop listening
 ```
 
+---
+
 ### Firebase Rules
 
 - Public Access
@@ -255,6 +277,8 @@ service cloud.firestore {
 
 ```
 
+---
+
 - Authenticated Access
 
 ```
@@ -268,6 +292,8 @@ service cloud.firestore {
 
 ```
 
+---
+
 - User-Specific Data
 
 ```
@@ -280,6 +306,8 @@ service cloud.firestore {
 }
 
 ```
+
+---
 
 - Role-Based Access
 

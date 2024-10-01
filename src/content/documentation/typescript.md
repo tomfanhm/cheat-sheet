@@ -10,13 +10,15 @@ category: Documentation
 disable: false
 ---
 
-- Inline Type
+### Inline Type
 
 ```typescript
 const obj: { [x: string]: string } = {};
 ```
 
-- Interface
+---
+
+### Interface
 
 ```typescript
 interface T {
@@ -26,7 +28,9 @@ interface T {
 const obj: T = { key: "string" };
 ```
 
-- Type
+---
+
+### Type
 
 ```typescript
 type T = {
@@ -36,7 +40,9 @@ type T = {
 const obj: T = { key: "string" };
 ```
 
-- Class
+---
+
+### Class
 
 ```typescript
 class Obj {
@@ -48,15 +54,19 @@ class Obj {
 }
 ```
 
-- Record
+---
+
+### Record
 
 ```typescript
 const obj: Record<string, string> = {};
 ```
 
-- Partial
+---
 
-It means that every property in the resulting type can be either present or omitted, making it useful when you want to define an object type with optional properties.
+### Partial
+
+- It means that every property in the resulting type can be either present or omitted, making it useful when you want to define an object type with optional properties.
 
 ```typescript
 type T = Partial<Record<string, string[]>>;
@@ -68,7 +78,9 @@ if (obj.foo) {
 }
 ```
 
-- Required
+---
+
+### Required
 
 ```typescript
 type T = {
@@ -80,7 +92,9 @@ const invalid: Required<T> = { str: "string" }; // Error: Property 'num' is miss
 const valid: Required<T> = { str: "string", num: 0 };
 ```
 
-- Extends
+---
+
+### Extends
 
 ```typescript
 interface Vehicle {
@@ -97,7 +111,9 @@ displayBrand(car); // Output: Toyota
 displayBrand(""); // Error: Argument of type 'string' is not assignable to parameter of type 'Vehicle'.
 ```
 
-- Object Key
+---
+
+### Object Key
 
 ```typescript
 const likes = {

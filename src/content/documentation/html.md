@@ -37,6 +37,8 @@ disable: false
 />
 ```
 
+---
+
 ### Text Formatting
 
 - HTML tags for formatting text
@@ -51,6 +53,8 @@ disable: false
 <sub>Subscript text</sub>
 <sup>Superscript text</sup>
 ```
+
+---
 
 ### Lists
 
@@ -73,6 +77,8 @@ disable: false
 </dl>
 ```
 
+---
+
 ### Tables
 
 - HTML tables for displaying tabular data
@@ -94,6 +100,8 @@ disable: false
 </table>
 ```
 
+---
+
 ### Picture
 
 - The Picture element for responsive image loading
@@ -105,6 +113,8 @@ disable: false
   <img src="orange_flowers.jpg" alt="Flowers" style="width:auto;" />
 </picture>
 ```
+
+---
 
 ### Form
 
@@ -124,6 +134,8 @@ disable: false
   <button type="submit">Submit</button>
 </form>
 ```
+
+---
 
 ### Semantic Elements
 

@@ -18,6 +18,8 @@ disable: false
 const scene = new THREE.Scene();
 ```
 
+---
+
 ### Camera
 
 - Defines the virtual camera used to view the scene
@@ -30,6 +32,8 @@ const camera = new THREE.PerspectiveCamera(
   1000,
 );
 ```
+
+---
 
 ### Renderer
 
@@ -48,6 +52,8 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(devicePixelRatio);
 ```
 
+---
+
 ### Resize Handler
 
 - Used to handle window resizing
@@ -62,6 +68,8 @@ function onWindowResize() {
 }
 ```
 
+---
+
 ### Animation Loop
 
 - Creates a loop that repeatedly renders the scene
@@ -74,6 +82,8 @@ function animate() {
 animate();
 ```
 
+---
+
 ### Mesh
 
 - Combines the geometry and material to create a mesh object
@@ -84,6 +94,8 @@ const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
 const mesh = new THREE.Mesh(geometry, material);
 ```
 
+---
+
 ### GLTF Loader
 
 - Load 3D models in the glTF format
@@ -91,6 +103,8 @@ const mesh = new THREE.Mesh(geometry, material);
 ```typescript
 const loader = new THREE.GLTFLoader();
 ```
+
+---
 
 ### Texture Loader
 
@@ -106,6 +120,8 @@ const textures = [
   }),
 );
 ```
+
+---
 
 ### ShaderMaterial
 
@@ -149,6 +165,8 @@ const material = new THREE.ShaderMaterial({
 });
 ```
 
+---
+
 ### Mouse Events
 
 - Picking objects and performing intersection tests
@@ -175,6 +193,8 @@ function onMouseMove(event) {
   }
 }
 ```
+
+---
 
 ### Instance Mesh
 

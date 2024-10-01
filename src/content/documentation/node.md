@@ -14,7 +14,7 @@ disable: false
 
 - Install TypeScript and the TypeScript definitions for Node.js as development dependencies
 
-```
+```bash
 mkdir my-app
 cd my-app
 npm init -y
@@ -22,33 +22,26 @@ npm install typescript --save-dev
 npm install @types/node --save-dev
 ```
 
+---
+
 ### Setting Up TypeScript
 
 - Create a tsconfig.json file to set up TypeScript compiler options
 
-```json
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["es6"],
-    "allowJs": true,
-    "outDir": "build",
-    "rootDir": "src",
-    "strict": true,
-    "noImplicitAny": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true
-  }
-}
+```bash
+tsc --init
 ```
+
+---
 
 - Create a src directory and an index.ts file as the entry point of your application
 
-```
+```bash
 mkdir src
 touch src/index.ts
 ```
+
+---
 
 ### Nodemon Configuration
 
@@ -63,6 +56,8 @@ touch src/index.ts
 }
 ```
 
+---
+
 - Update your package.json scripts to include a script for starting the application in development mode with Nodemon
 
 ```json
@@ -72,19 +67,23 @@ touch src/index.ts
 }
 ```
 
+---
+
 ### Running the Application
 
 - You can start your application in development mode with the following command
 
-```
+```bash
 npm run start:dev
 ```
+
+---
 
 ### Creating a Simple HTTP Server
 
 - Add Express.js as a dependency
 
-```
+```bash
 npm install express
 ```
 

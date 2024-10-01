@@ -18,6 +18,8 @@ import DirectionalWarp from "../../components/showcase/directional_warp/Directio
 
 <DirectionalWarp client:only="react" />
 
+---
+
 ### Behind the Scenes: The Vertex Shader
 
 - The Vertex Shader provides the foundation for our effect
@@ -36,6 +38,8 @@ void main() {
      gl_Position = projectionMatrix * modelViewMatrix * vec4(vPosition, 1.0);
 }
 ```
+
+---
 
 ### The Real Magic: The Fragment Shader
 

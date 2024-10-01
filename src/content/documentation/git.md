@@ -30,6 +30,8 @@ git config --global user.name "[name]"
 git config --global user.email "[email address]"
 ```
 
+---
+
 ### Staging and Committing
 
 - Add all new and changed files to the staging area
@@ -49,6 +51,8 @@ git add [file or dir name]
 ```
 git commit -m "[commit message]"
 ```
+
+---
 
 ### Branching and Merging
 
@@ -75,6 +79,8 @@ git branch [branch name]
 ```
 git checkout [branch name]
 ```
+
+---
 
 ### Working with Remotes
 
@@ -107,6 +113,8 @@ git status
 ```
 git log
 ```
+
+---
 
 ### Undoing Changes
 

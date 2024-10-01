@@ -20,6 +20,8 @@ CSS Images
 JavaScript Books
 ```
 
+---
+
 ### Using Quotes for Exact Search
 
 - Use quotes to find exact matches of phrases or sentences.
@@ -29,6 +31,8 @@ JavaScript Books
 "The Great Gatsby by F. Scott Fitzgerald"
 "Photosynthesis Process"
 ```
+
+---
 
 ### Using Hyphen to Exclude Words
 
@@ -40,6 +44,8 @@ Python -Snake
 Mercury -Planet
 ```
 
+---
+
 ### Searching Within a Specific Site
 
 - Use a colon followed by a site name to search within that specific site.
@@ -50,6 +56,8 @@ Global Warming site:nytimes.com
 COVID-19 Vaccination site:who.int
 ```
 
+---
+
 ### Using the Asterisk Wildcard
 
 - Use an asterisk as a placeholder for unknown or wildcard terms.
@@ -58,6 +66,8 @@ COVID-19 Vaccination site:who.int
 Be the _ you wish to see in the _
 A _ saved is a _ earned
 ```
+
+---
 
 ### Using Google Search for Math
 
@@ -69,6 +79,8 @@ sqrt(16)
 sin(30 degrees)
 ```
 
+---
+
 ### Searching a Range of Numbers
 
 - Use two dots between numbers to search within a range of numbers.
@@ -78,6 +90,8 @@ Samsung TV 32..65
 Laptop $500..$1000
 Calories in burger 300..500
 ```
+
+---
 
 ### Using Shortcuts for Instant Results
 
@@ -89,6 +103,8 @@ Weather New York
 Saudi Riyal to USD
 ```
 
+---
+
 ### Searching for a Specific File Type
 
 - Search for a specific file type by using 'filetype:' followed by the file extension.
@@ -98,6 +114,8 @@ Global Warming filetype:pdf
 Machine Learning filetype:ppt
 Budget Planning filetype:xls
 ```
+
+---
 
 ### Money and Unit Conversions
 
