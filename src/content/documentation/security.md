@@ -1,0 +1,463 @@
+---
+id: 0cf60581
+layout: ../../layouts/MarkdownContainer.astro
+title: Computer Security
+description: Computer Security encompasses the measures and practices designed to protect computer systems and networks from unauthorized access, damage, or disruption. It includes a range of disciplines such as encryption, network security, application security, and operational security.
+imageUrl: ../../assets/security.png
+date: Oct 15, 2024
+datetime: "2024-10-15"
+category: Documentation
+disable: false
+---
+
+### Security Keywords
+
+#### Threats
+
+- Man-made: Cyber attacks, vandalism, insider threats.
+- Natural: Earthquakes, floods, fires.
+- Environmental: Power outages, pollution, humidity.
+
+#### Vulnerabilities
+
+- Software & Hardware: Bugs, outdated systems.
+- Procedures: Poor processes or policies.
+- Configuration: Misconfigured settings.
+- Physical Security: Lack of proper access control to facilities.
+
+#### Adversary
+
+- An entity that attempts to exploit vulnerabilities to harm a system.
+
+#### Attack
+
+- An attempt to exploit vulnerabilities and cause damage to assets.
+
+#### Countermeasure
+
+- Action or device that reduces threats, vulnerabilities, or attacks.
+- Examples: Passwords, encryption, access controls.
+
+---
+
+### Security Principles
+
+#### Confidentiality
+
+- Ensures only authorized users can access data.
+- Countermeasures: Encryption, usernames & passwords, access permissions.
+
+#### Integrity
+
+- Prevents unauthorized or accidental changes to data.
+- Ensures data consistency and accuracy.
+- Countermeasures: Auditing, careful database design, version control, hashing, audit logging.
+
+#### Availability
+
+- Ensures authorized users can access systems and data when needed.
+- Countermeasures: Backups, RAID, fault tolerance, redundant systems.
+
+---
+
+### Fundamental Security Design Principles
+
+- Economy of Mechanism: Simple, small security measures for ease of understanding and validation.
+
+- Fail-Safe Defaults: Access should be denied unless explicitly permitted.
+
+- Complete Mediation: All access must be verified by an access control system.
+
+- Open Design: Security mechanisms should not rely on secrecy; transparency is key.
+
+- Separation of Privilege: Multiple conditions required to access restricted resources.
+
+- Least Privilege: Users/processes should have the minimum privileges necessary.
+
+- Least Common Mechanism: Minimize shared components to reduce risks between users.
+
+---
+
+### Enforcing the Principle of Least Privilege (PoLP)
+
+#### Minimum Permissions
+
+Grant only the essential rights and permissions to users, resources, and applications needed to perform their tasks—nothing more.
+
+#### Benefits
+
+- Limits the damage that can occur from accidental or malicious actions.
+- Reduces attack surface by restricting access to critical systems and data.
+
+#### Avoid Privilege Escalation
+
+- Separate accounts for administrators
+- Regular account for everyday tasks.
+- Administrative account for performing privileged actions only when necessary.
+
+---
+
+### ASCII Table
+
+- Char A, Hex 41
+- Char Z, Hex 5A
+- Char a, Hex 61
+- Char z, Hex 7A
+- Char 0, Hex 30
+- Char 9, Hex 39
+
+---
+
+### Disadvantages of Symmetric Encryption
+
+#### Key Sharing Requirement
+
+- Both sender and receiver must share the same secret key.
+
+#### Complex Key Management
+
+- For n people to communicate securely, each must manage n-1 secret keys.
+- Total keys needed for _n_ participants = n \* (n-1) /2
+- Example: 52 participants would need 1,326 keys, complicating key distribution and management.
+
+---
+
+### Asymmetric Encryption
+
+#### Uses a Public and Private Key Pair
+
+- Also known as public-key encryption.
+
+#### How it Works
+
+- Public key encrypts data → Only the matching private key can decrypt it.
+- Private key encrypts data → Only the corresponding public key can decrypt it.
+
+#### Benefits
+
+- Simplifies key management by using separate keys for encryption and decryption.
+
+---
+
+### Pseudo-Random Bit Generator
+
+- Definition: An algorithm that takes a truly random binary sequence of length _k_ (called the “seed”) and outputs a much longer binary sequence (_m >> k_) that appears random.
+
+- Seed Sources for PRBG: System clock, Elapsed time between keystrokes or mouse movements, Input/output buffer contents, User input, Operating system values (e.g., system load, network statistics)
+
+---
+
+### Prime Numbers
+
+- Definition: Prime numbers are integers greater than 1 that are divisible only by 1 and themselves (e.g., 2, 3, 5, 7).
+
+- Importance: All integers (except 0 and 1) are composed of prime numbers, making them fundamental in number theory and cryptography.
+
+---
+
+### Simplified RSA Encryption
+
+- n = p × q: Multiply two prime numbers.
+- f = (p-1) × (q-1): Calculate Euler’s totient function.
+- 1 <= e < f: Choose a public exponent e such that gcd(e, f) = 1 (i.e., e and f are coprime).
+- d × e mod f = 1: Find d, the private key exponent, so that it satisfies this equation.
+- Public key: Consists of n and e.
+- Private key: Consists of d.
+
+#### Encryption and Decryption
+
+- Encryption: Ciphertext c = m^e mod n (where m is the plaintext message).
+- Decryption: Message m = c^d mod n (where c is the ciphertext).
+
+#### Security Levels
+
+- RSA-512: 155 decimal digits (insecure).
+- RSA-768: 232 decimal digits (insecure).
+- RSA-1024: 308 decimal digits (borderline secure).
+
+---
+
+### Using Certificates
+
+Certificates are digital files containing key data used in public key encryption. They are primarily used for securely sharing a public key and other important information.
+
+- Certificates serve various purposes, including: Verifying identity., Ensuring secure communication., Sharing a public key.
+- Accessing Certificates: You can view and manage certificates in the Personal certificate store on a Windows system.
+- Example: A certificate using the RSA algorithm can have a public key that is 4,096 bits long, ensuring a high level of security.
+
+---
+
+### Secure/Multipurpose Internet Mail Extensions (S/MIME)
+
+- A widely-used standard for email security.
+- Uses public and private keys to both encrypt and digitally sign emails.
+- The sender needs a certificate with an embedded public key that matches the private key, which only the sender can access.
+
+#### Certification Authority (CA)
+
+- Within an Active Directory domain, administrators often set up a CA to issue and manage certificates.
+- Public CAs are also available to issue certificates for internet use.
+
+#### Steps in the S/MIME Process
+
+1. Session key creation: The sender generates a session key for symmetric encryption.
+2. Encrypting the email: The sender encrypts the email content using the session key and symmetric encryption.
+3. Retrieving the recipient’s public key: The sender retrieves the recipient’s certificate, which includes the recipient's public key.
+4. Encrypting the session key: The sender encrypts the session key using the recipient's public key.
+5. Sending the email: The sender sends the encrypted email along with the encrypted session key to the recipient.
+6. Receiving the encrypted content: The recipient receives both the encrypted email and the encrypted session key.
+7. Decrypting the session key: The recipient uses their private key to decrypt the session key.
+8. Decrypting the email: The recipient then uses the decrypted session key to unlock the contents of the email.
+
+---
+
+### Hashing
+
+- Not Encryption: Hashing is different from encryption. You cannot "decrypt" a hash because it was never encrypted.
+- One-Way Function: Hashing is irreversible; you cannot retrieve the original data from the hash.
+- Deterministic: The same input always produces the same hash output, no matter how many times it's hashed.
+
+---
+
+### MD5 VS SHA
+
+| Keys For Comparison                                        | MDS                                    | SHA                                     |
+| ---------------------------------------------------------- | -------------------------------------- | --------------------------------------- |
+| Security                                                   | Less Secure than SHA                   | Higher Secure than MDS                  |
+| Message Digest Length                                      | 128 Bits                               | 160 Bits                                |
+| Attacks required to find out original Message              | 2^128 bit operations required to break | 2^160 bit operations required to break  |
+| Attacks to try and find two messages producing the same MD | 2^64 bit operations required to break  | 2^80 bit operations required to break   |
+| Speed                                                      | Faster, only 64 iterations             | Slower than MDS, required 80 iterations |
+| Successful attacks so far                                  | Attacks reported to some extent        | No such attack report yet               |
+
+### Hashing vs. Encryption
+
+#### Hashing
+
+- Deterministic: The same data always produces the same hash.
+- No Key: Hash functions do not use keys; the process is always consistent.
+- One-Way Function: It’s impossible to retrieve the original data from the hash.
+- Fixed-Length Output: The hash output is always of the same length, regardless of the input size.
+
+#### Encryption
+
+- Key-Based: Encryption uses a key to transform data, allowing decryption with the same or corresponding key.
+- Reversible: Encrypted data can be decrypted to retrieve the original.
+- Variable-Length Output: The length of the ciphertext depends on the size of the plaintext.
+
+---
+
+### Application of Hashing
+
+#### Ensuring Integrity
+
+- Contracts & Treaties: Hashes ensure important documents haven’t been altered since signing.
+- Software Downloads: Hashes verify that downloaded software or files from USB/CD match the original version released by the vendor.
+- Email Signing: Hashing with asymmetric encryption ensures emails haven't been modified in transit, preserving the integrity of the message.
+
+---
+
+#### Digital Signature Verification
+
+##### Sender's Process
+
+- Create Email: The sender writes the email.
+- Hash the Email: The content of the email is hashed.
+- Encrypt Hash: The hash is encrypted using the sender's private key (this forms the digital signature).
+- Send: The unencrypted email and the encrypted hash (digital signature) are sent to the recipient.
+
+##### Recipient's Process
+
+- Receive Message & Signature: The recipient receives both the email and digital signature.
+- Retrieve Public Key: The recipient obtains the sender’s public key from the sender’s certificate.
+- Decrypt Hash: The encrypted hash is decrypted using the sender's public key.
+- Hash the Email: The recipient hashes the received email.
+- Compare Hashes: If the decrypted hash matches the recalculated hash, the message's integrity is confirmed (it hasn't been altered).
+
+---
+
+### Rainbow Table
+
+- Definition: A rainbow table is a precomputed table used to reverse cryptographic hash functions, commonly for cracking password hashes.
+- Purpose: Helps in recovering plaintext passwords by looking up hashes in the table.
+- Limitations: Typically effective for passwords of a certain length and from a limited set of characters.
+
+---
+
+### Hash Salt
+
+- Definition: A salt is random data added to a password before hashing, used to enhance security in cryptographic systems.
+- Purpose: Protects against dictionary attacks and rainbow table attacks by making each hash unique, even for identical passwords.
+- Usage in Password Storage: Historically, passwords were stored in plaintext, but salts are now used to secure them. A unique, randomly generated salt is created for each password, ensuring that even the same passwords produce different hashes.
+
+---
+
+### Integrity & Non-Repudiation
+
+#### Non-Repudiation
+
+- Ensures that a party cannot deny sending a message they originated.
+- Achieved through proof of data integrity and origin, authenticated with high assurance.
+
+#### Achieving Non-Repudiation
+
+- Data Integrity: Use hashing to ensure the data hasn’t been altered (e.g., to prevent man-in-the-middle attacks).
+- Data Origin: Use digital certificates to verify the sender's identity.
+
+#### Digital Signature Process
+
+- The sender encrypts the hash with their private key.
+- If the recipient's public key can decrypt the hash, it confirms the sender's identity (since only the sender’s private key could have encrypted it).
+- This provides non-repudiation because the sender cannot later deny sending the message.
+
+#### Key Points
+
+- Integrity: Data hash ensures the content hasn’t been altered.
+- Authentication: The sender is verified by their private key, as shown in the digital certificate.
+- Non-Repudiation in Action: If the public key decrypts the hash, the message is genuine and sent by the identified party.
+
+#### Example
+
+- In tools like Microsoft Outlook, digital signatures are easily applied by selecting a checkbox, and the recipient is notified if verification fails.
+
+---
+
+### Encrypting File System (EFS)
+
+#### NTFS & EFS Overview
+
+- NTFS (New Technology File System) is the standard for file management in Microsoft environments, ensuring file integrity and security.
+- EFS (Encrypting File System) provides confidentiality by encrypting files and folders on NTFS drives, restricting access to authorized users.
+
+#### EFS Encryption Process
+
+- Symmetric Key Creation: EFS generates a unique symmetric secret key (File Encryption Key, or FEK) for each file.
+- Public Key Encryption: EFS retrieves the user’s public key.
+- Encrypting the Symmetric Key: The symmetric key is encrypted using the user’s public key.
+- Storing the Encrypted Key: The encrypted symmetric key is saved in the file header.
+
+#### EFS Decryption Process
+
+- Retrieve Encrypted Key: The encrypted symmetric key is retrieved from the file header.
+- Private Key Decryption: The user's private key decrypts the symmetric key.
+- Decrypt the File: EFS uses the decrypted symmetric key to decrypt the file.
+
+#### Key Features
+
+- Symmetric & Asymmetric Encryption: EFS uses symmetric encryption for the file (efficient for large data) and asymmetric encryption for securing the symmetric key.
+- Automatic Decryption: Users generally don’t interact with keys directly; decryption happens automatically when accessing the file.
+
+#### Important Considerations
+
+- Password Resets: If a local user's password is reset (not changed), the private key is lost, preventing decryption of previously encrypted files.
+- Efficiency: Symmetric encryption is used because it’s faster for large data, while asymmetric encryption secures the key.
+
+---
+
+### Certificate Authority (CA)
+
+A Certificate Authority (CA) is a trusted entity that issues digital certificates, which verify the identity of digital entities on the internet.
+
+#### Digital Certificates
+
+- Essential for secure communication in Public Key Infrastructure (PKI).
+- Contain important details, such as: Owner’s public key, Owner's name, Certificate expiration date, Additional identifying information
+
+#### Trusted CA Lists
+
+Operating systems and browsers maintain trusted CA root certificates to verify certificates issued and signed by CAs, ensuring secure connections.
+
+---
+
+### Purpose of Digital Certificates
+
+#### Authentication
+
+- Certificates verify the identity of a person or server.
+- Example: A website like Amazon.com uses a certificate to assure users they are interacting with the legitimate site.
+
+#### Encryption
+
+- Certificates enable encryption for securing data both at rest and during transmission, ensuring data confidentiality.
+
+#### Digital Signatures
+
+- Digital certificates can be used to sign emails, providing authentication, integrity, and non-repudiation by proving the sender’s identity.
+
+#### Code Signing
+
+- Certificates are used to sign software or active web content to verify its origin and integrity.
+- Legitimate companies use code-signing certificates to prove their code hasn't been altered. Unsigned or malicious code can be blocked by browsers.
+
+---
+
+### Creating an HTTPS Session
+
+- Client Request: The client initiates the HTTPS session by typing a URL (e.g., Amazon.com).
+- Server Sends Certificate: The server responds by sending its digital certificate, which contains the public key.
+- Session Key Creation: The client generates a session key that will be used to encrypt all data exchanged during the session.
+- Encrypt Session Key: The client encrypts the session key using the server's public key, ensuring only the server can decrypt it with its private key.
+- Send Encrypted Session Key: The client sends the encrypted session key to the server.
+- Server Decrypts Session Key: The server uses its private key to decrypt the session key, ensuring both the client and server now share the same session key.
+- Secure Session Begins: The HTTPS session is encrypted and decrypted using the session key, ensuring confidentiality throughout the communication.
+
+---
+
+### DNS Poisoning Attack
+
+- Attack Overview: In a DNS poisoning attack, the hosts file on a victim's system is altered to redirect a legitimate domain (e.g., google.com) to a malicious site (e.g., baidu.com).
+
+#### Why It Fails in Firefox
+
+- Certificate Mismatch: When Firefox attempts to visit the malicious site (e.g., baidu.com) via HTTPS, it checks the SSL certificate.
+- The certificate of baidu.com does not match the expected certificate for google.com stored in Firefox.
+- Result: Firefox displays a security warning, preventing the attack from succeeding because the site’s certificate doesn’t match.
+
+---
+
+### Understanding Certificate Errors
+
+#### "The Certificate Has Been Revoked"
+
+- Indicates the private key has been compromised or the certificate is being used fraudulently.
+- Revoked certificates should not be trusted, as attackers might be using them maliciously.
+
+#### "The Certificate Is Out of Date"
+
+- The certificate has expired and is no longer validated by the Certificate Authority (CA).
+- Expired certificates should not be trusted.
+
+#### "The Certificate Isn’t from a Trusted Source"
+
+- The certificate was not issued by a trusted CA.
+- Common in phishing or other malicious attacks where the certificate is self-signed or from an untrusted source.
+
+#### "There Is a Problem with This Website's Security Certificate"
+
+- Triggered by miscellaneous issues, such as a tampered, modified, or unreadable certificate.
+- Indicates potential security risks with the website.
+
+---
+
+### Components of a PKI (Public Key Infrastructure)
+
+#### Public/Private Key Pairs
+
+- Matched keys for encrypting and decrypting data.
+
+#### Certificates
+
+- Electronic files containing issuer details, recipient info, validity dates, and the public key.
+
+#### Certification Authority (CA)
+
+- Issues and manages certificates.
+
+#### Root CA
+
+- The primary CA in a certificate chain.
+- Issues certificates to subordinate CAs within the same chain.
+- Trust in the root CA extends to all certificates issued by its subordinate CAs.
+- Microsoft systems store certificates from various public root CAs in the Trusted Root Certification Authority store.
+
+---
