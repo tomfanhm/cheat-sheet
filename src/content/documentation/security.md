@@ -10,6 +10,14 @@ category: Documentation
 disable: false
 ---
 
+### Certifications
+
+- Microsoft Technology Associate (MTA)
+  - Exam: 98-367 Security Fundamentals
+- CCNA (Cisco Certified Network Associate)
+- CISSP® (Certified Information Systems Security Professional)
+  - Issuer: (ISC)² Associate
+
 ### Security Keywords
 
 #### Threats
@@ -29,6 +37,12 @@ disable: false
 
 - An entity that attempts to exploit vulnerabilities to harm a system.
 
+#### Risk
+
+- Risk is unavoidable and cannot be eliminated
+- Minimizing Risk: Involves understanding risk and taking steps to reduce it
+- Definition: Risk is a function of the likelihood of a given threat source exercising a particular potential vulnerability and the resulting impact of that adverse event on the organization.
+
 #### Attack
 
 - An attempt to exploit vulnerabilities and cause damage to assets.
@@ -37,6 +51,15 @@ disable: false
 
 - Action or device that reduces threats, vulnerabilities, or attacks.
 - Examples: Passwords, encryption, access controls.
+
+---
+
+### Risk analysis
+
+- Single Loss Expectancy (SLE): The cost of a single loss.
+- Annual Rate of Occurrence (ARO): The number of losses you suffer per year.
+- Annualized Loss Expectancy (ALE): The yearly cost due to a risk. ALE = SLE x ARO
+- TOTAL COST OF OWNERSHIP: Total Cost of Ownership (TCO) is the total cost of a purchasing, operating and maintaining a system.
 
 ---
 
@@ -97,24 +120,39 @@ Grant only the essential rights and permissions to users, resources, and applica
 
 ---
 
-### ASCII Table
+### Ancient Encryption
 
-- Char A, Hex 41
-- Char Z, Hex 5A
-- Char a, Hex 61
-- Char z, Hex 7A
-- Char 0, Hex 30
-- Char 9, Hex 39
+- Skytale Cipher: A thin sheet of papyrus wrapped around a staff. Messages written along the staff's length, then the papyrus is unwrapped.
+- Substitution Cipher: A substitution cipher encrypts plaintext by replacing units.
+- Transposition Cipher: A transposition cipher encrypts by scrambling the positions of characters without altering the characters themselves.
 
 ---
 
-### Disadvantages of Symmetric Encryption
+### ASCII Table
 
-#### Key Sharing Requirement
+- Char A: Hex 41; Char F: Hex 46; Char K: Hex 4B; Char P: Hex 50; Char U: Hex 55
+- Char a: Hex 61; Char f: Hex 66; Char k: Hex 6B; Char p: Hex 70; Char u: Hex 75
+- Char 0: Hex 30; Char 9: Hex 39
+
+---
+
+### Symmetric Encryption
+
+- Definition: Symmetric encryption uses the same key for both encrypting and decrypting data.
+
+- Key Characteristics: Both parties must know the symmetric key, which must remain secret from others. The key introduces a randomization factor, altering the ciphertext. A different key produces entirely different ciphertext.
+
+- Strength of Encryption, depends on key length, 16 bits: 65,536 possible keys; 256 bits: Over 1.0e+77 possible keys (1 followed by 77 zeroes).
+
+- Algorithm Selection: End users typically do not choose the encryption algorithm; it is selected by software or an administrator.
+
+#### Disadvantages of Symmetric Encryption
+
+##### Key Sharing Requirement
 
 - Both sender and receiver must share the same secret key.
 
-#### Complex Key Management
+##### Complex Key Management
 
 - For n people to communicate securely, each must manage n-1 secret keys.
 - Total keys needed for _n_ participants = n \* (n-1) /2
@@ -174,6 +212,14 @@ Grant only the essential rights and permissions to users, resources, and applica
 - RSA-512: 155 decimal digits (insecure).
 - RSA-768: 232 decimal digits (insecure).
 - RSA-1024: 308 decimal digits (borderline secure).
+
+---
+
+### Check Digit
+
+- ISBN-10: To check the validity of an ISBN-10, calculate the sum of the first 9 digits multiplied by their positions (1 to 9), add the last digit (which can be 10 for 'X'), and verify if the total is divisible by 11.
+- EAN-13: To check the validity of an EAN-13, calculate the sum of the digits at odd positions multiplied by 1, add the sum of the digits at even positions multiplied by 3, and verify if the total modulo 10 equals zero.
+- VISA: To check the validity of a Visa card number, use the Luhn algorithm: double every second digit from right to left, sum the digits of the resulting numbers, add the untouched digits, and verify if the total is divisible by 10.
 
 ---
 
@@ -354,6 +400,24 @@ Certificates are digital files containing key data used in public key encryption
 
 ---
 
+### Certificates
+
+#### Certificate Issuance
+
+- Can be issued to individuals and linked with a user account.
+- Can be embedded in a smart card.
+- May also be issued to servers, workstations, or mobile phones.
+
+#### Automated Issuance
+
+- Within a domain, certificates are typically issued automatically to users with minimal user interaction.
+
+#### Manual Installation
+
+- Administrators often request and install certificates on servers manually.
+
+---
+
 ### Certificate Authority (CA)
 
 A Certificate Authority (CA) is a trusted entity that issues digital certificates, which verify the identity of digital entities on the internet.
@@ -388,6 +452,27 @@ Operating systems and browsers maintain trusted CA root certificates to verify c
 
 - Certificates are used to sign software or active web content to verify its origin and integrity.
 - Legitimate companies use code-signing certificates to prove their code hasn't been altered. Unsigned or malicious code can be blocked by browsers.
+
+---
+
+### Certificate Revocation List (CRL)
+
+#### Purpose of CRL
+
+- Verifies the validity of a certificate before acceptance for use by a machine.
+- Checks are usually automatic; users may encounter errors if a check fails.
+
+#### Revocation Check Process
+
+- When a certificate is presented to a client, it may check with the Certification Authority (CA) to confirm that the certificate hasn't been revoked.
+
+#### Contents of CRL
+
+- Includes the serial numbers of all revoked certificates and their dates of revocation.
+
+#### Publication Format
+
+- A CRL is published in a special format known as a version 2 certificate.
 
 ---
 
@@ -436,6 +521,23 @@ Operating systems and browsers maintain trusted CA root certificates to verify c
 
 - Triggered by miscellaneous issues, such as a tampered, modified, or unreadable certificate.
 - Indicates potential security risks with the website.
+
+---
+
+### Public Key Infrastructure (PKI)
+
+#### Definition
+
+- A Public Key Infrastructure (PKI) is a framework of roles, policies, and procedures for creating, managing, distributing, using, storing, and revoking digital certificates, as well as managing public-key encryption.
+
+#### Purpose
+
+- Facilitates secure electronic transfer of information for various network activities, including: E-commerce, Internet banking, Confidential email
+
+#### Need for PKI
+
+- Essential for activities where simple passwords are inadequate for authentication.
+- Provides rigorous proof to confirm the identity of parties in communication and validate the information being transferred.
 
 ---
 
