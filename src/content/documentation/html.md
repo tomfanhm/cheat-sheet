@@ -23,8 +23,6 @@ disable: false
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="HandheldFriendly" content="True" />
-<meta name="MobileOptimized" content="320" />
 <meta property="og:title" content="Title Here" />
 <meta property="og:description" content="Description Here" />
 <meta property="og:image" content="Thumbnail Image Here" />
@@ -121,7 +119,7 @@ disable: false
 - Form elements for user inputs
 
 ```html
-<form>
+<form action="/submit" method="POST">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required />
 
@@ -133,6 +131,52 @@ disable: false
 
   <button type="submit">Submit</button>
 </form>
+```
+
+---
+
+### Input
+
+- The input element is versatile, used for various types of user input such as text, numbers, emails, dates, etc.
+
+```html
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" required />
+
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required />
+
+<label for="age">Age:</label>
+<input type="number" id="age" name="age" min="1" max="100" />
+```
+
+#### Summary Table for Types
+
+| Type       | Description                              | Example                     |
+| ---------- | ---------------------------------------- | --------------------------- |
+| `text`     | Single-line text input                   | `<input type="text" />`     |
+| `password` | Password input (masked text)             | `<input type="password" />` |
+| `email`    | Email input with basic validation        | `<input type="email" />`    |
+| `number`   | Numeric input                            | `<input type="number" />`   |
+| `date`     | Date picker                              | `<input type="date" />`     |
+| `file`     | File upload                              | `<input type="file" />`     |
+| `checkbox` | Checkbox (multiple selections allowed)   | `<input type="checkbox" />` |
+| `radio`    | Radio button (single selection in group) | `<input type="radio" />`    |
+
+---
+
+### Select
+
+- The select element is used to create a dropdown list, allowing users to choose one or more options from a predefined set.
+
+```html
+<label for="colors">Choose a color:</label>
+<select id="colors" name="colors" multiple>
+  <option value="red">Red</option>
+  <option value="green">Green</option>
+  <option value="blue">Blue</option>
+  <option value="yellow">Yellow</option>
+</select
 ```
 
 ---
