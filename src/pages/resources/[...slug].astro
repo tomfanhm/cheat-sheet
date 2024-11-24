@@ -1,5 +1,5 @@
 ---
-import { parse } from "@/lib/utils";
+import { generateLinkedContentList, getContentNavigation } from "@/lib/utils";
 import { getCollection, type CollectionEntry } from "astro:content";
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import Layout from "../../layouts/Layout.astro";
@@ -16,9 +16,9 @@ type Props = CollectionEntry<"resources">;
 
 const doc = Astro.props;
 const docs = await getCollection("resources");
-const parsed = parse(docs, "/resources/");
-const success = parsed.find((d) => d.slug === doc.slug);
-const { previous, next } = success ? success : { previous: null, next: null };
+const content = generateLinkedContentList(docs, "/resources/");
+const { previous, next } = getContentNavigation(content, doc.slug);
+
 const data = {
   ...doc.data,
   previous,

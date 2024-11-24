@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Showcase from "../../components/Showcase.astro";
 import Layout from "../../layouts/Layout.astro";
-import { parse } from "../../lib/utils";
+import { generateLinkedContentList } from "../../lib/utils";
 
 const heading = "Documentation";
 const paragraph =
@@ -10,7 +10,7 @@ const paragraph =
 
 const docs = await getCollection("documentation");
 
-const data = parse(docs, "/documentation/");
+const data = generateLinkedContentList(docs, "/documentation/");
 ---
 
 <Layout title={heading} description={paragraph}>

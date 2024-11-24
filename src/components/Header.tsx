@@ -5,9 +5,25 @@ import { Icons } from "./Icons";
 import ModeToggle from "./ModeToggle";
 import Search from "./Search";
 import SearchPanel from "./SearchPanel";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./ui/sheet";
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  contents: {
+    title: string;
+    description: string;
+    href: string;
+    collection: string;
+  }[];
+};
+
+const Header: React.FC<HeaderProps> = ({ contents }) => {
   const [searchOpen, setSearchOpen] = useState(false);
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -40,6 +56,12 @@ const Header: React.FC = () => {
               </button>
             </SheetTrigger>
             <SheetContent side="right">
+              <SheetTitle>
+                <span className="sr-only">Title</span>
+              </SheetTitle>
+              <SheetDescription>
+                <span className="sr-only">Description</span>
+              </SheetDescription>
               <SheetHeader>
                 <div className="flex items-center justify-between">
                   <a href="#" className="-m-1.5 p-1.5">
@@ -97,7 +119,11 @@ const Header: React.FC = () => {
         </div>
       </nav>
       {/* Search */}
-      <SearchPanel searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
+      <SearchPanel
+        contents={contents}
+        searchOpen={searchOpen}
+        setSearchOpen={setSearchOpen}
+      />
     </header>
   );
 };

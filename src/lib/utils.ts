@@ -1,13 +1,38 @@
-import { getCollection } from "astro:content";
 import { clsx, type ClassValue } from "clsx";
-import Fuse from "fuse.js";
 import { twMerge } from "tailwind-merge";
 
+/**
+ * Combines multiple class names into a single string, merging Tailwind CSS classes where necessary.
+ *
+ * @param inputs - The class names to combine.
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function parse<
+type LinkedContentList = Array<{
+  id: string;
+  slug: string;
+  collection: string;
+  href: string;
+  title: string;
+  description: string;
+  body: string;
+  imageUrl: ImageMetadata;
+  date: string;
+  datetime: string;
+  previous: { title: string; href: string } | null;
+  next: { title: string; href: string } | null;
+}>;
+
+/**
+ * Generates a list of linked content objects from an array of content items.
+ * The resulting list is sorted by date and includes previous and next links for navigation.
+ *
+ * @param arr - The array of content items.
+ * @param prefix - The prefix to add to the slug to generate the href.
+ */
+export function generateLinkedContentList<
   T extends {
     slug: string;
     body: string;
@@ -22,7 +47,7 @@ export function parse<
       disable: boolean;
     };
   },
->(arr: T[], prefix: string) {
+>(arr: T[], prefix: string): LinkedContentList {
   const temp = arr
     .filter((el) => !el.data.disable)
     .sort(
@@ -60,24 +85,31 @@ export function parse<
   }));
 }
 
-export async function getPosts(q: string) {
-  try {
-    const collections = await Promise.all([
-      getCollection("blog").then((el) => parse(el, "/blog/")),
-      getCollection("documentation").then((el) => parse(el, "/documentation/")),
-      getCollection("resources").then((el) => parse(el, "/resources/")),
-      getCollection("showcase").then((el) => parse(el, "/showcase/")),
-    ]);
-    const allPosts = collections.flat();
+type ContentNavigation = {
+  previous: {
+    title: string;
+    href: string;
+  } | null;
+  next: {
+    title: string;
+    href: string;
+  } | null;
+};
 
-    const fuse = new Fuse(allPosts, {
-      includeScore: false,
-      keys: ["title", "description", "body"],
-    });
-    const result = fuse.search(q);
-    return result.map((item) => item.item);
-  } catch (error) {
-    console.log("🚀 ~ file: utils.ts ~ getPosts ~ error:", error);
+/**
+ * Retrieves the navigation information (previous and next content) for a given slug.
+ *
+ * @param arr - The array of linked content objects.
+ * @param slug - The slug to find the corresponding content.
+ */
+export function getContentNavigation(
+  arr: LinkedContentList,
+  slug: string,
+): ContentNavigation {
+  const content = arr.find((el) => el.slug === slug);
+  if (!content) {
+    return { previous: null, next: null };
   }
-  return [];
+  const { previous, next } = content;
+  return { previous, next };
 }

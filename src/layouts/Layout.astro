@@ -1,6 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import { ViewTransitions } from "astro:transitions";
 import "../styles/global.css";
+import { generateLinkedContentList } from "@/lib/utils";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { siteConfig } from "../config/site";
@@ -13,6 +15,31 @@ export interface Props {
 
 const { title, description } = Astro.props;
 const socialUrl = Astro.url.origin + siteConfig.ogImage;
+
+const blogContents = await getCollection("blog").then((contents) =>
+  generateLinkedContentList(contents, "/blog/"),
+);
+const documentationContents = await getCollection("documentation").then(
+  (contents) => generateLinkedContentList(contents, "/documentation/"),
+);
+const resourcesContents = await getCollection("resources").then((contents) =>
+  generateLinkedContentList(contents, "/resources/"),
+);
+const showcaseContents = await getCollection("showcase").then((contents) =>
+  generateLinkedContentList(contents, "/showcase/"),
+);
+
+const contents = [
+  ...blogContents,
+  ...documentationContents,
+  ...resourcesContents,
+  ...showcaseContents,
+].map((el) => ({
+  title: el.title,
+  description: el.description,
+  href: el.href,
+  collection: el.collection,
+}));
 ---
 
 <!doctype html>
@@ -68,15 +95,22 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
     class="min-h-screen bg-background font-sans text-foreground antialiased"
   >
     <div class="flex min-h-screen flex-col">
-      <Header client:only="react" />
+      <Header contents={contents} client:only="react" />
       <main class="flex-1">
         <slot />
       </main>
       <Footer />
     </div>
     <script is:inline>
-      //
+      /**
+       * Sets the website theme based on user's preference or system settings.
+       * Synchronizes the theme with localStorage and observes changes to the class list of `document.documentElement`.
+       */
       const setTheme = () => {
+        /**
+         * Retrieves the theme preference from localStorage or system settings.
+         * @returns {string} The preferred theme ("dark" or "light").
+         */
         const getThemePreference = () => {
           if (
             typeof localStorage !== "undefined" &&
@@ -88,6 +122,7 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
             ? "dark"
             : "light";
         };
+
         const isDark = getThemePreference() === "dark";
         document.documentElement.classList[isDark ? "add" : "remove"]("dark");
 
@@ -102,7 +137,10 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
           });
         }
       };
-      //
+
+      /**
+       * Adds a "Copy" button to all `<pre>` elements to enable users to copy the code block content to their clipboard.
+       */
       const setCopyButton = () => {
         const pres = Array.from(document.querySelectorAll("pre"));
         for (const pre of pres) {
@@ -112,6 +150,7 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
           button.className =
             "absolute top-0 right-0 m-2 inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-8 rounded-md px-3 text-xs";
           button.innerHTML = "Copy";
+
           const code = pre.querySelector("code");
 
           if (code && pre && pre.parentNode) {
@@ -134,9 +173,16 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
           }
         }
       };
-      //
+
+      /**
+       * Adds navigation features to an article, such as generating a table of contents with links to each heading in the article.
+       */
       const setArticleFeatures = () => {
-        //
+        /**
+         * Maps heading tags to margin classes for proper indentation.
+         * @param {string} tagName - The name of the heading tag (e.g., "H3").
+         * @returns {string} The corresponding margin class.
+         */
         const addMargin = (tagName) => {
           const marginMap = {
             H3: "ml-2",
@@ -145,27 +191,24 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
             H6: "ml-8",
           };
 
-          if (
-            tagName === "H3" ||
-            tagName === "H4" ||
-            tagName === "H5" ||
-            tagName === "H6"
-          )
-            return marginMap[tagName];
-          return "";
+          return marginMap[tagName] || "";
         };
-        //
+
         const article = document.querySelector("article");
         if (!article) return;
+
         const headings = article.querySelectorAll("h2, h3, h4, h5, h6");
         const list = document.getElementById("article-list");
+
         if (list) {
           headings.forEach((heading) => {
             if (heading.textContent) {
               const id = heading.textContent.toLowerCase().replace(/\W/g, "-");
               heading.id = id;
+
               const li = document.createElement("li");
               li.setAttribute("class", addMargin(heading.tagName));
+
               const link = document.createElement("a");
               link.setAttribute("href", `#${id}`);
               link.setAttribute(
@@ -173,22 +216,27 @@ const socialUrl = Astro.url.origin + siteConfig.ogImage;
                 "flex items-center gap-x-2 text-muted-foreground hover:text-foreground",
               );
               link.textContent = heading.textContent;
+
               li.appendChild(link);
               list.appendChild(li);
             }
           });
         }
-        //
       };
-      //
+
+      /**
+       * Initializes the application by setting up theme, copy buttons, and article features.
+       */
       const initialize = () => {
         setCopyButton();
         setTheme();
         setArticleFeatures();
       };
-      //
+
+      // Initialize on DOMContentLoaded
       window.addEventListener("DOMContentLoaded", initialize);
-      //
+
+      // Re-initialize after Astro content swap
       document.addEventListener("astro:after-swap", initialize);
     </script>
   </body>

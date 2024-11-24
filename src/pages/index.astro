@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import Card from "../components/Card.astro";
 import Hero from "../components/Hero";
 import Layout from "../layouts/Layout.astro";
-import { parse } from "../lib/utils";
+import { generateLinkedContentList } from "../lib/utils";
 
 const heading = "From the Cheat Sheet";
 const paragraph =
@@ -11,7 +11,7 @@ const paragraph =
 
 const docs = await getCollection("documentation");
 
-const data = parse(docs, "/documentation/");
+const data = generateLinkedContentList(docs, "/documentation/");
 ---
 
 <Layout>

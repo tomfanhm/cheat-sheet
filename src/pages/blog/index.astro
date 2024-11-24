@@ -2,14 +2,14 @@
 import { getCollection } from "astro:content";
 import Showcase from "../../components/Showcase.astro";
 import Layout from "../../layouts/Layout.astro";
-import { parse } from "../../lib/utils";
+import { generateLinkedContentList } from "../../lib/utils";
 
 const heading = "Blog";
 const paragraph = "Stay updated with the latest trends in the coding world.";
 
 const docs = await getCollection("blog");
 
-const data = parse(docs, "/blog/");
+const data = generateLinkedContentList(docs, "/blog/");
 ---
 
 <Layout title={heading} description={paragraph}>

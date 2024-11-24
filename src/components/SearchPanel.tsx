@@ -1,3 +1,5 @@
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import Fuse from "fuse.js";
 import React, { Fragment, useState, useTransition } from "react";
 import { Dialog, DialogContent } from "./ui/dialog";
 
@@ -9,11 +11,13 @@ interface Post {
 }
 
 type SearchPanelProps = {
+  contents: Post[];
   searchOpen: boolean;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const SearchPanel: React.FC<SearchPanelProps> = ({
+  contents,
   searchOpen,
   setSearchOpen,
 }) => {
@@ -23,15 +27,29 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
 
   const handleSearch = async (value: string) => {
     setSearchValue(value);
-    const { getPosts } = await import("../lib/utils");
-    const result = await getPosts(value);
     startTransition(() => {
-      setSearchResult(result);
+      if (value.length > 0) {
+        const fuse = new Fuse(contents, {
+          keys: ["title", "description"],
+          includeScore: true,
+        });
+        const result = fuse.search(value);
+        const temp = result.map((el) => el.item);
+        setSearchResult(temp);
+      } else {
+        setSearchResult([]);
+      }
     });
   };
 
   return (
     <Dialog open={searchOpen} onOpenChange={(el) => setSearchOpen(el)}>
+      <DialogTitle>
+        <span className="sr-only">Search Panel</span>
+      </DialogTitle>
+      <DialogDescription>
+        <span className="sr-only">Search for contents</span>
+      </DialogDescription>
       <DialogContent className="max-w-lg border-0 bg-transparent px-4 py-0">
         <div className="overflow-hidden rounded-lg border border-border bg-background shadow-md">
           <div className="relative">
