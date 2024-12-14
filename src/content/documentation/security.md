@@ -973,3 +973,173 @@ Here's the information in a table format:
 | Wireless Network Attacks     | Attackers exploit vulnerabilities in wireless networks, such as weak encryption, to gain unauthorized access.                        | Unauthorized access, data theft, eavesdropping on wireless communications.                         |
 | Cross-Site Scripting (XSS)   | Malicious JavaScript is injected into a website, executing in another user’s browser, exploiting a website vulnerability.            | Data theft, session hijacking, malicious activities disguised as legitimate website behavior.      |
 | Penetration Testing          | A controlled process where security professionals simulate attacks to find vulnerabilities in systems and networks.                  | Helps identify and fix vulnerabilities before real attackers can exploit them.                     |
+
+---
+
+### User Authentication
+
+| Authentication Type            | Description                                                               | Examples                                     | Risk                                                                                            |
+| ------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Something the Individual Knows | Knowledge-based authentication. Relies on secrets known only to the user. | Password, PIN, answers to security questions | Weak passwords or password reuse can be easily guessed or stolen through attacks like phishing. |
+| Something the Individual Has   | Something physical that the user possesses.                               | Smartcard, Keycard, Token                    | Lost/stolen tokens could be used by attackers to gain unauthorized access.                      |
+| Something the Individual Is    | Biometric-based authentication, relying on unique physical traits.        | Fingerprint, Retina Scan, Facial Recognition | Biometric data theft or spoofing using high-tech methods.                                       |
+| Something the Individual Does  | Behavior-based authentication, relying on actions or patterns.            | Voice Pattern, Handwriting, Typing Rhythm    | Inaccurate measurements or pattern changes could lead to access denial or false positives.      |
+
+---
+
+### Authentication vs. Authorization
+
+- Authentication: The process of verifying a user's identity (e.g., entering a password).
+- Authorization: Determines what the authenticated user is allowed to do on the system (e.g., access certain files or resources).
+
+Note: Authentication is the first step, but successful authentication does not automatically grant authorization to access all resources.
+
+---
+
+### Password Authentication
+
+#### Password Authentication Basics
+
+- What is it?
+  - Password authentication relies on the something the individual knows (the password).
+  - The user provides a username and password, and the system checks if the password matches the one stored in the system for that specific login.
+
+---
+
+#### Password Selection Strategies
+
+1. User Education
+
+   - Goal: Teach users about the importance of choosing hard-to-guess passwords.
+   - Tips: Provide guidelines on selecting strong passwords (e.g., minimum length, complexity, avoid common words).
+
+2. Computer-Generated Passwords
+
+   - Pros: Strong passwords generated automatically.
+   - Cons: Hard to remember, may require storage tools like password managers.
+
+3. Reactive Password Checking
+
+   - Goal: The system uses password crackers periodically to check for weak passwords.
+   - Pro: Identifies weak or commonly guessable passwords.
+
+4. Complex Password Policy
+   - Goal: Allow users to select their own passwords but enforce rules to avoid guessable passwords.
+   - Example: Enforcing a mix of upper/lowercase letters, numbers, and symbols, with a minimum length.
+
+---
+
+### CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Apart)
+
+- Purpose: Prevents automated systems (bots) from performing actions like spam or mass account creation by using a challenge that is easy for humans but difficult for machines.
+- Common Usage: Blocking automated systems from scraping emails or signing up for services.
+
+---
+
+### Hash Functions for Password Storage
+
+- What is a Hash?
+  - A hash function converts the password into a fixed-length string, making it difficult to reverse and obtain the original password.
+  - Key Properties:
+    - One-way function: Easy to compute the hash, but very hard to reverse.
+    - Deterministic: The same input always produces the same output.
+
+#### Common Hashing Algorithms
+
+| Algorithm | Hash Size        | Storage Format                                          |
+| --------- | ---------------- | ------------------------------------------------------- |
+| MD5       | 128-bit          | CHAR(32) or BINARY(16)                                  |
+| SHA-1     | 160-bit          | CHAR(40) or BINARY(20)                                  |
+| SHA-224   | 224-bit          | CHAR(56) or BINARY(28)                                  |
+| SHA-256   | 256-bit          | CHAR(64) or BINARY(32)                                  |
+| SHA-384   | 384-bit          | CHAR(96) or BINARY(48)                                  |
+| SHA-512   | 512-bit          | CHAR(128) or BINARY(64)                                 |
+| BCrypt    | 448-bit (varies) | CHAR(56), CHAR(60), CHAR(76), BINARY(56), or BINARY(60) |
+
+#### Best Practices for Hashing Passwords
+
+1. Salt the Passwords:
+
+   - Why: Adding a unique salt value to each password before hashing prevents attackers from using precomputed hash tables (rainbow tables) to crack passwords.
+   - Effect: Salted passwords do not affect the length of the hash, but make it unique to each user.
+
+2. Use Strong Hashing Algorithms:
+   - Recommendation: Use SHA-256 or higher for storing passwords.
+   - Note: Older algorithms like MD5 and SHA-1 are considered weak and vulnerable to attacks.
+
+---
+
+### How Password Authentication Works
+
+1. User Login:
+   - The user enters their password.
+2. Hashing the Password:
+
+   - The system computes the hash `h(password)` using a secure hash function.
+
+3. Verification:
+
+   - The system compares the computed hash with the stored hash in the password file.
+
+4. Authentication:
+   - If the hashes match, the user is authenticated and granted access.
+
+---
+
+### Brute Force Attack
+
+#### What is a Brute Force Attack?
+
+- Definition: A brute force attack is a method where an attacker tries every possible combination to guess a password or uncover hidden pages on a website.
+- Goal: To find the correct password or hidden resource by systematically testing all possible options.
+- Conditions for Success:
+  - Direct access to the password file (for password cracking).
+  - Large computing power to quickly test combinations.
+
+---
+
+#### Brute Force Beyond Password Cracking
+
+- Website Hidden Pages:
+  - Attackers can use brute force to guess URLs of hidden pages.
+  - The attacker sends requests to different URLs, checking responses:
+    - 404 Response: Page does not exist.
+    - 200 Response: Page exists (success).
+
+---
+
+#### How to Protect Against Brute Force Attacks
+
+1. Use Long and Complex Passwords
+
+   - Why: A longer and more complex password increases the number of possible combinations, making it harder for an attacker to crack.
+   - Best Practices:
+     - Minimum 12 characters.
+     - Mix of upper/lowercase, numbers, and special characters.
+
+2. Account Lockout Mechanism
+
+   - How it Works: After a certain number of failed login attempts, the account is temporarily locked or blocked.
+   - Effect: Prevents attackers from continuously trying combinations without consequences.
+   - Limitations:
+     - Not effective for offline attacks where the attacker has access to the password hash.
+
+3. Implement CAPTCHA
+
+   - Purpose: Adds a challenge-response test to ensure the login attempt is human and not an automated script.
+   - Effect: Slows down automated brute force attempts.
+
+4. Multi-Factor Authentication (MFA)
+
+   - Why: Even if the attacker guesses the password, they still need the second factor (e.g., SMS code, authenticator app) to access the system.
+
+5. Password Hashing & Salting
+
+   - Why: Even if an attacker gains access to password files, salted hashes are much harder to reverse (compared to plain-text passwords).
+   - Effect: Makes brute force password cracking more time-consuming.
+
+6. Rate Limiting and Throttling
+   - How it Works: Restrict the number of login attempts a user can make in a given period.
+   - Effect: Prevents rapid-fire brute force attacks, slowing the attacker down.
+
+---
