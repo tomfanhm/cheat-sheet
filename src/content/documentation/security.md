@@ -785,3 +785,191 @@ Here's the information in a table format:
 |                                           | Simple guidelines can empower users to avoid common malware tactics.               |
 | 5. Minimize Use of Administrator Accounts | Users should use accounts with the least privilege necessary.                      |
 |                                           | Administrators should have separate accounts for regular and administrative tasks. |
+
+---
+
+### Social Engineering
+
+#### Overview
+
+- Definition: Social engineering involves manipulating people into giving up sensitive information or performing actions that benefit the attacker, often without requiring technical skills.
+- Methods: Deception and trickery are used in various forms, including in person, over the phone, or through phishing emails.
+
+#### Types of Social Engineering
+
+| Method     | Description                                                                                                        |
+| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| In Person  | Attackers impersonate trusted individuals (e.g., repairmen) to gain access.                                        |
+|            | Example: An attacker may disconnect a phone line, then appear as a repairman and gain access to a restricted area. |
+|            | They may use tools like wireless access points to capture network traffic.                                         |
+| Phone Call | Attackers impersonate executives or employees to gain unauthorized access.                                         |
+|            | Example: An attacker calls the help desk pretending to be an executive and requests a password reset.              |
+
+#### Countermeasures Against Social Engineering
+
+| Countermeasure                      | Description                                                                                                          |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Verify Identity for Password Resets | Ensure users provide specific, non-public information before resetting passwords.                                    |
+| Limit Password-Reset Rights         | Restrict password reset capabilities to authorized personnel, especially for high-level accounts (e.g., executives). |
+
+---
+
+### Phishing and Related Social Engineering Attacks
+
+#### Phishing with Email
+
+- Definition: A fraudulent attempt to trick users into revealing personal information (e.g., usernames, passwords, banking details) via email.
+- Common Characteristics:
+  - Appears to be from a trusted source (e.g., bank, ISP).
+  - Claims there is an urgent issue with an account and asks for personal information for verification.
+  - Promises rewards, prizes, or commissions in exchange for sensitive information.
+
+---
+
+#### Types of Phishing
+
+| Type           | Description                                                                                                                  |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Masked URL     | A link that looks legitimate but redirects to a malicious site when hovered over.                                            |
+| Email Spoofing | The "From" address is manipulated to make it appear as if the email is from a trusted source.                                |
+| Spear Phishing | A targeted phishing attack where the email appears to come from someone within the victim’s organization.                    |
+| Typosquatting  | A technique where the domain name is altered slightly (e.g., "microsft.com" instead of "microsoft.com") to deceive the user. |
+
+---
+
+#### Other Social Engineering Techniques
+
+| Technique                | Description                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Phone Phishing (Vishing) | Fraudulent calls or voicemail messages pretending to be from reputable companies to steal personal information (e.g., bank details). |
+| Dumpster Diving          | Stealing personal information from discarded documents, providing criminals with data to open or steal from accounts.                |
+
+---
+
+#### Countermeasures Against Phishing
+
+| Countermeasure                           | Description                                                                                       |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Be Cautious with Links                   | Always verify URLs before clicking. Hover over links to check for masked URLs.                    |
+| Verify Sender Information                | Check email addresses for typos or unusual domains (e.g., microsft.com instead of microsoft.com). |
+| Enable Multi-Factor Authentication (MFA) | Adds an extra layer of security to protect accounts even if credentials are compromised.          |
+| Educate Users                            | Teach users to identify phishing emails, and encourage reporting suspicious messages.             |
+
+---
+
+### Pharming and Related Attacks
+
+#### Pharming Overview
+
+- Definition: Pharming is a type of attack where users are redirected to malicious websites even if they enter the correct URL in their browser. It targets name-resolution methods like the hosts file or DNS server to hijack website traffic.
+
+---
+
+#### Pharming Techniques
+
+| Technique               | Description                                                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Hosts File Modification | Malware alters the hosts file to map legitimate websites to malicious IP addresses (e.g., preventing access to Windows Update). |
+| DNS Cache Poisoning     | Attackers modify DNS cache data on a DNS server, redirecting users to fraudulent sites.                                         |
+| DNS Server Compromise   | Attackers manipulate DNS records to redirect users to their own malicious website.                                              |
+
+---
+
+#### Name-Resolution Process
+
+1. Hosts File: First, the system checks the local hosts file for any entries (e.g., `c:\windows\system32\drivers\etc` on Windows).
+2. DNS Cache: If no entry is found, the system checks the DNS cache, which can be viewed using the command: `ipconfig/displaydns`.
+3. DNS Server Query: If neither local method provides a result, the system queries the DNS server for the IP address.
+
+---
+
+#### Countermeasures Against Pharming
+
+| Countermeasure                   | Description                                                                                                    |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Regularly Check Hosts File       | Monitor and protect the hosts file from unauthorized modifications.                                            |
+| Clear DNS Cache Regularly        | Regularly clear the DNS cache to prevent cached poison attacks.                                                |
+| Use Secure DNS Services          | Use reputable DNS servers or DNSSEC to prevent DNS poisoning.                                                  |
+| Enable Antivirus and Antimalware | Keep security software up-to-date to detect malware that may modify the hosts file or compromise DNS settings. |
+
+---
+
+### Protecting Email
+
+#### Antivirus Software (AV)
+
+- Function:
+  - Primary protection against email-borne threats.
+  - Strips off or quarantines malicious attachments.
+  - Real-time protection detects malware when a user attempts to open it.
+  - AV on both client systems and email servers filters out malicious emails.
+
+---
+
+#### Antispam Techniques
+
+- Spam Filters:
+  - Most email programs (e.g., Outlook Junk E-mail Filter) automatically move suspected spam to a Junk E-mail folder.
+- Purpose:
+  - Spam is a major source of malware. Filtering spam reduces the risk of infection.
+
+---
+
+#### Disable Automatic Display of Pictures
+
+- Why:
+  - Prevents web beacons (hidden images in emails) from loading.
+- How:
+  - Web beacons can track the recipient’s email address, validating it for attackers and increasing spam.
+- Benefit:
+  - Stops attackers from collecting valid email addresses.
+
+---
+
+#### User Education
+
+- Focus:
+  - Phishing attacks are best prevented with user awareness.
+  - Educate users to recognize common scams to avoid falling for them.
+
+---
+
+#### Threat Statistics
+
+- Spam:
+  - 89% of all email is spam.
+- Botnets:
+  - Approximately 5 million active botnets are used to spread malware.
+- Malware Strains:
+  - Over 339,600 strains of malware detected in emails.
+- Phishing Emails:
+  - 95.1 billion phishing emails were sent in 2010.
+- Impersonated Organizations:
+  - Over 1,500 organizations were impersonated in phishing attacks.
+
+---
+
+### Types of Hackers
+
+| Type of Hacker    | Description                                                                 | Intent                                                                                                            | Legality                    | Activities                                                                  |
+| ----------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------- |
+| White Hat Hackers | Ethical hackers with advanced knowledge of systems and networks.            | Identify and fix vulnerabilities                                                                                  | Legal                       | Penetration testing, vulnerability assessments, ethical hacking.            |
+| Black Hat Hackers | Hackers with malicious intent, aiming to harm systems or steal information. | Unauthorized access, harm, theft                                                                                  | Illegal                     | Stealing data, damaging systems, violating privacy, blocking communication. |
+| Grey Hat Hackers  | Blend of white and black hat hackers.                                       | Exploit vulnerabilities for fun, often without malicious intent, and report weaknesses for recognition or bounty. | Unclear, often unauthorized | Finding and reporting vulnerabilities without permission, seeking rewards.  |
+
+---
+
+### Advanced Hacking Techniques
+
+| Technique                    | Description                                                                                                                          | Risk                                                                                               |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| ARP Poisoning (ARP Spoofing) | Attackers forge ARP packets to flood the switch and poison the ARP cache of devices, allowing the attacker to sniff network traffic. | Man-in-the-middle (MITM) attack, compromising data and system confidentiality.                     |
+| Man-in-the-Middle (MITM)     | The attacker intercepts communication between two victims, impersonating them and altering data.                                     | Data manipulation, credential theft, unauthorized access to sensitive information.                 |
+| DNS Poisoning                | Manipulates a DNS server’s cache to replace legitimate IP addresses with malicious ones, redirecting users to fake websites.         | Redirects users to malicious sites, potentially stealing sensitive data (e.g., login credentials). |
+| Exploitation                 | Hackers use software or scripts (e.g., Metasploit) to exploit vulnerabilities in a system.                                           | Gaining unauthorized access, controlling systems, or launching further attacks.                    |
+| Backdoor                     | An undocumented access point created by hackers for illicit access or by admins for legitimate maintenance purposes.                 | Permanent access for attackers, bypassing regular security measures.                               |
+| TCP/IP Hijacking             | The attacker intercepts and hijacks an existing network connection to bypass authentication and take over sessions.                  | Session hijacking, bypassing password authentication, impersonating legitimate users.              |
+| Password Attacks             | Techniques like Dictionary, Hybrid Dictionary, and Brute Force attacks are used to crack weak passwords.                             | Unauthorized access to systems, services, or accounts using stolen passwords.                      |
+| Wireless Network Attacks     | Attackers exploit vulnerabilities in wireless networks, such as weak encryption, to gain unauthorized access.                        | Unauthorized access, data theft, eavesdropping on wireless communications.                         |
+| Cross-Site Scripting (XSS)   | Malicious JavaScript is injected into a website, executing in another user’s browser, exploiting a website vulnerability.            | Data theft, session hijacking, malicious activities disguised as legitimate website behavior.      |
+| Penetration Testing          | A controlled process where security professionals simulate attacks to find vulnerabilities in systems and networks.                  | Helps identify and fix vulnerabilities before real attackers can exploit them.                     |
