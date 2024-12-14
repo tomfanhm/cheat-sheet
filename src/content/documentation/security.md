@@ -563,3 +563,225 @@ Operating systems and browsers maintain trusted CA root certificates to verify c
 - Microsoft systems store certificates from various public root CAs in the Trusted Root Certification Authority store.
 
 ---
+
+### Malicious Software (Malware)
+
+#### Definition
+
+Malware is software installed on a system without the user's consent or knowledge.
+
+#### Types:
+
+- Viruses
+- Worms
+- Trojan Horses
+- Spyware
+- And more.
+
+#### Purpose:
+
+- Data Theft: Steals personal or financial data for monetary gain (e.g., identity theft, clearing bank accounts).
+- Espionage: Used for corporate or government espionage.
+
+#### Attack Methods:
+
+- Gathering large amounts of data (small amounts from millions of users).
+- Exploiting data for malicious activities, including financial fraud.
+
+---
+
+### Botnets and Malware
+
+#### Botnet (Robot Network):
+
+- A network of infected computers (clones or zombies) controlled remotely by an attacker.
+
+#### Command-and-Control Server:
+
+- A server used by attackers to manage and send instructions to the infected devices (clones/zombies).
+
+#### Functions of Infected Devices:
+
+- Denial of Service (DoS) Attacks: Coordinated attacks that overwhelm a system.
+- Massive Spam Distribution: Sending out large volumes of infected spam emails.
+
+#### Protection:
+
+- Up-to-date Antivirus (AV) software.
+- Educated Users: Awareness of security threats and safe online practices.
+
+---
+
+Here's the information in a table format:
+
+### Common Malware Types
+
+| Malware Type    | Protection                             | Characteristics                                                                       |
+| --------------- | -------------------------------------- | ------------------------------------------------------------------------------------- |
+| Spam            | None (AV software helps detect)        | Unsolicited email; may contain malware, harmful scripts, or links to malicious sites. |
+| Virus           | Up-to-date AV software, educated users | Requires user interaction to spread.                                                  |
+| Worm            | Up-to-date AV software, firewalls      | Self-replicates automatically, does not require user interaction.                     |
+| Trojan Horse    | Up-to-date AV software, educated users | Appears helpful but contains a hidden harmful component.                              |
+| Buffer Overflow | Up-to-date OS and applications         | Exploits memory vulnerabilities by sending unexpected code.                           |
+| Spyware         | Up-to-date AV or antispyware software  | Collects user information without the user’s knowledge.                               |
+
+---
+
+### Viruses
+
+#### Virus Overview
+
+- Definition: A virus is an executable program that replicates and spreads from one computer to another.
+- Potential Damages:
+  - Joins your computer to a botnet.
+  - Corrupts or deletes data.
+  - Erases everything on your hard disk.
+  - Emails itself to other computers via your address list.
+
+#### Virus Delivery Methods
+
+| Method                       | Description                                                                                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Attachment in Unwanted Email | Spam emails with attachments (e.g., greeting cards, audio/video files, images). Virus installs when the attachment is opened. |
+| Script in Unwanted Email     | Some emails contain scripts. Opening the email runs the script and installs the virus (some email programs block scripts).    |
+| Installed on USB Drives      | Viruses can infect USB drives. When plugged into another system, the virus spreads.                                           |
+| Embedded in Downloaded Files | Freeware or shareware files downloaded from the internet may contain viruses.                                                 |
+
+#### Types of Files
+
+- Freeware: Software available at no cost.
+- Shareware: Software available for free for a limited trial period; payment required to continue using after the trial.
+
+---
+
+### Worms
+
+#### Worm Overview
+
+- Definition: A self-replicating software program that spreads from computer to computer over a network.
+- Key Difference from Viruses: Worms do not require human interaction to spread, unlike viruses, which need user execution.
+
+#### Damage Caused by Worms
+
+- Can cause similar damage as viruses:
+  - Slows down or crashes systems and networks.
+  - Corrupts data or causes system malfunctions.
+
+#### Worm Propagation Methods
+
+| Method                             | Description                                                                   |
+| ---------------------------------- | ----------------------------------------------------------------------------- |
+| Identify IP Addresses & Open Ports | Worm scans the network for open, exploitable ports to infect other computers. |
+| Email Propagation                  | Worm can send itself to email addresses stored in the user's address book.    |
+
+#### Impact on Network
+
+- Worms can slow down network performance by flooding the network with excessive traffic.
+- In severe cases, they can cause the entire network to become unusable.
+
+#### Famous Worms
+
+| Worm Name | Year | Description                                                                                        |
+| --------- | ---- | -------------------------------------------------------------------------------------------------- |
+| RTM       | 1998 | Created by Robert Tappan Morris; crashed many Internet systems.                                    |
+| Code Red  | 2001 | Targeted unpatched Microsoft IIS servers.                                                          |
+| Stuxnet   | 2010 | Targeted specific systems in the Middle East, including industrial control systems.                |
+| Morris    | 1988 | Exploited Unix vulnerabilities (Sendmail, Finger) and weak passwords; caused system crashes.       |
+| Conficker | 2008 | Infected unpatched Windows systems, creating a global botnet of over 7 million infected computers. |
+| Sasser    | 2004 | Spread via open port 445; caused system crashes, including X-ray machines in hospitals.            |
+| Melissa   | 1999 | Email worm that spread via infected attachments.                                                   |
+
+---
+
+### Trojan Horses
+
+#### Trojan Horse Overview
+
+- Definition: Malicious software that disguises itself as a legitimate program to trick users.
+
+- Example: A user downloads a game or utility, but the download also includes embedded malware (Trojan horse).
+
+#### Rogueware (A Popular Trojan Horse Type)
+
+- Definition: Fake programs that pretend to be legitimate security tools (e.g., antivirus software).
+
+- Function: The program alerts the user that their system is infected and asks for payment to remove the threat.
+
+- Intention: The goal is to get the user to pay, regardless of whether any actual threat exists.
+
+- Deception: Some rogueware mimics legitimate software names (e.g., "Security Essentials 2010" mimicking Microsoft’s Security Essentials).
+
+#### Trojan Horse Installation
+
+- Method: When the user installs the legitimate-looking program, the Trojan horse is also installed.
+- Example: Clicking a "Scan System Now" button may start the download and installation of malware.
+
+#### Protection
+
+- Up-to-date Antivirus (AV) software from a reliable source.
+- Educated Users: Awareness of common Trojan horse tactics and recognizing fake software.
+
+---
+
+### Buffer-Overflow Attacks
+
+#### Overview
+
+- Definition: A buffer overflow occurs when an application receives more data than it can handle, causing the data to overflow into other memory areas.
+- Memory Buffers: Applications use buffers (temporary memory areas) to store data, like form inputs on web pages.
+
+#### How It Works
+
+- Data Overflow: When unexpected data is input, the application writes more data than the buffer can hold, causing it to spill over into other parts of memory.
+- Exploiting Vulnerabilities: Attackers exploit this overflow to insert malicious code into the system.
+
+#### Attack Process
+
+1. Buffer Overflow: The application writes data to the buffer, causing an overflow.
+2. Code Injection: Attackers append malicious code to the overflowing data.
+3. Malicious Code Execution: The malicious code is executed when it enters the exposed memory, allowing the attacker to control the system.
+
+#### Protection
+
+- Up-to-date operating systems and applications: Prevent vulnerabilities that lead to buffer overflows.
+
+---
+
+### Countermeasures Against Buffer-Overflow Attacks
+
+| Countermeasure      | Description                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------ |
+| Input Validation    | Ensure data is validated before use (e.g., check if numbers fall within the expected range).     |
+| Application Testing | Test applications with edge-case data (e.g., input values at the boundaries of accepted ranges). |
+| Up-to-Date Patching | Apply patches promptly when vulnerabilities are discovered to fix buffer overflow issues.        |
+
+---
+
+### Spyware
+
+#### Overview
+
+- Definition: Spyware is software that installs itself without the user's consent, often running silently in the background to gather information.
+- Purpose: It collects personal data, including online habits and personally identifiable information (PII), which can lead to identity theft or financial account hacking.
+
+#### Spyware Example: Keylogger
+
+- Keylogger: A type of spyware that records all keystrokes on a system, including sensitive information like usernames, passwords, and URLs. The attacker later views this logged data.
+
+---
+
+### Other Countermeasures Against Malware
+
+| Method                                    | Description                                                                        |
+| ----------------------------------------- | ---------------------------------------------------------------------------------- |
+| 1. Use Firewalls                          | Content filtering firewalls can block some spam and malware.                       |
+|                                           | AV and spam software on email servers strip off spam and malware.                  |
+|                                           | AV software on end-user devices provides an extra layer of protection.             |
+| 2. Keep Systems Up to Date                | Regular software updates fix known vulnerabilities.                                |
+|                                           | Updates only effective if applied to the system.                                   |
+| 3. Reduce the Attack Surface              | Disable unused services and protocols to minimize vulnerabilities.                 |
+|                                           | Fewer services mean fewer potential entry points for malware.                      |
+| 4. Educate Users                          | Training users to recognize and avoid malware threats helps prevent infections.    |
+|                                           | Simple guidelines can empower users to avoid common malware tactics.               |
+| 5. Minimize Use of Administrator Accounts | Users should use accounts with the least privilege necessary.                      |
+|                                           | Administrators should have separate accounts for regular and administrative tasks. |
