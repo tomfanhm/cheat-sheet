@@ -1143,3 +1143,283 @@ Note: Authentication is the first step, but successful authentication does not a
    - Effect: Prevents rapid-fire brute force attacks, slowing the attacker down.
 
 ---
+
+### Wireless Security
+
+Definition:  
+Wireless security prevents unauthorized access or damage to systems using wireless networks.
+
+Key Points:
+
+- Network Type: Supported by radio communications.
+- Vulnerability: Wireless networks are exposed to specialized attacks.
+- Shared Concerns: Similar security issues as in wired environments.
+
+---
+
+### Wireless Local Area Network (WLAN)
+
+Definition:  
+A WLAN is a wireless network that connects two or more devices to form a local area network within a limited range.
+
+Benefits:
+
+- Mobility: Provides internet connectivity while on the move.
+- Cost-Effective: Reduces expenses for cabling and infrastructure.
+- Ease of Maintenance: Less hassle for IT and maintenance teams.
+- Flexibility: Offers adaptability for organizational needs.
+- Disaster Recovery: Useful when physical infrastructure is damaged.
+
+---
+
+### Why Security is a Bigger Concern in Wireless Networks
+
+1. Lack of Physical Protection:
+
+- No physical connections between devices; replaced by logical associations.
+- Messages can be sent/received without physical access to infrastructure (e.g., cables, hubs, routers).
+
+2. Broadcast Communications:
+
+- Nature of Wireless: Typically uses radio waves, which are broadcast.
+- Eavesdropping Risk: Transmissions can be overheard by anyone within range.
+- Transmission Interference:
+  - Any nearby device can generate signals.
+  - Signals can interfere with others, causing jamming and disrupting communication.
+
+---
+
+### Wireless Network Attack
+
+Key Attack Methods:
+
+1. Eavesdropping: Intercepting communications is straightforward.
+
+- Wireless signals are broadcast, making it easy for attackers to intercept unencrypted communications. Tools like packet sniffers (e.g., Wireshark) allow attackers to capture and analyze transmitted data.
+
+2. Message Injection: Easy to inject bogus messages into the network.
+
+- Attackers inject fake packets into the network, exploiting weak authentication mechanisms. This can manipulate communications, disrupt operations, or spread malware.
+
+3. Replay Attacks: Previously recorded messages can be replayed effortlessly.
+
+- Attackers record legitimate messages and retransmit them later to trick systems into performing unauthorized actions. This bypasses time-sensitive protocols if replay detection isn't implemented.
+
+4. Unauthorized Access: Gaining illegitimate access to the network and services is simple.
+
+- Weak or no authentication allows attackers to connect to the network, access sensitive resources, or use network services for malicious purposes (e.g., launching further attacks).
+
+5. Denial of Service (DoS): Easily achieved by jamming wireless signals.
+
+- How it works: Attackers flood the wireless spectrum with signals (jamming), causing interference that disrupts legitimate communication. This makes the network unavailable to users.
+
+---
+
+### Wireless Communication Security Requirements
+
+1. Confidentiality:
+
+- Messages sent over wireless links must be encrypted to prevent unauthorized access.
+
+2. Authenticity:
+
+- Verify the origin of messages received over wireless links to ensure they are genuine.
+
+3. Replay Detection:
+
+- Check the freshness of messages to prevent replay attacks.
+
+4. Integrity:
+
+- Ensure messages have not been altered during transmission.
+- Verify the integrity of all received messages.
+
+5. Access Control:
+
+- Only legitimate entities should have access to the network and its services.
+- Access control must be continuous and enforced at all times.
+
+6. Protection Against Jamming:
+
+- Implement measures to detect and mitigate jamming attacks.
+
+---
+
+### Wireless Security Precautions
+
+1. Change Default Settings:
+
+   - Rename default network names (SSIDs).
+   - Add strong passwords to all devices.
+
+2. Limit Visibility:
+
+   - Disable SSID broadcasting on network hubs.
+   - Avoid naming the network with identifiable information (e.g., company name).
+
+3. Physical Security:
+
+   - Place wireless hubs away from windows to limit signal range.
+
+4. Use Encryption:
+
+   - Enable built-in encryption protocols (e.g., WPA3).
+
+5. Disable Unused Features:
+
+   - Turn off unnecessary network functions to reduce attack surface.
+
+6. Firewall Protection:
+
+   - Use a firewall between the wireless network and company systems.
+
+7. Data Protection:
+
+   - Encrypt sensitive data before transmission.
+
+8. Regular Security Audits:
+   - Routinely test and update wireless network security measures.
+
+---
+
+### Wireless Security Countermeasures
+
+1. Encrypt:
+
+- Use robust encryption protocols like WPA3 to protect data transmitted over wireless networks.
+- Ensure end-to-end encryption for sensitive communications.
+
+2. Apply Access Control Rules:
+
+- Limit network access to authorized devices and users using MAC address filtering or VLANs.
+- Regularly review and update access permissions.
+
+3. Secure Trusted Devices:
+
+- Protect devices connected to the wireless network with strong passwords, firewalls, and security updates.
+- Disable unnecessary features or ports on devices to reduce vulnerabilities.
+
+4. Authenticate Users & Devices:
+
+- Implement multi-factor authentication (MFA) for all users.
+- Use digital certificates or pre-shared keys to verify devices.
+
+5. Integrate with IDPS & Other Security Tools:
+
+- Deploy Intrusion Detection and Prevention Systems (IDPS) to monitor and block suspicious activities.
+- Use firewalls, endpoint protection, and network monitoring tools to enhance security.
+
+---
+
+### Secure Wi-Fi Networks
+
+1. Use Encryption Methods:
+
+- Enable strong encryption protocols like WPA3 to protect transmitted data.
+- Avoid outdated protocols such as WEP or WPA.
+
+2. Activate Router Firewall:
+
+- Enable the built-in firewall on your router to block unauthorized access and filter traffic.
+
+3. Protect Service Set Identifier (SSID):
+
+- Change the default SSID to a unique name that doesn’t reveal personal or organizational information.
+- Disable SSID broadcasting to hide the network from casual discovery.
+
+4. Utilize Virtual Private Networks (VPNs):
+
+- Use a VPN to encrypt internet traffic and protect sensitive data from interception, especially on public Wi-Fi.
+
+5. Deploy Wireless Security Software:
+
+- Implement security tools that monitor and secure Wi-Fi connections, detect unauthorized access, and prevent intrusions.
+
+---
+
+### Wired Equivalent Privacy (WEP)
+
+#### Definition
+
+- WEP is part of the IEEE 802.11 specification designed to secure Wi-Fi networks, aiming to provide the same level of security as wired LANs without specific protection mechanisms.
+
+#### Goals
+
+- Secure Wi-Fi to match the security of a wired LAN.
+- Provide basic security for access control, confidentiality, and integrity.
+- Note: WEP failed to achieve even weak security due to significant vulnerabilities.
+
+#### Services Provided
+
+1. Access Control: Restricts network access to authorized users.
+2. Message Confidentiality: Encrypts packets to protect data from eavesdropping.
+3. Message Integrity: Ensures packets are not modified during transmission.
+
+#### How WEP Works
+
+1. Secret Key:
+
+   - A shared key is used between the sender (mobile station) and receiver (access point).
+   - Packets are encrypted with this key before transmission.
+
+2. Integrity Check:
+   - A checksum is added to ensure packets are not altered in transit.
+   - However, this mechanism is weak and easily exploitable.
+
+#### Security Issues
+
+- Weak Encryption: Uses static keys and vulnerable algorithms, making it susceptible to attacks like key cracking.
+- Integrity Vulnerability: Poor integrity mechanisms make WEP easy to bypass.
+- Obsolescence: WEP has been deprecated and replaced by more secure protocols like WPA2 and WPA3.
+
+---
+
+### Wireless Security Solutions
+
+1. Wired Equivalent Privacy (WEP) & WEP2:
+
+- Early encryption standards for Wi-Fi networks.
+- Weakness: Vulnerable to attacks; now considered obsolete.
+
+2. Media Access Control (MAC) Address Filtering:
+
+- Configure access points to allow only specific MAC addresses.
+- Advantages: Simple to set up.
+- Drawbacks: Easy to spoof MAC addresses, providing limited protection.
+
+3. Virtual Private Networks (VPNs):
+
+- Encrypt all data transmitted over wireless networks.
+- Advantages: Strong protection for sensitive communications.
+- Drawbacks: Requires significant management and client-side configuration.
+
+4. User Authentication:
+
+- Enforce strong user verification methods, such as passwords or multi-factor authentication (MFA).
+- Enhances access control by validating authorized users.
+
+5. Temporal Key Integrity Protocol (TKIP) [IEEE 802.11i]:
+
+- A security enhancement to WEP, introduced as part of WPA.
+- Advantages: Dynamically generates new encryption keys for every data packet.
+- Drawbacks: Considered outdated compared to modern standards like WPA3.
+
+---
+
+### WEP vs. WPA vs. WPA2 vs. WPA3
+
+| Feature           | WEP                         | WPA                                   | WPA2                                            | WPA3                                        |
+| ----------------- | --------------------------- | ------------------------------------- | ----------------------------------------------- | ------------------------------------------- |
+| Release Year      | 1997                        | 2003                                  | 2004                                            | 2018                                        |
+| Encryption        | RC4                         | TKIP / RC4                            | AES-CCMP                                        | AES-CCMP / AES-GCMP                         |
+| Session Key       | 64/128 bit                  | 128 bit                               | 128 bit                                         | 128/256 bit                                 |
+| Authentication    | Open system, shared key     | Pre-shared key                        | Pre-shared key                                  | SAE (Simultaneous Authentication of Equals) |
+| Level of Security | Very low                    | Low                                   | Moderate                                        | High                                        |
+| Weakness          | Easily exploited by hackers | Weak encryption, compatibility issues | Vulnerable to KRACK (Key Reinstallation Attack) | Complex deployment but highly secure        |
+
+#### Key Highlights
+
+- WEP: Outdated and highly insecure due to weak RC4 encryption and static keys.
+- WPA: Improved security with TKIP but still has weaknesses and compatibility issues.
+- WPA2: Introduced strong AES encryption but vulnerable to KRACK attacks.
+- WPA3: Latest and most secure standard with enhanced encryption (AES-GCMP) and robust authentication (SAE).
