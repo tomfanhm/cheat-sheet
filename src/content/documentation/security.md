@@ -1356,6 +1356,147 @@ sqlmap -u "http://targetsite.com/page?id=1" --dbs
 
 ---
 
+### SQL Injection Prevention
+
+1. Disallow Unchecked User Input
+
+   - Do not allow unvalidated input to pass through the application GUI.
+
+2. Sanitize and Validate Inputs
+
+   - Ensure every variable passed into the application is sanitized and validated against expected formats.
+
+3. Quote User Input
+   - Properly quote all user inputs before passing them into the database.
+
+---
+
+### Database Integrity in Database Security
+
+#### Physical Database Integrity
+
+- Immunity to Physical Catastrophes: Protect against power failures and media failures.
+  - Use physical security measures, UPS systems, and regular backups.
+- Backup Process:
+  - Periodically copy the database and log files to offline storage.
+  - Ensure the DBMS provides backup and recovery tools.
+
+#### Logical Database Integrity
+
+- Reconstruction Ability:
+  - Maintain a transaction log to replay and restore the database to a stable state after failure.
+- RAID:
+  - Use Redundant Array of Independent Disks for improved reliability and performance.
+
+#### Element Integrity
+
+- Field Checks: Allow only valid values for database fields.
+- Access Controls: Restrict updates to authorized users.
+- Change Log: Track changes to undo errors.
+- Referential Integrity: Ensure key relationships remain consistent.
+- Two-Phase Locking: Prevent integrity issues during concurrent transactions.
+
+#### Auditability
+
+- Maintain logs of read/write operations for tracking and accountability.
+
+---
+
+### Access Control in Database Security
+
+#### Authorization
+
+- Grants privileges for users to access a system legitimately.
+- Often referred to as access controls.
+- Authorization process: Authenticates the user requesting access to system objects.
+
+#### Authentication
+
+- Confirms the identity of a user (e.g., verifying if the user is who they claim to be).
+- System administrators manage user access by creating individual user accounts.
+
+#### Closed vs. Open Systems
+
+- Closed Systems:
+  - Require authorization for users to access specific objects.
+- Open Systems:
+  - Provide unrestricted access to all database objects.
+
+#### User and Group Identifiers in DBMS
+
+- DBMS can create both individual user identifiers and group identifiers.
+- Specific privileges (e.g., read, write, execute) are assigned to these identifiers.
+- Privilege Mechanism:
+  - Privileges have associated binary values.
+  - The total sum of binary values indicates allowed actions for a user/group on a specific object.
+
+---
+
+### Views in Database Security
+
+#### Purpose
+
+- Enhance security by hiding certain rows or attributes from users.
+
+#### Advantages
+
+- Flexible access control at an application level.
+- Supports context and data-dependent policies.
+- Enables easy data reclassification.
+
+#### Disadvantages
+
+- Complex access checks.
+- Requires validation for correctness and consistency.
+- May overlap or omit parts of the database.
+- Increases security-related complexity of DBMS.
+
+#### Row-Level Security (DAC)
+
+1. Application Views:
+   - Commonly used to filter data.
+2. Application Logic:
+   - Embeds security into program logic but requires additional tables for user authorization.
+3. Multiple Databases:
+   - Dedicated databases for each sensitivity level.
+   - Challenges:
+     - Increased memory, storage, and processing costs.
+     - Complex distributed queries for cross-database views.
+
+---
+
+### Auditability in Database Security
+
+#### Definition
+
+-Observing a database to monitor and record the actions of its users.
+
+#### Purpose
+
+-Ensures security by tracking unauthorized access attempts or improper usage.
+
+#### Key Roles
+
+- Database administrators and consultants configure auditing to protect sensitive information.
+
+---
+
+### Encryption in Database Security
+
+#### Definition
+
+- Encryption encodes data using an algorithm, making it unreadable without the decryption key.
+
+#### Performance Impact
+
+- May degrade performance due to time required for decoding.
+
+#### Purpose
+
+-Protects data, especially during transmission over communication lines.
+
+---
+
 ### Wireless Security
 
 #### Definition
