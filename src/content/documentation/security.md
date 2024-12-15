@@ -267,13 +267,13 @@ Certificates are digital files containing key data used in public key encryption
 
 ### MD5 VS SHA
 
-| Keys For Comparison                                        | MDS                                    | SHA                                     |
+| Keys For Comparison                                        | MD5                                    | SHA                                     |
 | ---------------------------------------------------------- | -------------------------------------- | --------------------------------------- |
-| Security                                                   | Less Secure than SHA                   | Higher Secure than MDS                  |
+| Security                                                   | Less Secure than SHA                   | Higher Secure than MD5                  |
 | Message Digest Length                                      | 128 Bits                               | 160 Bits                                |
 | Attacks required to find out original Message              | 2^128 bit operations required to break | 2^160 bit operations required to break  |
 | Attacks to try and find two messages producing the same MD | 2^64 bit operations required to break  | 2^80 bit operations required to break   |
-| Speed                                                      | Faster, only 64 iterations             | Slower than MDS, required 80 iterations |
+| Speed                                                      | Faster, only 64 iterations             | Slower than MD5, required 80 iterations |
 | Successful attacks so far                                  | Attacks reported to some extent        | No such attack report yet               |
 
 ### Hashing vs. Encryption
@@ -835,16 +835,12 @@ Here's the information in a table format:
 | Spear Phishing | A targeted phishing attack where the email appears to come from someone within the victim’s organization.                    |
 | Typosquatting  | A technique where the domain name is altered slightly (e.g., "microsft.com" instead of "microsoft.com") to deceive the user. |
 
----
-
 #### Other Social Engineering Techniques
 
 | Technique                | Description                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Phone Phishing (Vishing) | Fraudulent calls or voicemail messages pretending to be from reputable companies to steal personal information (e.g., bank details). |
 | Dumpster Diving          | Stealing personal information from discarded documents, providing criminals with data to open or steal from accounts.                |
-
----
 
 #### Countermeasures Against Phishing
 
@@ -1004,8 +1000,6 @@ Note: Authentication is the first step, but successful authentication does not a
   - Password authentication relies on the something the individual knows (the password).
   - The user provides a username and password, and the system checks if the password matches the one stored in the system for that specific login.
 
----
-
 #### Password Selection Strategies
 
 1. User Education
@@ -1144,12 +1138,231 @@ Note: Authentication is the first step, but successful authentication does not a
 
 ---
 
-### Wireless Security
+### Data Loss Prevention (DLP)
+
+#### Definition
+
+- DLP is a strategy to prevent end users from sending sensitive or critical information outside the corporate network.
+- Includes software solutions to monitor, classify, and restrict data transfers by end users.
+
+#### How DLP Works
+
+- Uses business rules to classify confidential information and block unauthorized access or sharing.
+- Prevents accidental or malicious sharing of sensitive data (e.g., emails, files uploaded to cloud storage services).
+- Example: Blocking an employee from forwarding corporate emails outside the domain or uploading files to consumer cloud services like Dropbox.
+
+#### Why DLP?
+
+1. Insider Threats:
+   - Protects against intentional or accidental data leaks by employees.
+2. Regulatory Compliance:
+   - Driven by stringent state privacy laws with strict data protection requirements.
+
+#### Capabilities of DLP Tools
+
+- Endpoint Monitoring: Controls activities on devices (e.g., file copying, email forwarding).
+- Network Protection: Filters data streams and safeguards data in motion across corporate networks.
+- Cloud Security: Restricts unauthorized cloud storage usage.
+
+---
+
+### Database Security
 
 Definition:  
-Wireless security prevents unauthorized access or damage to systems using wireless networks.
+Database security involves mechanisms to protect databases from intentional or accidental threats, ensuring confidentiality, integrity, and availability.
 
-Key Points:
+#### Common Threats to Databases
+
+1. Theft and Fraud
+2. Loss of Confidentiality
+
+#### Impacts of Database Attacks
+
+- Loss of Privacy: Sensitive data exposed to unauthorized users.
+- Loss of Integrity: Data is altered, leading to inaccurate or corrupted information.
+- Loss of Availability: Database becomes inaccessible, disrupting business operations.
+
+#### Why Databases Are Vulnerable
+
+1. Excessive and Unused Privileges: Over-privileged accounts increase attack surfaces.
+2. Privilege Abuse: Legitimate users misusing granted privileges.
+3. SQL Injection: Attackers manipulate database queries to access or modify data.
+4. Weak Audit Trails: Inadequate logging of user actions makes detecting breaches difficult.
+5. Storage Media Exposure: Physical theft or unauthorized access to storage devices.
+6. Exploitation of Misconfigured Databases: Vulnerabilities due to improper setup or outdated software.
+7. Unmanaged Sensitive Data: Lack of oversight on critical or confidential data.
+
+#### Key Takeaways
+
+- Ensure proper access controls and privilege management.
+- Regularly audit database activity.
+- Address vulnerabilities through updates and secure configurations.
+- Protect sensitive data with encryption and robust security protocols.
+
+---
+
+### SQL Injection
+
+#### Definition
+
+- SQL Injection is a security vulnerability where malicious SQL commands are inserted into input fields, URLs, or data structures to manipulate or exploit a database via a web application.
+
+#### Characteristics of SQL Injection Attacks
+
+- Targets: Web applications using databases, often built with PHP or ASP.NET.
+- Input Sources: Address bars, search fields, or form inputs.
+- Vulnerability: Occurs when input is not properly validated before being passed to SQL statements.
+
+#### Common Intentions of Attackers
+
+1. Dump Database: Extract sensitive data from the database.
+2. Modify Content: Alter existing data maliciously.
+3. Execute Unauthorized Queries: Perform unauthorized database operations.
+4. Delete Data: Remove critical database information (e.g., via `DROP TABLE`).
+5. Execute OS Commands: Run system commands via SQL.
+6. Launch DoS Attacks: Overload the database to disrupt service.
+
+#### Examples of SQL Injection
+
+1. Basic Injection to Extract Data:  
+   Input:  
+   `blah' OR 'x' = 'x`  
+   SQL Generated:  
+   `SELECT prodinfo FROM prodtable WHERE prodname = 'blah' OR 'x' = 'x';`
+
+   - Always true, resulting in the extraction of all data.
+
+2. Destructive Query:  
+   Input:  
+   `blah'; DROP TABLE prodinfo; --`  
+   SQL Generated:
+
+   ```sql
+   SELECT prodinfo FROM prodtable WHERE prodname = 'blah';
+   DROP TABLE prodinfo; --
+   ```
+
+   - Deletes the table `prodinfo`.
+
+3. Manipulate Prices:  
+   Modify prices or add incorrect data by inserting malicious queries (e.g., `INSERT` or `UPDATE` statements).
+
+#### Why SQL Injection is Dangerous
+
+- Prevalent: One of the most common web-based security threats.
+- Exploitation Potential: Can extract data, manipulate records, or even control the database server.
+- Business Impact: Embarrassing data changes, financial losses, or user account compromise.
+
+#### Countermeasures
+
+1. Input Validation:
+
+   - Check input syntax for validity based on expected formats (e.g., email, dates).
+   - Exclude problematic characters like quotes (`'`), semicolons (`;`), or SQL keywords.
+
+2. Parameterized Queries (Prepared Statements):
+
+   - Use placeholders instead of directly embedding user input in SQL queries.
+   - Example:
+     ```php
+     $stmt = $conn->prepare("SELECT prodinfo FROM prodtable WHERE prodname = ?");
+     $stmt->bind_param("s", $prod_search);
+     $stmt->execute();
+     ```
+
+3. Escaping Input:
+
+   - Use escape functions to neutralize special characters in user input.
+
+4. Length Limits on Inputs:
+
+   - Restrict input size to prevent overly long malicious strings.
+
+5. Error Handling:
+
+   - Avoid exposing database error messages to users, as they can reveal table names or other sensitive details.
+
+6. Access Control:
+
+   - Use least privilege for database accounts; limit permissions for read/write actions.
+
+7. Web Application Firewalls (WAF):
+   - Deploy WAFs to detect and block SQL injection attempts dynamically.
+
+#### Key Takeaway
+
+- Preventing SQL injection requires a combination of input validation, secure query practices, and robust application design to minimize vulnerabilities and mitigate risks effectively.
+
+---
+
+### SQLMAP
+
+#### What is SQLMAP?
+
+- SQLMAP is a powerful, open-source tool for detecting and exploiting SQL injection vulnerabilities. It automates the process of identifying and leveraging these vulnerabilities in web applications.
+
+#### Key Features of SQLMAP
+
+- Detects and exploits SQL injection vulnerabilities.
+- Supports a wide range of database management systems (e.g., MySQL, Oracle, PostgreSQL, Microsoft SQL Server).
+- Automates testing and payload generation for SQL injection.
+- Capable of database fingerprinting, data extraction, and accessing the file system.
+
+#### How to Access SQLMAP
+
+1. Download SQLMAP:
+
+   - Official site: [http://sqlmap.org](http://sqlmap.org).
+   - Pre-installed in Kali Linux at:  
+     Applications → Database Assessment → Sqlmap.
+
+2. Identify SQL Injection Points:
+   - Navigate to the target page containing the SQL injection vulnerability.
+   - Capture the HTTP request header using a browser or proxy tool like Burp Suite.
+
+#### Example Command
+
+Run SQLMAP with the HTTP request to test for vulnerabilities.
+
+```bash
+sqlmap -u "http://targetsite.com/page?id=1" --dbs
+```
+
+- `-u`: Specifies the URL to test.
+- `--dbs`: Retrieves database names if the site is vulnerable.
+
+#### Testing Variables
+
+- SQLMAP tests parameters in the request (e.g., `id` in `?id=1`) to identify vulnerable points.
+- Example:  
+   The tool may indicate:  
+   "The parameter 'id' is vulnerable."
+
+#### SQLMAP Output
+
+- Shows the tested variables and their vulnerability status.
+- Highlights the type of SQL injection found (e.g., error-based, time-based blind).
+- Allows further exploitation, such as dumping database contents.
+
+#### Usage Tips
+
+- Use proxies to monitor and refine SQLMAP commands.
+- Combine with other tools (e.g., Burp Suite) for effective vulnerability assessment.
+- Always conduct testing with proper authorization to avoid legal issues.
+
+#### Key Takeaway
+
+- SQLMAP simplifies the detection and exploitation of SQL injection vulnerabilities, making it an essential tool for penetration testers and security professionals. However, it should only be used ethically and with permission.
+
+---
+
+### Wireless Security
+
+#### Definition
+
+- Wireless security prevents unauthorized access or damage to systems using wireless networks.
+
+#### Key Points
 
 - Network Type: Supported by radio communications.
 - Vulnerability: Wireless networks are exposed to specialized attacks.
@@ -1159,10 +1372,11 @@ Key Points:
 
 ### Wireless Local Area Network (WLAN)
 
-Definition:  
-A WLAN is a wireless network that connects two or more devices to form a local area network within a limited range.
+#### Definition
 
-Benefits:
+- A WLAN is a wireless network that connects two or more devices to form a local area network within a limited range.
+
+#### Benefits
 
 - Mobility: Provides internet connectivity while on the move.
 - Cost-Effective: Reduces expenses for cabling and infrastructure.
